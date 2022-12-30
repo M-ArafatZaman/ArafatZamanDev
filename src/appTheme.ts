@@ -8,6 +8,9 @@ const APP_THEME = createTheme({
         secondary: {
             main: "#09605A"
         }
+    },
+    typography: {
+        fontFamily: "\"Montserrat\", \"Roboto\", \"Helvetica\", \"Arial\", sans-serif"
     }
 })
 
