@@ -7,6 +7,9 @@ const APP_THEME = createTheme({
         },
         secondary: {
             main: "#09605A"
+        },
+        background: {
+            paper: "#DCE9EC"
         }
     },
     typography: {
