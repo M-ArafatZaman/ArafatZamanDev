@@ -24,7 +24,7 @@ const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
             color: "rgba(255,255,255,0.8)",
         },
         '&:active': {
-            color: "rgba(255,255,255,0.5)"
+            color: "rgba(255,255,255,0.2)"
         },
         borderBottom: "3px solid rgba(255,255,255,0.3)"
     }
