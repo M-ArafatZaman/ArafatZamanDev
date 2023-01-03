@@ -9,6 +9,8 @@ import {
     useTheme
 } from '@mui/material';
 import { SxProps } from '@mui/material/styles';
+// Page components
+import Navbar from './navbar';
 
 // Logo imports
 const LOGO = require("../media/logo/Logo-filled.svg").default as string;
@@ -31,12 +33,15 @@ const Header: React.FC = () => {
             {/* The header */}
             <Box sx={headerStyles}>
                 <Container>
-                    {/* The logo */}
-                    <Box flexDirection="row">
-                        <img src={LOGO} style={{height: 50, width: 50}} />
-                    </Box>
+                    <Box display="flex" flexDirection="row">
+                        {/* The logo */}
+                        <Box display="flex" flexGrow={1}>
+                            <img src={LOGO} style={{height: 50, width: 50}} />
+                        </Box>
 
-                    {/* Nav bar */}
+                        {/* Nav bar */}
+                        <Navbar/>
+                    </Box>
                 </Container>
             </Box>
         </Box>
