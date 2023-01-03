@@ -3,8 +3,10 @@ import react from 'react';
 import {
     Box,
     Link,
-    SxProps
+    SxProps,
+    IconButton
 } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 // NavLink Props style
 interface NavLinkProps {
@@ -43,6 +45,7 @@ const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
 const Navbar: React.FC = () => {
     
     return (
+        <>
         <Box display="flex" flexDirection="row" alignItems="center">
             <NavLink
                 label="HOME"
@@ -64,7 +67,12 @@ const Navbar: React.FC = () => {
                 label="CONTACT"
                 href="#"
             />
+            {/* Github button */}
+            <IconButton>
+                <GitHubIcon/>
+            </IconButton>
         </Box>
+        </>
     )
 };
 
