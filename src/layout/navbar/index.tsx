@@ -4,9 +4,12 @@ import {
     Box,
     Link,
     SxProps,
-    IconButton
+    IconButton,
+    Typography
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
+// Apptheme
+import {APP_THEME} from '../../appTheme';
 
 // NavLink Props style
 interface NavLinkProps {
@@ -21,6 +24,8 @@ const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
     const LinkStyles: SxProps = {
         color: "#fff",
         textDecoration: "none",
+        fontWeight: "bold",
+        fontFamily: APP_THEME.typography.fontFamily,
         transition: "all ease-in-out 300ms",
         '&:hover': {
             color: "rgba(255,255,255,0.8)",
@@ -68,7 +73,7 @@ const Navbar: React.FC = () => {
                 href="#"
             />
             {/* Github button */}
-            <IconButton>
+            <IconButton href="https://github.com/M-ArafatZaman" target="_blank">
                 <GitHubIcon/>
             </IconButton>
         </Box>
