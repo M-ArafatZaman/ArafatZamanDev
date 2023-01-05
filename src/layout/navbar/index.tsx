@@ -4,8 +4,7 @@ import {
     Box,
     Link,
     SxProps,
-    IconButton,
-    Typography
+    IconButton
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 // Apptheme

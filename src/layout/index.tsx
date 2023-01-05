@@ -5,6 +5,8 @@ import {
     Box,
     useTheme
 } from '@mui/material';
+// Page components
+import Home from '../pages/home';
 
 // The main layout that is used throughout the app
 export default function Index() {
@@ -18,6 +20,7 @@ export default function Index() {
             position: "relative"
         }}>
             <Header/>
+            <Home/>
         </Box>
     );
 }
