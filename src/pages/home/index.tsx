@@ -35,7 +35,9 @@ const Home: React.FC = () => {
                             Download Resume
                         </Button>
                         <br/>
-                        <Button variant="contained" color="inherit" sx={{fontWeight: "bold", mt: 1}} startIcon={<GithubIcon/>}>
+                        <Button variant="contained" color="inherit" sx={{fontWeight: "bold", mt: 1}} startIcon={<GithubIcon/>}
+                            href="https://github.com/M-ArafatZaman" target="_blank"
+                        >
                             Github
                         </Button>
                     </Box>
