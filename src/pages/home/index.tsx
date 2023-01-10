@@ -20,7 +20,7 @@ const Home: React.FC = () => {
     return (
         <Container>
 
-            <Grid container spacing={2} sx={{marginY: 1}}>
+            <Grid container spacing={2} sx={{marginY: 0}}>
 
                 {/* The software developer container */}
                 <Grid item xs={12} sm={6}>
