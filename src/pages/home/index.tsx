@@ -13,6 +13,8 @@ import {APP_THEME} from '../../appTheme';
 import DescriptionIcon from '@mui/icons-material/Description';
 import GithubIcon from '@mui/icons-material/GitHub';
 
+const backdrop_VEC = require("./media/backdrop.png") as string;
+
 const Home: React.FC = () => {
 
     return (
@@ -27,19 +29,41 @@ const Home: React.FC = () => {
                         borderRadius: "12px",
                         boxShadow: APP_THEME.shadows[3],
                         padding: 4,
-                        paddingTop: 6
+                        paddingTop: 6,
+                        position: "relative",
+                        overflow: "hidden"
                     }}>
-                        <Typography variant="h5" sx={{fontWeight: "bold"}}>Hi! I am Arafat</Typography>
-                        <Typography variant="h6" sx={{marginBottom: 1}}>I am a software developer</Typography>
-                        <Button variant="contained" color="primary" sx={{fontWeight: "bold"}} startIcon={<DescriptionIcon/>}>
-                            Download Resume
-                        </Button>
-                        <br/>
-                        <Button variant="contained" color="inherit" sx={{fontWeight: "bold", mt: 1}} startIcon={<GithubIcon/>}
-                            href="https://github.com/M-ArafatZaman" target="_blank"
-                        >
-                            Github
-                        </Button>
+                        {/* The backdrop */}
+                        <img 
+                            src={backdrop_VEC} 
+                            style={{
+                                objectFit: "contain",
+                                width: "100%",
+                                position: "absolute",
+                                bottom: 0,
+                                left: 0,
+                                zIndex: 0
+                            }}
+                        />
+                        
+                        {/* Content */}
+                        <Box sx={{
+                            backgroundColor: "rgba(0,0,0,0)",
+                            zIndex: 1,
+                            position: "relative"
+                        }}>
+                            <Typography variant="h5" sx={{fontWeight: "bold"}}>Hi! I am Arafat</Typography>
+                            <Typography variant="h6" sx={{marginBottom: 1}}>I am a software developer</Typography>
+                            <Button variant="contained" color="primary" sx={{fontWeight: "bold"}} startIcon={<DescriptionIcon/>}>
+                                Download Resume
+                            </Button>
+                            <br/>
+                            <Button variant="contained" color="inherit" sx={{fontWeight: "bold", mt: 1}} startIcon={<GithubIcon/>}
+                                href="https://github.com/M-ArafatZaman" target="_blank"
+                            >
+                                Github
+                            </Button>
+                        </Box>
                     </Box>
                 </Grid>
 
