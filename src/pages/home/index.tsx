@@ -29,7 +29,7 @@ const Home: React.FC = () => {
                         borderRadius: "12px",
                         boxShadow: APP_THEME.shadows[3],
                         padding: 4,
-                        paddingTop: 6,
+                        paddingY: 8,
                         position: "relative",
                         overflow: "hidden"
                     }}>
