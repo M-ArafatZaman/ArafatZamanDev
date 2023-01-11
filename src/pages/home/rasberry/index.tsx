@@ -1,6 +1,8 @@
 import React, {useEffect, createRef} from 'react';
 import * as THREE from 'three';
 // @ mui components
+// Others
+import {APP_THEME} from '../../../appTheme';
 
 const RasberryPI: React.FC = () => {
 
@@ -16,15 +18,19 @@ const RasberryPI: React.FC = () => {
         const _renderer = new THREE.WebGLRenderer();
         const _camera = new THREE.PerspectiveCamera(75, WIDTH/HEIGHT, 0.1, 1000);
         // SETUP
+        const sceneBackgroundColor = APP_THEME.palette.background.paper;
+        // The first index is removed because it is a #
+        _scene.background = new THREE.Color( parseInt(sceneBackgroundColor.substring(1), 16) ); 
         _renderer.setSize(WIDTH, HEIGHT);
         ContainerRef.current?.appendChild(_renderer.domElement);
         
+
         const geometry = new THREE.BoxGeometry( 1, 1, 1 );
         const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
         const cube = new THREE.Mesh( geometry, material );
         _scene.add( cube );
 
-        _camera.position.z = 5;
+        _camera.position.z = 3;
 
         // Animation
         function animate() {
