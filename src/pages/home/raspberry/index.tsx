@@ -29,9 +29,9 @@ const RasberryPI: React.FC = () => {
         const _scene = new THREE.Scene();
         const _renderer = new THREE.WebGLRenderer();
         const _camera = new THREE.PerspectiveCamera(75, WIDTH/HEIGHT, 0.1, 1000);
-        _camera.position.z = 5;
-        _camera.position.y = 5;
-        _camera.rotateX(toRad(-45));
+        _camera.position.z = 7;
+        _camera.position.y = 3;
+        _camera.rotateX(toRad(-30));
         // SETUP
         const sceneBackgroundColor = APP_THEME.palette.background.paper;
         // The first index is removed because it is a #
@@ -40,10 +40,15 @@ const RasberryPI: React.FC = () => {
         ContainerRef.current?.appendChild(_renderer.domElement);
         
         // Add lighting
-        const AmbientLight = new THREE.AmbientLight( 0xFFFFFF ); // soft white light
+        const AmbientLight = new THREE.AmbientLight( 0xFFFFFF, 1 ); // soft white light
         _scene.add( AmbientLight );
-        const DirectionalLight = new THREE.DirectionalLight( 0xffffff ); // soft white light
+        const DirectionalLight = new THREE.DirectionalLight( 0xffffff, 1 ); // soft white light
+        DirectionalLight.position.setY(3);
+        console.log(DirectionalLight.position);
         _scene.add( DirectionalLight );
+        const HemisphereLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 1);
+        HemisphereLight.position.setY(3);
+        _scene.add(HemisphereLight);
         
         // Load Raspberry PI model
         const loader = new GLTFLoader();
