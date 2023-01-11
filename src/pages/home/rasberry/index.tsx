@@ -37,7 +37,9 @@ const RasberryPI: React.FC = () => {
 
         // Destructing
         return () => {
-            ContainerRef.current!.innerHTML = "";
+            if (ContainerRef.current !== null) {
+                ContainerRef.current.innerHTML = "";
+            }
         }
     }, [])
 
