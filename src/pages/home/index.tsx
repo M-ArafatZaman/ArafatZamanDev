@@ -12,8 +12,8 @@ import {APP_THEME} from '../../appTheme';
 // Icons
 import DescriptionIcon from '@mui/icons-material/Description';
 import GithubIcon from '@mui/icons-material/GitHub';
-// RasberryPI component
-import RasberryPI from './raspberry';
+// RaspberryPI component
+import RaspberryPI from './raspberry';
 
 const backdrop_VEC = require("./media/backdrop.png") as string;
 
@@ -69,9 +69,9 @@ const Home: React.FC = () => {
                     </Box>
                 </Grid>
                 
-                {/* RasberryPI component */}
+                {/* RaspberryPI component */}
                 <Grid item xs={12} sm={6}>
-                    <RasberryPI/>
+                    <RaspberryPI/>
                 </Grid>
             </Grid>
 
