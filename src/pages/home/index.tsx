@@ -13,7 +13,7 @@ import {APP_THEME} from '../../appTheme';
 import DescriptionIcon from '@mui/icons-material/Description';
 import GithubIcon from '@mui/icons-material/GitHub';
 // RasberryPI component
-import RasberryPI from './rasberry';
+import RasberryPI from './raspberry';
 
 const backdrop_VEC = require("./media/backdrop.png") as string;
 
