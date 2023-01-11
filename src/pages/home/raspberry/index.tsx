@@ -5,6 +5,17 @@ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 // Others
 import {APP_THEME} from '../../../appTheme';
 
+const RASPBERRY_PI_MODEL: string = "./models/raspberry_pi/scene.gltf";
+
+/**
+ * A function to return a radian from a deg
+ * @param deg The degree in degrees
+ * @returns The radian
+ */
+function toRad(deg: number): number {
+    return deg * Math.PI/180;
+}
+
 const RasberryPI: React.FC = () => {
 
     // Ref for container
@@ -18,7 +29,9 @@ const RasberryPI: React.FC = () => {
         const _scene = new THREE.Scene();
         const _renderer = new THREE.WebGLRenderer();
         const _camera = new THREE.PerspectiveCamera(75, WIDTH/HEIGHT, 0.1, 1000);
-        _camera.position.z = 2;
+        _camera.position.z = 5;
+        _camera.position.y = 5;
+        _camera.rotateX(toRad(-45));
         // SETUP
         const sceneBackgroundColor = APP_THEME.palette.background.paper;
         // The first index is removed because it is a #
@@ -27,24 +40,33 @@ const RasberryPI: React.FC = () => {
         ContainerRef.current?.appendChild(_renderer.domElement);
         
         // Add lighting
-        const AmbientLight = new THREE.AmbientLight( 0xAAABAB ); // soft white light
+        const AmbientLight = new THREE.AmbientLight( 0xFFFFFF ); // soft white light
         _scene.add( AmbientLight );
         const DirectionalLight = new THREE.DirectionalLight( 0xffffff ); // soft white light
         _scene.add( DirectionalLight );
         
-        // Component
-        const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        const material = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
-        const cube = new THREE.Mesh( geometry, material );
-        _scene.add( cube );
+        // Load Raspberry PI model
+        const loader = new GLTFLoader();
+        let loadedRaspberryModel: THREE.Group;
 
+        loader.load(
+            RASPBERRY_PI_MODEL,
+            (gltf) => {
+                loadedRaspberryModel = gltf.scene;
+                _scene.add(gltf.scene);
+                
+            }, undefined, (e) => {
+                console.log(e);
+            }
+        );
 
         // Animation
         function animate() {
             requestAnimationFrame(animate);
             _renderer.render(_scene, _camera);
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
+            if (loadedRaspberryModel instanceof THREE.Group) {
+                loadedRaspberryModel.rotation.y += 0.01;
+            }
         };
         animate();
 
