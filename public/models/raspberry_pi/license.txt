@@ -1,0 +1,11 @@
+Model Information:
+* title:	Raspberry Pi
+* source:	https://sketchfab.com/3d-models/raspberry-pi-dd04d376b5c24f2a98f4c5dd3ce576a5
+* author:	Aleksander Buzlaev (https://sketchfab.com/Aleksander2019)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Raspberry Pi" (https://sketchfab.com/3d-models/raspberry-pi-dd04d376b5c24f2a98f4c5dd3ce576a5) by Aleksander Buzlaev (https://sketchfab.com/Aleksander2019) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
