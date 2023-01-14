@@ -45,6 +45,7 @@ const RasberryPI: React.FC = () => {
         _camera.position.z = 7;
         _camera.position.y = 3;
         _camera.rotateX(toRad(-30));
+        _camera.updateProjectionMatrix();
         // Add controls
         const Controls = new OrbitControls(_camera, _renderer.domElement);
         Controls.update();

@@ -72,12 +72,19 @@ const Home: React.FC = () => {
                 
                 {/* RaspberryPI component */}
                 <Grid item xs={12} sm={6}>
-                    <RaspberryPI/>
-                    <Box width="100%" display="flex" justifyContent="center">
-                        <Typography variant="caption" color="GrayText"><Link href="https://skfb.ly/oBs8I" target="_blank" sx={{
-                            color: "inherit",
-                            textDecorationColor: "inherit"
-                        }}>"Raspberry Pi"</Link> by Aleksander Buzlaev</Typography>
+                    <Box display="flex" flexDirection="column" sx={{height: "100%", width: "100%"}}>
+                        
+                        <Box flexGrow={1}>
+                            <RaspberryPI/>
+                        </Box>
+                        
+                        {/* Raspberry PI tag */}
+                        <Box width="100%" display="flex" justifyContent="center">
+                            <Typography variant="caption" color="GrayText"><Link href="https://skfb.ly/oBs8I" target="_blank" sx={{
+                                color: "inherit",
+                                textDecorationColor: "inherit"
+                            }}>"Raspberry Pi"</Link> by Aleksander Buzlaev</Typography>
+                        </Box>
                     </Box>
                 </Grid>
             </Grid>
