@@ -88,10 +88,6 @@ const RasberryPI: React.FC = () => {
         BottomDirectionalLight.target.position.set(0,0,0);
         _scene.add(BottomDirectionalLight);
         _scene.add(BottomDirectionalLight.target); 
-        /* const HemisphereLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 1);
-        HemisphereLight.position.setY(10);
-        _scene.add(HemisphereLight);
-         */
 
         // Load Raspberry PI model
         const loader = new GLTFLoader();
@@ -118,6 +114,15 @@ const RasberryPI: React.FC = () => {
             Controls.update();
         };
         animate();
+
+        // Added resize event listener
+        window.addEventListener("resize", () => {
+            const width = ContainerRef.current?.clientWidth as number;
+            const height = ContainerRef.current?.clientHeight as number;
+            _renderer.setSize( width, height );
+            _camera.aspect = width / height;
+            _camera.updateProjectionMatrix();
+        })
 
         // Destructing
         return () => {
