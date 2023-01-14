@@ -5,7 +5,8 @@ import {
     Typography,
     Container,
     Grid,
-    Button
+    Button,
+    Link
 } from '@mui/material';
 // App theme
 import {APP_THEME} from '../../appTheme';
@@ -72,6 +73,12 @@ const Home: React.FC = () => {
                 {/* RaspberryPI component */}
                 <Grid item xs={12} sm={6}>
                     <RaspberryPI/>
+                    <Box width="100%" display="flex" justifyContent="center">
+                        <Typography variant="caption" color="GrayText"><Link href="https://skfb.ly/oBs8I" target="_blank" sx={{
+                            color: "inherit",
+                            textDecorationColor: "inherit"
+                        }}>"Raspberry Pi"</Link> by Aleksander Buzlaev</Typography>
+                    </Box>
                 </Grid>
             </Grid>
 
