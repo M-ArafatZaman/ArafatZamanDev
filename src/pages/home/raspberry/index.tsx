@@ -100,6 +100,7 @@ const RasberryPI: React.FC = () => {
         return () => {
             if (ContainerRef.current !== null) {
                 ContainerRef.current.innerHTML = "";
+                _renderer.dispose();
             }
         }
     }, [])
