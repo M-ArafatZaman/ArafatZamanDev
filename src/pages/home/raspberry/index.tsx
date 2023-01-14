@@ -69,6 +69,18 @@ const RasberryPI: React.FC = () => {
                 _scene.add(DirectionalLight.target);
             }
         }
+
+        // Add directional light from 4 different sides
+        const PLANE_GRID_X = [0, 6, 0, -6];
+        const PLANE_GRID_Y = [6, 0, -6, 0];
+        for (let i = 0; i < 4; i++) {
+            const PlaneDirectionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            PlaneDirectionalLight.castShadow = true;
+            PlaneDirectionalLight.position.set(PLANE_GRID_X[i], 0, PLANE_GRID_Y[i]);
+            PlaneDirectionalLight.target.position.set(0,0,0);
+            _scene.add(PlaneDirectionalLight);
+            _scene.add(PlaneDirectionalLight.target);
+        }
         
         // Add a Directional light from the bottom
         const BottomDirectionalLight = new THREE.DirectionalLight(0xffffff, 0.2);
