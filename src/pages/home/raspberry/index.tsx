@@ -17,6 +17,8 @@ function toRad(deg: number): number {
     return deg * Math.PI/180;
 }
 
+let OrbitInteraction: boolean = false;
+
 const RasberryPI: React.FC = () => {
 
     // Ref for container
@@ -46,6 +48,13 @@ const RasberryPI: React.FC = () => {
         // Add controls
         const Controls = new OrbitControls(_camera, _renderer.domElement);
         Controls.update();
+        Controls.addEventListener("start", () => {
+            OrbitInteraction = true;
+        })
+        Controls.addEventListener("end", () => {
+            OrbitInteraction = false;
+        })
+
         // SETUP
         const sceneBackgroundColor = APP_THEME.palette.background.paper;
         // The first index is removed because it is a #
@@ -105,10 +114,10 @@ const RasberryPI: React.FC = () => {
         );
 
         // Animation
-        function animate() {
+        const animate = () => {
             requestAnimationFrame(animate);
             _renderer.render(_scene, _camera);
-            if (loadedRaspberryModel instanceof THREE.Group) {
+            if (loadedRaspberryModel instanceof THREE.Group && !OrbitInteraction) {
                 loadedRaspberryModel.rotation.y += 0.01;
             };
             Controls.update();
