@@ -29,7 +29,7 @@ const Header: React.FC = () => {
 
     return (
         /* Header container for the padding */
-        <Box sx={{padding: '8px'}}>
+        <Box sx={{padding: '8px', pb: 0}}>
             {/* The header */}
             <Box sx={headerStyles}>
                 <Container>
