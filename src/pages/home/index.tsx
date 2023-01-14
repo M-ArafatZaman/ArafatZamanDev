@@ -2,6 +2,7 @@ import React from 'react';
 // @mui components
 import {
     Box,
+    Card,
     Typography,
     Container,
     Grid,
@@ -15,6 +16,10 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import GithubIcon from '@mui/icons-material/GitHub';
 // RaspberryPI component
 import RaspberryPI from './raspberry';
+// Import svgs
+import blogSVG from '../media/blog.svg';
+import portfolioSVG from '../media/portfolio.svg';
+import projectSVG from '../media/projects.svg';
 
 const backdrop_VEC = require("./media/backdrop.png") as string;
 
@@ -23,8 +28,8 @@ const Home: React.FC = () => {
     return (
         <Container>
 
+            {/* The first grid with greetings and raspberry container */}
             <Grid container spacing={2} sx={{marginY: 0}}>
-
                 {/* The software developer container */}
                 <Grid item xs={12} sm={6}>
                     <Box sx={{
@@ -86,6 +91,51 @@ const Home: React.FC = () => {
                             }}>"Raspberry Pi"</Link> by Aleksander Buzlaev</Typography>
                         </Box>
                     </Box>
+                </Grid>
+            </Grid>
+
+            {/* The second container containing portfolio, projects, blogs */}
+            <Grid container paddingY={2} spacing={2}>
+                {/* Portfolio */}
+                <Grid item xs={12} sm={4}>
+                    <Card sx={{
+                        backgroundColor: "#fff",
+                        padding: 2
+                    }}>
+                        <Box display="flex" justifyContent="center">
+                            <img src={portfolioSVG} style={{height: "200px", objectFit: "contain"}} />
+                        </Box>
+                        
+                        <Typography>Portfolio</Typography>
+                    </Card>
+                </Grid>
+
+                {/* Projects */}
+                <Grid item xs={12} sm={4}>
+                    <Card sx={{
+                        backgroundColor: "#fff",
+                        padding: 2
+                    }}>
+                         <Box display="flex" justifyContent="center">
+                            <img src={projectSVG} style={{height: "200px", objectFit: "contain"}} />
+                        </Box>
+                        
+                        <Typography>Projects</Typography>
+                    </Card>
+                </Grid>
+
+                {/* Blogs */}
+                <Grid item xs={12} sm={4}>
+                    <Card sx={{
+                        backgroundColor: "#fff",
+                        padding: 2
+                    }}>
+                         <Box display="flex" justifyContent="center">
+                            <img src={blogSVG} style={{height: "200px", objectFit: "contain"}} />
+                        </Box>
+                        
+                        <Typography>Blogs</Typography>
+                    </Card>
                 </Grid>
             </Grid>
 
