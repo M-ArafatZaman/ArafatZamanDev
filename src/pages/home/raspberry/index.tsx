@@ -28,6 +28,10 @@ const RasberryPI: React.FC = () => {
         // Create scene, renderer, and camera
         const _scene = new THREE.Scene();
         const _renderer = new THREE.WebGLRenderer({antialias: true});
+        // Adjust renderer
+        _renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        _renderer.outputEncoding = THREE.sRGBEncoding;
+
         const _camera = new THREE.PerspectiveCamera(75, WIDTH/HEIGHT, 0.1, 1000);
         _camera.position.z = 7;
         _camera.position.y = 3;
@@ -47,8 +51,8 @@ const RasberryPI: React.FC = () => {
         const GRID = [-4, 0, 4];
         for (let z = 0; z < 3; z++) {
             for (let x = 0; x < 3; x++) {
-                const DirectionalLight = new THREE.DirectionalLight(0xffffff, 1);
-                DirectionalLight.position.set(GRID[x], 4, GRID[z]);
+                const DirectionalLight = new THREE.DirectionalLight(0xffffff, 0.2);
+                DirectionalLight.position.set(GRID[x], 10, GRID[z]);
                 DirectionalLight.target.position.set(GRID[x], 0, GRID[z]);
                 _scene.add(DirectionalLight);
                 _scene.add(DirectionalLight.target);
@@ -57,8 +61,8 @@ const RasberryPI: React.FC = () => {
         const DirectionalLight = new THREE.DirectionalLight( 0xffffff, .5 ); // soft white light
         DirectionalLight.position.setY(4);
         DirectionalLight.target.position.set(0, 0, 0);
-        _scene.add( DirectionalLight );
-        _scene.add(DirectionalLight.target);
+        //_scene.add( DirectionalLight );
+        //_scene.add(DirectionalLight.target);
         /* const HemisphereLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 1);
         HemisphereLight.position.setY(3);
         _scene.add(HemisphereLight); */
