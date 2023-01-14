@@ -95,8 +95,7 @@ const Home: React.FC = () => {
             <Grid container paddingY={2} spacing={2}>
                 {/* Portfolio */}
                 <Grid item xs={12} sm={4}>
-                    <Card sx={{
-                        backgroundColor: "#fff",
+                    <AppCard sx={{
                         padding: 2
                     }}>
                         <Box display="flex" justifyContent="center">
@@ -104,13 +103,12 @@ const Home: React.FC = () => {
                         </Box>
                         
                         <Typography>Portfolio</Typography>
-                    </Card>
+                    </AppCard>
                 </Grid>
 
                 {/* Projects */}
                 <Grid item xs={12} sm={4}>
-                    <Card sx={{
-                        backgroundColor: "#fff",
+                    <AppCard sx={{
                         padding: 2
                     }}>
                          <Box display="flex" justifyContent="center">
@@ -118,13 +116,12 @@ const Home: React.FC = () => {
                         </Box>
                         
                         <Typography>Projects</Typography>
-                    </Card>
+                    </AppCard>
                 </Grid>
 
                 {/* Blogs */}
                 <Grid item xs={12} sm={4}>
-                    <Card sx={{
-                        backgroundColor: "#fff",
+                    <AppCard sx={{
                         padding: 2
                     }}>
                          <Box display="flex" justifyContent="center">
@@ -132,7 +129,7 @@ const Home: React.FC = () => {
                         </Box>
                         
                         <Typography>Blogs</Typography>
-                    </Card>
+                    </AppCard>
                 </Grid>
             </Grid>
 
