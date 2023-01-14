@@ -31,7 +31,13 @@ const RasberryPI: React.FC = () => {
         // Adjust renderer
         _renderer.toneMapping = THREE.ACESFilmicToneMapping;
         _renderer.outputEncoding = THREE.sRGBEncoding;
+        _renderer.shadowMap.enabled = true;
+        _renderer.shadowMap.type = THREE.PCFShadowMap;
 
+        const pmremGenerator = new THREE.PMREMGenerator( _renderer );
+        pmremGenerator.compileEquirectangularShader();
+
+        // Add camera
         const _camera = new THREE.PerspectiveCamera(75, WIDTH/HEIGHT, 0.1, 1000);
         _camera.position.z = 7;
         _camera.position.y = 3;
@@ -48,36 +54,22 @@ const RasberryPI: React.FC = () => {
         _scene.add( AmbientLight );
 
         // Add Directional Light as a grid
-        const GRID = [-4, 0, 4];
+        const GRID = [-5, 0, 5];
         for (let z = 0; z < 3; z++) {
             for (let x = 0; x < 3; x++) {
                 const DirectionalLight = new THREE.DirectionalLight(0xffffff, 0.2);
+                DirectionalLight.castShadow = true;
                 DirectionalLight.position.set(GRID[x], 10, GRID[z]);
                 DirectionalLight.target.position.set(GRID[x], 0, GRID[z]);
                 _scene.add(DirectionalLight);
                 _scene.add(DirectionalLight.target);
             }
         }
-        const DirectionalLight = new THREE.DirectionalLight( 0xffffff, .5 ); // soft white light
-        DirectionalLight.position.setY(4);
-        DirectionalLight.target.position.set(0, 0, 0);
-        //_scene.add( DirectionalLight );
-        //_scene.add(DirectionalLight.target);
-        /* const HemisphereLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 1);
-        HemisphereLight.position.setY(3);
-        _scene.add(HemisphereLight); */
         
-        // Add cube 
-        const geo = new THREE.BoxGeometry(1, 1, 1);
-        const m1 = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-
-        for (let z = 0; z < 3; z++) {
-            for (let x = 0; x < 3; x++) {
-                const c = new THREE.Mesh(geo, m1);
-                c.position.set(GRID[x], 3, GRID[z]);
-                //_scene.add(c);
-            };
-        }
+        const HemisphereLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 1);
+        HemisphereLight.position.setY(10);
+        _scene.add(HemisphereLight);
+        
 
         // Load Raspberry PI model
         const loader = new GLTFLoader();
