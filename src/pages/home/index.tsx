@@ -20,6 +20,8 @@ import RaspberryPI from './raspberry';
 import blogSVG from '../media/blog.svg';
 import portfolioSVG from '../media/portfolio.svg';
 import projectSVG from '../media/projects.svg';
+// Other components
+import AppCard from './components/AppCard';
 
 const backdrop_VEC = require("./media/backdrop.png") as string;
 
@@ -32,14 +34,9 @@ const Home: React.FC = () => {
             <Grid container spacing={2} sx={{marginY: 0}}>
                 {/* The software developer container */}
                 <Grid item xs={12} sm={6}>
-                    <Box sx={{
-                        backgroundColor: "#fff",
-                        borderRadius: "12px",
-                        boxShadow: APP_THEME.shadows[3],
+                    <AppCard sx={{
                         padding: 4,
-                        paddingY: 8,
-                        position: "relative",
-                        overflow: "hidden"
+                        paddingY: 8
                     }}>
                         {/* The backdrop */}
                         <img 
@@ -72,7 +69,7 @@ const Home: React.FC = () => {
                                 Github
                             </Button>
                         </Box>
-                    </Box>
+                    </AppCard>
                 </Grid>
                 
                 {/* RaspberryPI component */}
