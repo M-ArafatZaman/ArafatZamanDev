@@ -7,6 +7,11 @@ interface AppCardProps {
     sx?: SxProps 
 };
 
+/**
+ * Custom app card 
+ * @param props A sx prop similar to @mui components and a children(s)
+ * @returns 
+ */
 function AppCard(props: AppCardProps) {
     const {children, sx} = props;
 
