@@ -1,6 +1,7 @@
 import React, {useEffect, createRef} from 'react';
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 // @ mui components
 // Others
 import {APP_THEME} from '../../../appTheme';
@@ -42,6 +43,9 @@ const RasberryPI: React.FC = () => {
         _camera.position.z = 7;
         _camera.position.y = 3;
         _camera.rotateX(toRad(-30));
+        // Add controls
+        const Controls = new OrbitControls(_camera, _renderer.domElement);
+        Controls.update();
         // SETUP
         const sceneBackgroundColor = APP_THEME.palette.background.paper;
         // The first index is removed because it is a #
@@ -50,10 +54,10 @@ const RasberryPI: React.FC = () => {
         ContainerRef.current?.appendChild(_renderer.domElement);
         
         // Add lighting
-        const AmbientLight = new THREE.AmbientLight( 0x404040, 1 ); // soft white light
+        const AmbientLight = new THREE.AmbientLight( 0xD8D8D8, 1 ); // soft white light
         _scene.add( AmbientLight );
 
-        // Add Directional Light as a grid
+        // Add Directional Light as a grid from the top
         const GRID = [-5, 0, 5];
         for (let z = 0; z < 3; z++) {
             for (let x = 0; x < 3; x++) {
@@ -66,10 +70,16 @@ const RasberryPI: React.FC = () => {
             }
         }
         
-        const HemisphereLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 1);
+        // Add a Directional light from the bottom
+        const BottomDirectionalLight = new THREE.DirectionalLight(0xffffff, 0.2);
+        BottomDirectionalLight.position.set(0,-10,0);
+        BottomDirectionalLight.target.position.set(0,0,0);
+        _scene.add(BottomDirectionalLight);
+        _scene.add(BottomDirectionalLight.target); 
+        /* const HemisphereLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 1);
         HemisphereLight.position.setY(10);
         _scene.add(HemisphereLight);
-        
+         */
 
         // Load Raspberry PI model
         const loader = new GLTFLoader();
@@ -92,7 +102,8 @@ const RasberryPI: React.FC = () => {
             _renderer.render(_scene, _camera);
             if (loadedRaspberryModel instanceof THREE.Group) {
                 loadedRaspberryModel.rotation.y += 0.01;
-            }
+            };
+            Controls.update();
         };
         animate();
 
