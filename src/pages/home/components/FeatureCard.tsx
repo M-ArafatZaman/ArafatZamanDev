@@ -18,7 +18,7 @@ function FeatureCard(props: FeatureCardProps) {
     return (
         <AppCard>
             {/* Image */}
-            <Box display="flex" justifyContent="center" py={2} px={1}>
+            <Box display="flex" justifyContent="center" py={2} px={1} sx={{backgroundColor: "#C3FFFB"}}>
                 <img src={image} style={{height: "200px", objectFit: "contain"}} />
             </Box>
             {/* Content */}
