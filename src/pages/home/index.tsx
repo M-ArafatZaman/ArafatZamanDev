@@ -18,11 +18,10 @@ import RaspberryPI from './raspberry';
 import blogSVG from '../media/blog.svg';
 import portfolioSVG from '../media/portfolio.svg';
 import projectSVG from '../media/projects.svg';
+import backdropSVG from './media/backdrop.png';
 // Other components
 import AppCard from './components/AppCard';
 import FeatureCard from './components/FeatureCard';
-
-const backdrop_VEC = require("./media/backdrop.png") as string;
 
 const Home: React.FC = () => {
 
@@ -39,7 +38,7 @@ const Home: React.FC = () => {
                     }}>
                         {/* The backdrop */}
                         <img 
-                            src={backdrop_VEC} 
+                            src={backdropSVG} 
                             style={{
                                 objectFit: "contain",
                                 width: "100%",
