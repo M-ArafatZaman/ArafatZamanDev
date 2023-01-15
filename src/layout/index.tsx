@@ -14,10 +14,12 @@ export default function Index() {
 
     return (
         <Box sx={{
-            width: "100vw",
-            height: "100vh",
+            maxWidth: "100vw",
+            minHeight: "100vh",
             backgroundColor: theme.palette.background.paper,
-            position: "relative"
+            position: "relative",
+            overflowX: "clip",
+            overflowY: "auto"
         }}>
             <Header/>
             <Home/>

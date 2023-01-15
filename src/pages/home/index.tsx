@@ -2,7 +2,6 @@ import React from 'react';
 // @mui components
 import {
     Box,
-    Card,
     Typography,
     Container,
     Grid,
@@ -94,21 +93,23 @@ const Home: React.FC = () => {
                 {/* Portfolio */}
                 <Grid item xs={12} sm={4}>
                     <FeatureCard image={portfolioSVG}>
-                        <Typography>Portfolio</Typography>
+                        <Typography variant="h6"><b>Portfolio</b></Typography>
+                        <Typography>Explore my portfolio and discover my past projects and experiences.</Typography>
+                        <Button>visit</Button>
                     </FeatureCard>
                 </Grid>
 
                 {/* Projects */}
                 <Grid item xs={12} sm={4}>
                     <FeatureCard image={projectSVG}>
-                        <Typography>Projects</Typography>
+                        <Typography variant="h6"><b>Projects</b></Typography>
                     </FeatureCard>
                 </Grid>
 
                 {/* Blogs */}
                 <Grid item xs={12} sm={4}>
                     <FeatureCard image={blogSVG}>
-                        <Typography>Blogs</Typography>
+                        <Typography variant="h6"><b>Blogs</b></Typography>
                     </FeatureCard>
                 </Grid>
             </Grid>
