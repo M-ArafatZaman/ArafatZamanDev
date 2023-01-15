@@ -9,8 +9,6 @@ import {
     Button,
     Link
 } from '@mui/material';
-// App theme
-import {APP_THEME} from '../../appTheme';
 // Icons
 import DescriptionIcon from '@mui/icons-material/Description';
 import GithubIcon from '@mui/icons-material/GitHub';
@@ -22,6 +20,7 @@ import portfolioSVG from '../media/portfolio.svg';
 import projectSVG from '../media/projects.svg';
 // Other components
 import AppCard from './components/AppCard';
+import FeatureCard from './components/FeatureCard';
 
 const backdrop_VEC = require("./media/backdrop.png") as string;
 
@@ -95,41 +94,23 @@ const Home: React.FC = () => {
             <Grid container paddingY={2} spacing={2}>
                 {/* Portfolio */}
                 <Grid item xs={12} sm={4}>
-                    <AppCard sx={{
-                        padding: 2
-                    }}>
-                        <Box display="flex" justifyContent="center">
-                            <img src={portfolioSVG} style={{height: "200px", objectFit: "contain"}} />
-                        </Box>
-                        
+                    <FeatureCard image={portfolioSVG}>
                         <Typography>Portfolio</Typography>
-                    </AppCard>
+                    </FeatureCard>
                 </Grid>
 
                 {/* Projects */}
                 <Grid item xs={12} sm={4}>
-                    <AppCard sx={{
-                        padding: 2
-                    }}>
-                         <Box display="flex" justifyContent="center">
-                            <img src={projectSVG} style={{height: "200px", objectFit: "contain"}} />
-                        </Box>
-                        
+                    <FeatureCard image={projectSVG}>
                         <Typography>Projects</Typography>
-                    </AppCard>
+                    </FeatureCard>
                 </Grid>
 
                 {/* Blogs */}
                 <Grid item xs={12} sm={4}>
-                    <AppCard sx={{
-                        padding: 2
-                    }}>
-                         <Box display="flex" justifyContent="center">
-                            <img src={blogSVG} style={{height: "200px", objectFit: "contain"}} />
-                        </Box>
-                        
+                    <FeatureCard image={blogSVG}>
                         <Typography>Blogs</Typography>
-                    </AppCard>
+                    </FeatureCard>
                 </Grid>
             </Grid>
 
