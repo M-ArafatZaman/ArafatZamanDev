@@ -1,5 +1,6 @@
 import react from 'react';
 import Header from './header';
+import Footer from './footer';
 // @mui components
 import {
     Box,
@@ -23,6 +24,7 @@ export default function Index() {
         }}>
             <Header/>
             <Home/>
+            <Footer/>
         </Box>
     );
 }

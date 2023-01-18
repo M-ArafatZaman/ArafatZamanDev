@@ -1,17 +1,9 @@
 import React from 'react';
 // @mui components
 import {
-    Typography,
     Container,
     Grid,
 } from '@mui/material';
-// Icons
-// Import svgs
-import blogSVG from '../media/blog.svg';
-import portfolioSVG from '../media/portfolio.svg';
-import projectSVG from '../media/projects.svg';
-// Other components
-import FeatureCard from './components/FeatureCard';
 // Grid layers
 import GridLayer1 from './GridLayer1';
 import GridLayer2 from './GridLayer2';
