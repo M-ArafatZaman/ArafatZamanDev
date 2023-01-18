@@ -14,6 +14,7 @@ import projectSVG from '../media/projects.svg';
 import FeatureCard from './components/FeatureCard';
 // Grid layers
 import GridLayer1 from './GridLayer1';
+import GridLayer2 from './GridLayer2';
 
 const Home: React.FC = () => {
 
@@ -27,29 +28,7 @@ const Home: React.FC = () => {
 
             {/* The second container containing portfolio, projects, blogs */}
             <Grid container paddingY={2} spacing={2}>
-                {/* Portfolio */}
-                <Grid item xs={12} sm={4}>
-                    <FeatureCard image={portfolioSVG} href="#">
-                        <Typography variant="h6"><b>Portfolio</b></Typography>
-                        <Typography>Explore my portfolio and discover my past work and experiences.</Typography>
-                    </FeatureCard>
-                </Grid>
-
-                {/* Projects */}
-                <Grid item xs={12} sm={4}>
-                    <FeatureCard image={projectSVG} href="#">
-                        <Typography variant="h6"><b>Projects</b></Typography>
-                        <Typography>Check out my personal projects and learn more about my interests and skills.</Typography>
-                    </FeatureCard>
-                </Grid>
-
-                {/* Blogs */}
-                <Grid item xs={12} sm={4}>
-                    <FeatureCard image={blogSVG} href="#">
-                        <Typography variant="h6"><b>Blogs</b></Typography>
-                        <Typography>Read my latest thoughts and musings on my blog.</Typography>
-                    </FeatureCard>
-                </Grid>
+                <GridLayer2/>
             </Grid>
 
         </Container>
