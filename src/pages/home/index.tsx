@@ -56,7 +56,7 @@ const Home: React.FC = () => {
                         }}>
                             <Typography variant="h5" sx={{fontWeight: "bold"}}>Hi! I am Arafat</Typography>
                             <Typography variant="h6" sx={{marginBottom: 1}}>I am a software developer</Typography>
-                            <Button variant="contained" color="primary" sx={{fontWeight: "bold"}} startIcon={<DescriptionIcon/>}>
+                            <Button variant="contained" color="primary" sx={{fontWeight: "bold"}} startIcon={<DescriptionIcon/>} download={true} href="resume.pdf">
                                 Download Resume
                             </Button>
                             <br/>
