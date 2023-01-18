@@ -19,7 +19,7 @@ function toRad(deg: number): number {
 
 let OrbitInteraction: boolean = false;
 
-const RasberryPI: React.FC = () => {
+const RaspberryPI: React.FC = () => {
 
     // Ref for container
     const ContainerRef: React.RefObject<HTMLDivElement> = createRef();
@@ -149,4 +149,4 @@ const RasberryPI: React.FC = () => {
     )
 };
 
-export default RasberryPI;
+export default RaspberryPI;
