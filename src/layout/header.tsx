@@ -13,7 +13,7 @@ import { SxProps } from '@mui/material/styles';
 import Navbar from './navbar';
 
 // Logo imports
-const LOGO = require("../media/logo/Logo-filled.svg").default as string;
+import LOGO from '../media/logo/Logo-filled.svg';
 
 
 const Header: React.FC = () => {
