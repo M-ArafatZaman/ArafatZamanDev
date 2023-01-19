@@ -17,6 +17,8 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import LaunchIcon from '@mui/icons-material/Launch';
+import ExploreIcon from '@mui/icons-material/Explore';
 // Logo and SVGS
 import LOGO from '../media/logo/Logo-filled.svg';
 
@@ -96,7 +98,11 @@ const Footer: React.FC = () => {
                         {/* Site map */}
                         <Grid item xs={12} md={4}>
                             <Box sx={{borderLeft: "1px solid #656565"}} px={3} height="100%">
-                                <Typography variant="h6" sx={{color: "#fff"}}>Explore</Typography>
+                                {/* Wrapped in box for the icon */}
+                                <Box display="flex" flexDirection="row" alignItems="center">
+                                    <ExploreIcon sx={{color: "#fff"}}/>
+                                    <Typography variant="h6" sx={{color: "#fff", pl: 1}}>Explore</Typography>
+                                </Box>
                                 <Box p={2} pt={0}>
                                     <AppLink>Portfolio</AppLink>
                                     <AppLink>Projects</AppLink>
@@ -109,7 +115,11 @@ const Footer: React.FC = () => {
                         {/* Socials */}
                         <Grid item xs={12} md={4}>
                             <Box sx={{borderLeft: "1px solid #656565"}} px={3} height="100%">
-                                <Typography variant="h6" sx={{color: "#fff"}}>Socials</Typography>
+                                {/* Wrapped in box for the icon */}
+                                <Box display="flex" flexDirection="row" alignItems="center">
+                                    <LaunchIcon sx={{color: "#fff"}}/>
+                                    <Typography variant="h6" sx={{color: "#fff", pl: 1}}>Socials</Typography>
+                                </Box>
                                 <Box p={2} pt={0}>
                                     <AppLink startIcon={<LinkedInIcon sx={{color: "#0072b1"}}/>}>LinkedIn</AppLink>
                                     <AppLink startIcon={<TwitterIcon sx={{color: "#00acee"}}/>}>Twitter</AppLink>
