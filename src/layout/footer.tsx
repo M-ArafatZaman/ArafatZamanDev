@@ -11,6 +11,12 @@ import {
 } from '@mui/material';
 // APP THEME
 import {APP_THEME} from '../appTheme';
+// @mui icons
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
 // Logo and SVGS
 import LOGO from '../media/logo/Logo-filled.svg';
 
@@ -19,10 +25,19 @@ interface CustomLinkProps {
     children?: JSX.Element | JSX.Element[] | string;
     href?: string;
     target?: "_blank" | "_self" | "_parent" | "_top";
+    startIcon?: JSX.Element;
 }
 
 const AppLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
-    const {children, href="#", target="_self"} = props;
+    const {children, href="#", target="_self", startIcon} = props;
+
+    let iconStyles: SxProps = {};
+
+    if (typeof startIcon != "undefined") {
+        iconStyles = {
+            pl: 1
+        };
+    };
 
     // Styles
     const LinkStyles: SxProps = {
@@ -37,12 +52,16 @@ const AppLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
         },
         "&:active": {
             color: "rgba(236,236,236,0.5)"
-        }
+        },
+        ...iconStyles
     }
 
     return (
         <Box>
-            <Link href={href} sx={LinkStyles} target={target}>{children}</Link>
+            <Box display="flex" flexDirection="row" alignItems="center">
+                {startIcon}
+                <Link href={href} sx={LinkStyles} target={target}>{children}</Link>
+            </Box>
         </Box>
     )
 }
@@ -92,11 +111,11 @@ const Footer: React.FC = () => {
                             <Box sx={{borderLeft: "1px solid #656565"}} px={3} height="100%">
                                 <Typography variant="h6" sx={{color: "#fff"}}>Socials</Typography>
                                 <Box p={2} pt={0}>
-                                    <AppLink>LinkedIn</AppLink>
-                                    <AppLink>Github</AppLink>
-                                    <AppLink>Twitter</AppLink>
-                                    <AppLink>Facebook</AppLink>
-                                    <AppLink>Instagram</AppLink>
+                                    <AppLink startIcon={<LinkedInIcon sx={{color: "#0072b1"}}/>}>LinkedIn</AppLink>
+                                    <AppLink startIcon={<TwitterIcon sx={{color: "#00acee"}}/>}>Twitter</AppLink>
+                                    <AppLink startIcon={<FacebookIcon sx={{color: "#3b5998"}}/>}>Facebook</AppLink>
+                                    <AppLink startIcon={<InstagramIcon sx={{color: "#d62976"}}/>}>Instagram</AppLink>
+                                    <AppLink startIcon={<GitHubIcon sx={{color: "#171515"}}/>}>Github</AppLink>
                                 </Box>
                             </Box>
                         </Grid>
