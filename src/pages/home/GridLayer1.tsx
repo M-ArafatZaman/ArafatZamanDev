@@ -13,6 +13,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 // Other components
 import AppCard from './components/AppCard';
 import RaspberryPI from './raspberry';
+import TypewriterGreetings from './components/TypewriterGreetings';
 // SVGs
 import backdropSVG from './media/backdrop.png';
 
@@ -46,7 +47,9 @@ function GridLayer1() {
                     position: "relative"
                 }}>
                     <Typography variant="h5" sx={{fontWeight: "bold"}}>Hi! I am Arafat</Typography>
-                    <Typography variant="h6" sx={{marginBottom: 1}}>I am a software developer</Typography>
+                    <Box mb={1}>
+                        <TypewriterGreetings/>
+                    </Box>
                     <Button variant="contained" color="primary" sx={{fontWeight: "bold"}} startIcon={<DescriptionIcon/>} download={true} href="resume.pdf">
                         Download Resume
                     </Button>
