@@ -1,6 +1,7 @@
 import react from 'react';
 import Header from './header';
 import Footer from './footer';
+import Loader from './loader';
 // Browser router
 import {
     createBrowserRouter,
@@ -59,7 +60,7 @@ export default function Index() {
             flexDirection: "column"
         }}>
             <Header/>
-            <Box flexGrow={1}>
+            <Box display="flex" flexGrow={1} flexDirection="column">
                 <RouterProvider router={router}/>
             </Box>
             <Footer/>
