@@ -16,6 +16,7 @@ import {
 import Home from '../pages/home';
 import Portfolio from '../pages/portfolio';
 import Projects from '../pages/projects';
+import Blog from '../pages/blog';
 
 // The main layout that is used throughout the app
 export default function Index() {
@@ -34,6 +35,10 @@ export default function Index() {
         {
             path: "/projects/",
             element: <Projects/>
+        },
+        {
+            path: "/blog/",
+            element: <Blog/>
         }
     ]) 
 
