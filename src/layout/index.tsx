@@ -14,7 +14,7 @@ import {
     useTheme
 } from '@mui/material';
 // Utils
-import {LazyImport} from '../utils';
+import {LazyImport, FadeInWrapper} from '../utils';
 // Page components
 const Home = LazyImport(() => import("../pages/home"));
 const Portfolio = LazyImport(() => import("../pages/portfolio"));
@@ -30,23 +30,23 @@ export default function Index() {
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Suspense fallback={<Loader/>}><Home/></Suspense>
+            element: <Suspense fallback={<Loader/>}><FadeInWrapper><Home/></FadeInWrapper></Suspense>
         },
         {
             path: "/portfolio/",
-            element: <Suspense fallback={<Loader/>}><Portfolio/></Suspense>
+            element: <Suspense fallback={<Loader/>}><FadeInWrapper><Portfolio/></FadeInWrapper></Suspense>
         },
         {
             path: "/projects/",
-            element: <Suspense fallback={<Loader/>}><Projects/></Suspense>
+            element: <Suspense fallback={<Loader/>}><FadeInWrapper><Projects/></FadeInWrapper></Suspense>
         },
         {
             path: "/blog/",
-            element: <Suspense fallback={<Loader/>}><Blog/></Suspense>
+            element: <Suspense fallback={<Loader/>}><FadeInWrapper><Blog/></FadeInWrapper></Suspense>
         },
         {
             path: "/contact/",
-            element: <Suspense fallback={<Loader/>}><Contact/></Suspense>
+            element: <Suspense fallback={<Loader/>}><FadeInWrapper><Contact/></FadeInWrapper></Suspense>
         }
     ]) 
 
