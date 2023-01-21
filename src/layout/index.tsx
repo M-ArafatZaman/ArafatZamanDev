@@ -1,4 +1,4 @@
-import react from 'react';
+import React, {Suspense} from 'react';
 import Header from './header';
 import Footer from './footer';
 import Loader from './loader';
@@ -13,12 +13,14 @@ import {
     Box,
     useTheme
 } from '@mui/material';
+// Utils
+import {LazyImport} from '../utils';
 // Page components
-import Home from '../pages/home';
-import Portfolio from '../pages/portfolio';
-import Projects from '../pages/projects';
-import Blog from '../pages/blog';
-import Contact from '../pages/contact';
+const Home = LazyImport(() => import("../pages/home"));
+const Portfolio = LazyImport(() => import("../pages/portfolio"));
+const Projects = LazyImport(() => import("../pages/projects"));
+const Blog = LazyImport(() => import("../pages/blog"));
+const Contact = LazyImport(() => import("../pages/contact"));
 
 // The main layout that is used throughout the app
 export default function Index() {
@@ -28,23 +30,23 @@ export default function Index() {
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Home/>
+            element: <Suspense fallback={<Loader/>}><Home/></Suspense>
         },
         {
             path: "/portfolio/",
-            element: <Portfolio/>
+            element: <Suspense fallback={<Loader/>}><Portfolio/></Suspense>
         },
         {
             path: "/projects/",
-            element: <Projects/>
+            element: <Suspense fallback={<Loader/>}><Projects/></Suspense>
         },
         {
             path: "/blog/",
-            element: <Blog/>
+            element: <Suspense fallback={<Loader/>}><Blog/></Suspense>
         },
         {
             path: "/contact/",
-            element: <Contact/>
+            element: <Suspense fallback={<Loader/>}><Contact/></Suspense>
         }
     ]) 
 
