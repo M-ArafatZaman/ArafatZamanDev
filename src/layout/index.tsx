@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 // Page components
 import Home from '../pages/home';
+import Portfolio from '../pages/portfolio';
 
 // The main layout that is used throughout the app
 export default function Index() {
@@ -24,6 +25,10 @@ export default function Index() {
         {
             path: "/",
             element: <Home/>
+        },
+        {
+            path: "/portfolio/",
+            element: <Portfolio/>
         }
     ]) 
 
