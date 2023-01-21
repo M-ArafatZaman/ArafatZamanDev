@@ -1,6 +1,12 @@
 import react from 'react';
 import Header from './header';
 import Footer from './footer';
+// Browser router
+import {
+    createBrowserRouter,
+    RouterProvider,
+    Route
+} from 'react-router-dom';
 // @mui components
 import {
     Box,
@@ -12,6 +18,14 @@ import Home from '../pages/home';
 // The main layout that is used throughout the app
 export default function Index() {
     const theme = useTheme();
+    
+    // Create router
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <Home/>
+        }
+    ]) 
 
     return (
         <Box sx={{
@@ -19,11 +33,15 @@ export default function Index() {
             minHeight: "100vh",
             backgroundColor: theme.palette.background.paper,
             position: "relative",
-            overflowX: "clip",
-            overflowY: "auto"
+            overflowX: "hidden",
+            overflowY: "auto",
+            display: "flex",
+            flexDirection: "column"
         }}>
             <Header/>
-            <Home/>
+            <Box flexGrow={1}>
+                <RouterProvider router={router}/>
+            </Box>
             <Footer/>
         </Box>
     );
