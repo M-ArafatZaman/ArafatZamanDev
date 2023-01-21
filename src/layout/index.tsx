@@ -15,6 +15,7 @@ import {
 // Page components
 import Home from '../pages/home';
 import Portfolio from '../pages/portfolio';
+import Projects from '../pages/projects';
 
 // The main layout that is used throughout the app
 export default function Index() {
@@ -29,6 +30,10 @@ export default function Index() {
         {
             path: "/portfolio/",
             element: <Portfolio/>
+        },
+        {
+            path: "/projects/",
+            element: <Projects/>
         }
     ]) 
 
