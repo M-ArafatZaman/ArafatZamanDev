@@ -10,7 +10,7 @@ import {keyframes} from '@mui/system';
 
 const TypewriterGreetings: React.FC = () => {
 
-    const Content: string[] = ["software developer", "motivated learner", "change maker", "leader", "risk taker"];
+    const Content: string[] = ["software developer", "freelancer", "motivated learner", "risk taker", "change maker"];
     const [currContent, setContent] = useState<number>(0);
 
     // Update content - Cycle back to first if current content is the last
@@ -61,13 +61,17 @@ const TypewriterGreetings: React.FC = () => {
         width: "95%"
     };
 
+    // A string class should be added to the ref element to indicate that event listener has already been added.
+    const ANIMATION_ADDED = "animation-added-i18xlkn";
     useEffect(() => {
-        if (ContainerRef.current instanceof HTMLElement && typeof ContainerRef.current !== "undefined" ) {
+        if (ContainerRef.current instanceof HTMLElement && typeof ContainerRef.current !== "undefined" && !ContainerRef.current.classList.contains(ANIMATION_ADDED)) {
             ContainerRef.current.addEventListener("animationiteration", (e: AnimationEvent) => {
-                if (e.animationName == RewriteContentKeyframes.name) {
+                if (e.animationName === RewriteContentKeyframes.name) {
                     updateContent();
                 }
             });
+            // Add a class to indicate that animation has been added
+            ContainerRef.current.classList.add(ANIMATION_ADDED);
         }
     }, [ContainerRef.current]);
 
