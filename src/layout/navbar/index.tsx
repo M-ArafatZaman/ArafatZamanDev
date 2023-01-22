@@ -1,4 +1,5 @@
-import react from 'react';
+import React, {useEffect} from 'react';
+import {useLocation, useNavigate, useMatch} from 'react-router-dom';
 // @mui components
 import {
     Box,
@@ -14,62 +15,75 @@ import {APP_THEME} from '../../appTheme';
 interface NavLinkProps {
     label: string;
     href?: string;
+    active?: boolean;
 };
 // The link component
 const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
-    const {href, label} = props;
+    const {href="", label, active=false} = props;
+
 
     // The link styles
     const LinkStyles: SxProps = {
         color: "#fff",
         textDecoration: "none",
-        fontWeight: "bold",
         fontFamily: APP_THEME.typography.fontFamily,
+        borderBottom: "3px solid rgba(255,255,255,0)",
         transition: "all ease-in-out 300ms",
         '&:hover': {
             color: "rgba(255,255,255,0.8)",
+            borderBottom: active ? "3px solid rgba(255,255,255,0.3)" : "3px solid rgba(255,255,255,0.2)"
         },
         '&:active': {
             color: "rgba(255,255,255,0.2)"
         },
-        borderBottom: "3px solid rgba(255,255,255,0.3)"
+        ...(active ? {fontWeight: "bold", borderBottom: "3px solid rgba(255,255,255,0.3)"} : {})
+        //fontWeight: "bold",
+        //borderBottom: "3px solid rgba(255,255,255,0.3)"
     }
 
     return (
         <Box sx={{
             paddingX: 2,
-            cursor: "pointer"
+            cursor: active ? "default" : "pointer"
         }}>
-            <Link href={href} sx={LinkStyles}>{label}</Link>
+            <Link href={active ? "javascript:void(0)" : href} sx={LinkStyles}>{label}</Link>
         </Box>
     )
 }
 
 // The main navbar
 const Navbar: React.FC = () => {
+
+    // Get the location
+    const PATH = window.location.pathname;
+
+    useEffect(() => {
+        console.log(window.location.pathname);
+    }, [window.location.pathname]);
     
     return (
         <>
         <Box display="flex" flexDirection="row" alignItems="center">
             <NavLink
                 label="HOME"
-                href="#"
+                href="/"
+                active={PATH == "/"}
             />
             <NavLink
                 label="PORTFOLIO"
-                href="#"
+                href="/portfolio/"
             />
             <NavLink
                 label="PROJECTS"
-                href="#"
+                href="/projects/"
             />
             <NavLink
                 label="BLOG"
-                href="#"
+                href="/blog/"
             />
             <NavLink
                 label="CONTACT"
-                href="#"
+                href="/contact/"
             />
             {/* Github button */}
             <IconButton href="https://github.com/M-ArafatZaman" target="_blank">

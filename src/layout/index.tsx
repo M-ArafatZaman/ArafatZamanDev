@@ -6,7 +6,9 @@ import Loader from './loader';
 import {
     createBrowserRouter,
     RouterProvider,
-    Route
+    Route,
+    BrowserRouter,
+    Outlet
 } from 'react-router-dom';
 // @mui components
 import {
@@ -26,29 +28,6 @@ const Contact = LazyImport(() => import("../pages/contact"));
 export default function Index() {
     const theme = useTheme();
     
-    // Create router
-    const router = createBrowserRouter([
-        {
-            path: "/",
-            element: <Suspense fallback={<Loader/>}><FadeInWrapper><Home/></FadeInWrapper></Suspense>
-        },
-        {
-            path: "/portfolio/",
-            element: <Suspense fallback={<Loader/>}><FadeInWrapper><Portfolio/></FadeInWrapper></Suspense>
-        },
-        {
-            path: "/projects/",
-            element: <Suspense fallback={<Loader/>}><FadeInWrapper><Projects/></FadeInWrapper></Suspense>
-        },
-        {
-            path: "/blog/",
-            element: <Suspense fallback={<Loader/>}><FadeInWrapper><Blog/></FadeInWrapper></Suspense>
-        },
-        {
-            path: "/contact/",
-            element: <Suspense fallback={<Loader/>}><FadeInWrapper><Contact/></FadeInWrapper></Suspense>
-        }
-    ]) 
 
     return (
         <Box sx={{
@@ -63,7 +42,7 @@ export default function Index() {
         }}>
             <Header/>
             <Box display="flex" flexGrow={1} flexDirection="column">
-                <RouterProvider router={router}/>
+                <Outlet/>
             </Box>
             <Footer/>
         </Box>
