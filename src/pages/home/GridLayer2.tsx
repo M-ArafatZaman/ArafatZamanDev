@@ -10,6 +10,8 @@ import FeatureCard from './components/FeatureCard';
 import portfolioSVG from '../media/portfolio.svg';
 import projectSVG from '../media/projects.svg';
 import blogSVG from '../media/blog.svg';
+// Utils
+import {ElementInViewport} from '../../utils';
 
 function GridLayer2() {
 
@@ -17,26 +19,32 @@ function GridLayer2() {
         <>
         {/* Portfolio */}
         <Grid item xs={12} sm={4}>
-            <FeatureCard image={portfolioSVG} href="#">
-                <Typography variant="h6"><b>Portfolio</b></Typography>
-                <Typography>Explore my portfolio and discover my past work and experiences.</Typography>
-            </FeatureCard>
+            <ElementInViewport animation='fadeInLeft' delay={1000}>
+                <FeatureCard image={portfolioSVG} href="#">
+                    <Typography variant="h6"><b>Portfolio</b></Typography>
+                    <Typography>Explore my portfolio and discover my past work and experiences.</Typography>
+                </FeatureCard>
+            </ElementInViewport>
         </Grid>
 
         {/* Projects */}
         <Grid item xs={12} sm={4}>
-            <FeatureCard image={projectSVG} href="#">
-                <Typography variant="h6"><b>Projects</b></Typography>
-                <Typography>Check out my personal projects and learn more about my interests and skills.</Typography>
-            </FeatureCard>
+            <ElementInViewport animation="fadeInUp" delay={1000}>
+                <FeatureCard image={projectSVG} href="#">
+                    <Typography variant="h6"><b>Projects</b></Typography>
+                    <Typography>Check out my personal projects and learn more about my interests and skills.</Typography>
+                </FeatureCard>
+            </ElementInViewport>
         </Grid>
 
         {/* Blogs */}
         <Grid item xs={12} sm={4}>
-            <FeatureCard image={blogSVG} href="#">
-                <Typography variant="h6"><b>Blogs</b></Typography>
-                <Typography>Read my latest thoughts and musings on my blog.</Typography>
-            </FeatureCard>
+            <ElementInViewport animation="fadeInRight" delay={1000}>
+                <FeatureCard image={blogSVG} href="#">
+                    <Typography variant="h6"><b>Blogs</b></Typography>
+                    <Typography>Read my latest thoughts and musings on my blog.</Typography>
+                </FeatureCard>
+            </ElementInViewport>
         </Grid>
         </>
     )
