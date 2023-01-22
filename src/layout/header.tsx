@@ -64,9 +64,9 @@ const Header: React.FC = () => {
     return (
         <Box sx={{position: "relative"}}>
             {/* Header container for the padding */}
-            <Box sx={headerContainerStyles}>
+            <Box sx={headerContainerStyles} ref={HeaderRef}>
                 {/* The header */}
-                <Box sx={headerStyles} ref={HeaderRef}>
+                <Box sx={headerStyles}>
                     <Container>
                         <Box display="flex" flexDirection="row">
                             {/* The logo */}
