@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useMatch, useLocation} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 // @mui components
 import {
     Box,
@@ -34,7 +34,6 @@ const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
         event.preventDefault();
         // Only update if current link is not the current location
         if (currLocation.pathname != href) {
-            console.log("NAVIGATING")
             navigate(href);
         }
     };
@@ -55,8 +54,7 @@ const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
             color: "rgba(255,255,255,0.2)"
         },
         ...(active ? {fontWeight: "bold", borderBottom: "3px solid rgba(255,255,255,0.3)"} : {})
-        //fontWeight: "bold",
-        //borderBottom: "3px solid rgba(255,255,255,0.3)"
+
     }
 
     return (

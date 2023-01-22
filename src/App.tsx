@@ -8,8 +8,6 @@ import {
 import {APP_THEME} from './appTheme';
 // @MUI
 import {ThemeProvider} from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Main from './layout/index';
 // Utils
 import {FadeInWrapper, LazyImport} from './utils';
 // Main index and loader
