@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {useLocation, useNavigate, useMatch} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useNavigate, useMatch, useLocation} from 'react-router-dom';
 // @mui components
 import {
     Box,
@@ -15,12 +15,29 @@ import {APP_THEME} from '../../appTheme';
 interface NavLinkProps {
     label: string;
     href?: string;
-    active?: boolean;
 };
 // The link component
 const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
-    const {href="", label, active=false} = props;
+    const {href="", label} = props;
 
+    const navigate = useNavigate();
+    const currLocation = useLocation();
+    const [active, setActive] = useState<boolean>(currLocation.pathname == href);
+
+    // Event listener for when the current location changes
+    useEffect(() => {
+        setActive(currLocation.pathname == href);
+    }, [currLocation]);
+
+    // Even listener for on click
+    const onClick = (event: React.MouseEvent<HTMLElement>) => {
+        event.preventDefault();
+        // Only update if current link is not the current location
+        if (currLocation.pathname != href) {
+            console.log("NAVIGATING")
+            navigate(href);
+        }
+    };
 
     // The link styles
     const LinkStyles: SxProps = {
@@ -29,11 +46,12 @@ const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
         fontFamily: APP_THEME.typography.fontFamily,
         borderBottom: "3px solid rgba(255,255,255,0)",
         transition: "all ease-in-out 300ms",
-        '&:hover': {
+        // Only add the following styles if the current button is active
+        '&:hover': active ? {} : {
             color: "rgba(255,255,255,0.8)",
-            borderBottom: active ? "3px solid rgba(255,255,255,0.3)" : "3px solid rgba(255,255,255,0.2)"
+            borderBottom: "3px solid rgba(255,255,255,0.2)"
         },
-        '&:active': {
+        '&:active': active ? {} : {
             color: "rgba(255,255,255,0.2)"
         },
         ...(active ? {fontWeight: "bold", borderBottom: "3px solid rgba(255,255,255,0.3)"} : {})
@@ -46,20 +64,13 @@ const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
             paddingX: 2,
             cursor: active ? "default" : "pointer"
         }}>
-            <Link href={active ? "javascript:void(0)" : href} sx={LinkStyles}>{label}</Link>
+            <Link sx={LinkStyles} onClick={onClick}>{label}</Link>
         </Box>
     )
 }
 
 // The main navbar
 const Navbar: React.FC = () => {
-
-    // Get the location
-    const PATH = window.location.pathname;
-
-    useEffect(() => {
-        console.log(window.location.pathname);
-    }, [window.location.pathname]);
     
     return (
         <>
@@ -67,7 +78,6 @@ const Navbar: React.FC = () => {
             <NavLink
                 label="HOME"
                 href="/"
-                active={PATH == "/"}
             />
             <NavLink
                 label="PORTFOLIO"
