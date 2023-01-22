@@ -16,6 +16,8 @@ import RaspberryPI from './raspberry';
 import TypewriterGreetings from './components/TypewriterGreetings';
 // SVGs
 import backdropSVG from './media/backdrop.png';
+// Util components
+import {ElementInViewport} from '../../utils';
 
 function GridLayer1() {
 
@@ -23,50 +25,52 @@ function GridLayer1() {
         <>
         {/* The software developer container */}
         <Grid item xs={12} sm={6}>
-            <AppCard sx={{
-                padding: 4,
-                paddingY: 8
-            }}>
-                {/* The backdrop */}
-                <img 
-                    src={backdropSVG} 
-                    style={{
-                        objectFit: "contain",
-                        width: "100%",
-                        position: "absolute",
-                        bottom: 0,
-                        left: 0,
-                        zIndex: 0
-                    }}
-                />
-                
-                {/* Content */}
-                <Box sx={{
-                    backgroundColor: "rgba(0,0,0,0)",
-                    zIndex: 1,
-                    position: "relative"
+            {/* Wrap the appcard so that it fadesin from left */}
+            <ElementInViewport animation='fadeInLeft' delay={500}>
+                <AppCard sx={{
+                    padding: 4,
+                    paddingY: 8
                 }}>
-                    <Typography variant="h5" sx={{fontWeight: "bold"}}>Hi! I am Arafat</Typography>
-                    <Box mb={1}>
-                        <TypewriterGreetings/>
+                    {/* The backdrop */}
+                    <img 
+                        src={backdropSVG} 
+                        style={{
+                            objectFit: "contain",
+                            width: "100%",
+                            position: "absolute",
+                            bottom: 0,
+                            left: 0,
+                            zIndex: 0
+                        }}
+                    />
+                    
+                    {/* Content */}
+                    <Box sx={{
+                        backgroundColor: "rgba(0,0,0,0)",
+                        zIndex: 1,
+                        position: "relative"
+                    }}>
+                        <Typography variant="h5" sx={{fontWeight: "bold"}}>Hi! I am Arafat</Typography>
+                        <Box mb={1}>
+                            <TypewriterGreetings/>
+                        </Box>
+                        <Button variant="contained" color="primary" sx={{fontWeight: "bold"}} startIcon={<DescriptionIcon/>} download={true} href="resume.pdf">
+                            Download Resume
+                        </Button>
+                        <br/>
+                        <Button variant="contained" color="inherit" sx={{fontWeight: "bold", mt: 1}} startIcon={<GitHubIcon/>}
+                            href="https://github.com/M-ArafatZaman" target="_blank"
+                        >
+                            Github
+                        </Button>
                     </Box>
-                    <Button variant="contained" color="primary" sx={{fontWeight: "bold"}} startIcon={<DescriptionIcon/>} download={true} href="resume.pdf">
-                        Download Resume
-                    </Button>
-                    <br/>
-                    <Button variant="contained" color="inherit" sx={{fontWeight: "bold", mt: 1}} startIcon={<GitHubIcon/>}
-                        href="https://github.com/M-ArafatZaman" target="_blank"
-                    >
-                        Github
-                    </Button>
-                </Box>
-            </AppCard>
+                </AppCard>
+            </ElementInViewport>
         </Grid>
         
         {/* RaspberryPI component */}
         <Grid item xs={12} sm={6}>
-            <Box display="flex" flexDirection="column" sx={{height: "100%", width: "100%"}}>
-                
+            <Box display="flex" flexDirection="column" sx={{height: "100%", width: "100%"}}>  
                 <Box flexGrow={1}>
                     <RaspberryPI/>
                 </Box>
