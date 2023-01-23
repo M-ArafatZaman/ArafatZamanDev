@@ -5,6 +5,8 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 // @ mui components
 // Others
 import {APP_THEME} from '../../../appTheme';
+// Utils
+import {isAnyPartOfElementInViewport} from '../../../utils';
 
 const RASPBERRY_PI_MODEL: string = "./models/raspberry_pi/scene.gltf";
 
@@ -118,7 +120,7 @@ const RaspberryPI: React.FC = () => {
         const animate = () => {
             requestAnimationFrame(animate);
             _renderer.render(_scene, _camera);
-            if (loadedRaspberryModel instanceof THREE.Group && !OrbitInteraction) {
+            if (loadedRaspberryModel instanceof THREE.Group && !OrbitInteraction && isAnyPartOfElementInViewport(_renderer.domElement)) {
                 loadedRaspberryModel.rotation.y += 0.01;
             };
             Controls.update();
