@@ -3,15 +3,23 @@ import React from 'react';
 import {
     Container,
     Grid,
+    Divider,
+    Typography,
+    Box
 } from '@mui/material';
 // Grid layers
 import GridLayer1 from './GridLayer1';
 import GridLayer2 from './GridLayer2';
+import GridLayer3 from './GridLayer3';
+// @mui icons
+import StarIcon from '@mui/icons-material/Star';
+// Utils
+import {ElementInViewport} from '../../utils';
 
 const Home: React.FC = () => {
 
     return (
-        <Container>
+        <Container sx={{pb: 2}}>
 
             {/* The first grid with greetings and raspberry container */}
             <Grid container spacing={2} sx={{marginY: 0}}>
@@ -23,6 +31,19 @@ const Home: React.FC = () => {
                 <GridLayer2/>
             </Grid>
 
+            <Divider sx={{my:1}} />
+            {/* Feature projects title */}
+            <ElementInViewport delay={500}>
+                <Box display="flex" flexDirection="row" alignItems="center">
+                    <StarIcon fontSize="large" color="warning"/>
+                    <Typography variant="h4" sx={{ml: 1}}>Featured Projects</Typography>
+                </Box>
+            </ElementInViewport>
+
+            {/* The third container containing the lyrics finder */}
+            <Grid container spacing={2} paddingY={2}>
+                <GridLayer3/>
+            </Grid>
         </Container>
     )
 };
