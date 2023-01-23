@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 // Components
 import AppCard from './components/AppCard';
 // Import gif
-//import MobileDeviceGIF from '../../media/gif/mobile_device.gif';
+import MobileDeviceGIF from '../../media/gif/mobile_device.gif';
 // @mui icons
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import LaunchIcon from '@mui/icons-material/Launch';
@@ -49,8 +49,7 @@ const GridLayer4: React.FC = () => {
         <Grid item xs={12} sm={4}>
             <ElementInViewport animation="fadeInRight" delay={500} sx={{height: "100%"}}>
                 <Box display="flex" justifyContent="center" alignItems="center" p={3} height="100%">
-                    {/* <img src={MobileDeviceGIF} style={{objectFit: "contain", height: "250px"}}/> */}
-                    [Image]
+                    <img src={MobileDeviceGIF} style={{objectFit: "contain", height: "250px"}}/>
                 </Box>
             </ElementInViewport>
         </Grid>

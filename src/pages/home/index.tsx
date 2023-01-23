@@ -1,19 +1,19 @@
-import React from 'react';
+import React, {lazy} from 'react';
 // @mui components
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-// Grid layers
-import GridLayer1 from './GridLayer1';
-import GridLayer2 from './GridLayer2';
-import GridLayer3 from './GridLayer3';
-import GridLayer4 from './GridLayer4';
 // @mui icons
 import StarIcon from '@mui/icons-material/Star';
 // Utils
 import {ElementInViewport} from '../../utils';
+// Grid layers
+const GridLayer1 = lazy(() => import("./GridLayer1"));
+const GridLayer2 = lazy(() => import("./GridLayer2"));
+const GridLayer3 = lazy(() => import("./GridLayer3"));
+const GridLayer4 = lazy(() => import("./GridLayer4"));
 
 const Home: React.FC = () => {
 
@@ -26,9 +26,10 @@ const Home: React.FC = () => {
             
                 {/* The second container containing portfolio, projects, blogs */}
                 <GridLayer2/>
+
             </Grid>
 
-            <Divider sx={{my:1}} />
+            <Divider sx={{my:2}} />
             {/* Feature projects title */}
             <ElementInViewport delay={500}>
                 <Box display="flex" flexDirection="row" alignItems="center">
@@ -37,12 +38,12 @@ const Home: React.FC = () => {
                 </Box>
             </ElementInViewport>
 
-            {/* The third container containing the lyrics finder */}
-            {/* <Grid container spacing={2} paddingY={2}>
-                <GridLayer3/> */}
-            {/* The fourth container containing the inperil application */}
-                {/* <GridLayer4/>
-            </Grid> */}
+            <Grid container spacing={2} paddingY={2}>
+                {/* The third container containing the lyrics finder */}
+                <GridLayer3/>
+                {/* The fourth container containing the inperil application */}
+                <GridLayer4/>
+            </Grid>
         </Container>
     )
 };

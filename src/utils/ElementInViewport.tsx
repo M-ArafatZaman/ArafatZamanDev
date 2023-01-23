@@ -1,9 +1,7 @@
 import React, {createRef, useEffect} from 'react';
 // @mui element
-import {
-    Box,
-    SxProps
-} from '@mui/material'
+import Box from '@mui/material/Box';
+import {SxProps} from '@mui/material/styles';
 // Utils
 import {isAnyPartOfElementInViewport} from './viewport';
 

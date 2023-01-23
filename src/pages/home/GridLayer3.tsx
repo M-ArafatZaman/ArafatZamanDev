@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 // Components
 import AppCard from './components/AppCard';
 // Gif
-//import AstronautGIF from '../../media/gif/astronaut.gif';
+import AstronautGIF from '../../media/gif/astronaut.gif';
 // @mui icons
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import LaunchIcon from '@mui/icons-material/Launch';
@@ -21,8 +21,7 @@ const GridLayer3: React.FC = () => {
         <Grid item xs={12} sm={4}>
             <ElementInViewport animation="fadeInLeft" delay={500} sx={{height: "100%"}}>
                 <Box display="flex" justifyContent="center" alignItems="center" p={3} height="100%">
-                    {/* <img src={AstronautGIF} style={{objectFit: "contain", height: "250px"}} /> */}
-                    [Image]
+                    <img src={AstronautGIF} style={{objectFit: "contain", height: "250px"}} />
                 </Box>
             </ElementInViewport>
         </Grid>

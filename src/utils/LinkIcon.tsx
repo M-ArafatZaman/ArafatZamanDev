@@ -1,6 +1,6 @@
 import React from 'react';
 // @mui link component
-import {Link} from '@mui/material';
+import Link from '@mui/material/Link';
 
 interface LinkIconProp {
     href?: string;
