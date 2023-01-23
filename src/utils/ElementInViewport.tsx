@@ -11,6 +11,7 @@ interface ElementInViewportProps {
     children: React.ReactNode;
     animation?: string;
     delay?: number;
+    sx?: SxProps;
 }
 
 /**
@@ -19,10 +20,11 @@ interface ElementInViewportProps {
  * @returns 
  */
 const ElementInViewport: React.FC<ElementInViewportProps> = (props: ElementInViewportProps) => {
-    const {children, animation="fadeIn", delay=1000} = props;
+    const {children, animation="fadeIn", delay=1000, sx} = props;
 
     const Style: SxProps = {
-        animationDelay: `${delay}ms`
+        animationDelay: `${delay}ms`,
+        ...sx
     };
 
     // Container element

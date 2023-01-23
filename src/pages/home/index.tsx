@@ -1,12 +1,10 @@
 import React from 'react';
 // @mui components
-import {
-    Container,
-    Grid,
-    Divider,
-    Typography,
-    Box
-} from '@mui/material';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 // Grid layers
 import GridLayer1 from './GridLayer1';
 import GridLayer2 from './GridLayer2';
@@ -25,10 +23,8 @@ const Home: React.FC = () => {
             {/* The first grid with greetings and raspberry container */}
             <Grid container spacing={2} sx={{marginY: 0}}>
                 <GridLayer1/>
-            </Grid>
-
-            {/* The second container containing portfolio, projects, blogs */}
-            <Grid container paddingY={2} spacing={2}>
+            
+                {/* The second container containing portfolio, projects, blogs */}
                 <GridLayer2/>
             </Grid>
 
@@ -42,14 +38,11 @@ const Home: React.FC = () => {
             </ElementInViewport>
 
             {/* The third container containing the lyrics finder */}
-            <Grid container spacing={2} paddingY={2}>
-                <GridLayer3/>
-            </Grid>
-
+            {/* <Grid container spacing={2} paddingY={2}>
+                <GridLayer3/> */}
             {/* The fourth container containing the inperil application */}
-            <Grid container spacing={2} paddingY={2}>
-                <GridLayer4/>
-            </Grid>
+                {/* <GridLayer4/>
+            </Grid> */}
         </Container>
     )
 };

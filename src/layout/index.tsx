@@ -4,21 +4,18 @@ import Footer from './footer';
 // Browser router
 import { Outlet } from 'react-router-dom';
 // @mui components
-import {
-    Box,
-    useTheme
-} from '@mui/material';
+import Box from '@mui/material/Box';
+// App theme
+import {APP_THEME} from '../appTheme';
 
 // The main layout that is used throughout the app
 export default function Index() {
-    const theme = useTheme();
-    
 
     return (
         <Box sx={{
             maxWidth: "100vw",
             minHeight: "100vh",
-            backgroundColor: theme.palette.background.paper,
+            backgroundColor: APP_THEME.palette.background.paper,
             position: "relative",
             overflowX: "hidden",
             overflowY: "auto",

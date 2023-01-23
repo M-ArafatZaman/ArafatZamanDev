@@ -1,10 +1,8 @@
 import React, {useState, createRef, useEffect} from 'react';
 // @mui components
-import {
-    Typography,
-    Box,
-    SxProps,
-} from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import {SxProps} from '@mui/material/styles';
 // Emotion css
 import {keyframes} from '@mui/system';
 

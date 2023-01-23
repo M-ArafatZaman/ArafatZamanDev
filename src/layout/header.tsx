@@ -1,11 +1,8 @@
 import React, {createRef, useEffect} from 'react';
 // @mui components
-import {
-    Container,
-    Box,
-    useTheme
-} from '@mui/material';
-import { SxProps } from '@mui/material/styles';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import { SxProps, useTheme } from '@mui/material/styles';
 // Page components
 import Navbar from './navbar';
 

@@ -1,8 +1,6 @@
 import React from 'react';
 // @mui components
-import {
-    Box
-} from '@mui/material';
+import Box from '@mui/material/Box';
 
 /* The projects page */
 const Projects: React.FC = () => {

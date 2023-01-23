@@ -1,17 +1,13 @@
 import React from 'react';
 // @mui components
-import {
-    Grid,
-    Typography,
-    Box,
-    Divider,
-    Link
-} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 // Components
 import AppCard from './components/AppCard';
-// Lottie player and the lottie animation
-import {Player} from '@lottiefiles/react-lottie-player';
-import AstronautJSON from '../../media/lottie/astronaut.json';
+// Gif
+//import AstronautGIF from '../../media/gif/astronaut.gif';
 // @mui icons
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import LaunchIcon from '@mui/icons-material/Launch';
@@ -23,14 +19,10 @@ const GridLayer3: React.FC = () => {
     return (
         <>
         <Grid item xs={12} sm={4}>
-            <ElementInViewport animation="fadeInLeft" delay={500}>
-                <Box display="flex" justifyContent="center" alignItems="center" p={3}>
-                    <Player
-                        loop
-                        autoplay
-                        src={AstronautJSON}
-                        style={{height: 250}}
-                    />
+            <ElementInViewport animation="fadeInLeft" delay={500} sx={{height: "100%"}}>
+                <Box display="flex" justifyContent="center" alignItems="center" p={3} height="100%">
+                    {/* <img src={AstronautGIF} style={{objectFit: "contain", height: "250px"}} /> */}
+                    [Image]
                 </Box>
             </ElementInViewport>
         </Grid>

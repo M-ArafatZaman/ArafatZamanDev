@@ -1,12 +1,10 @@
 import React from 'react';
 // @mui components
-import {
-    Grid, 
-    Typography,
-    Box,
-    Link,
-    Button
-} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
 // @mui icons
 import GitHubIcon from '@mui/icons-material/GitHub';
 import DescriptionIcon from '@mui/icons-material/Description';

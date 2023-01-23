@@ -1,14 +1,12 @@
 import React from 'react';
 // @mui components
-import {
-    Box,
-    SxProps,
-    Typography,
-    Grid,
-    Divider,
-    Container,
-    Link
-} from '@mui/material';
+import {SxProps} from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
 // APP THEME
 import {APP_THEME} from '../appTheme';
 // @mui icons

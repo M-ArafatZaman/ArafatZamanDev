@@ -1,9 +1,7 @@
 import React from 'react';
 // @mui components
-import {
-    Grid,
-    Typography
-} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 // Other components
 import FeatureCard from './components/FeatureCard';
 // SVG

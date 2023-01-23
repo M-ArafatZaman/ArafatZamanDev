@@ -1,10 +1,8 @@
 import React from 'react';
 // @mui components
-import {
-    Box,
-    Divider,
-    Button
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
 // Extras
 import AppCard from './AppCard';
 import {APP_THEME} from '../../../appTheme';

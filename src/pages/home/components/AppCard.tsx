@@ -1,5 +1,7 @@
 import React from 'react';
-import {Box, SxProps} from '@mui/material';
+// @mui Components
+import Box from '@mui/material/Box';
+import {SxProps} from '@mui/material/styles';
 import {APP_THEME} from '../../../appTheme';
 
 interface AppCardProps {

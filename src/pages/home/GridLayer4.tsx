@@ -1,16 +1,13 @@
 import React from 'react';
 // @mui components
-import {
-    Grid,
-    Typography,
-    Box,
-    Divider
-} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 // Components
 import AppCard from './components/AppCard';
-// Lottie player and the lottie animation
-import {Player} from '@lottiefiles/react-lottie-player';
-import MobileDeviceJSON from '../../media/lottie/mobile_device.json';
+// Import gif
+//import MobileDeviceGIF from '../../media/gif/mobile_device.gif';
 // @mui icons
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import LaunchIcon from '@mui/icons-material/Launch';
@@ -50,14 +47,10 @@ const GridLayer4: React.FC = () => {
         </Grid>
 
         <Grid item xs={12} sm={4}>
-            <ElementInViewport animation="fadeInRight" delay={500}>
-                <Box display="flex" justifyContent="center" alignItems="center" p={3}>
-                    <Player
-                        loop
-                        autoplay
-                        src={MobileDeviceJSON}
-                        style={{height: 250}}
-                    />
+            <ElementInViewport animation="fadeInRight" delay={500} sx={{height: "100%"}}>
+                <Box display="flex" justifyContent="center" alignItems="center" p={3} height="100%">
+                    {/* <img src={MobileDeviceGIF} style={{objectFit: "contain", height: "250px"}}/> */}
+                    [Image]
                 </Box>
             </ElementInViewport>
         </Grid>
