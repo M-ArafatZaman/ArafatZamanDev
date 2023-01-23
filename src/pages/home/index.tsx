@@ -11,6 +11,7 @@ import {
 import GridLayer1 from './GridLayer1';
 import GridLayer2 from './GridLayer2';
 import GridLayer3 from './GridLayer3';
+import GridLayer4 from './GridLayer4';
 // @mui icons
 import StarIcon from '@mui/icons-material/Star';
 // Utils
@@ -43,6 +44,11 @@ const Home: React.FC = () => {
             {/* The third container containing the lyrics finder */}
             <Grid container spacing={2} paddingY={2}>
                 <GridLayer3/>
+            </Grid>
+
+            {/* The fourth container containing the inperil application */}
+            <Grid container spacing={2} paddingY={2}>
+                <GridLayer4/>
             </Grid>
         </Container>
     )
