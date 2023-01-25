@@ -19,6 +19,8 @@ const Portfolio = LazyImport(() => import("./pages/portfolio"));
 const Projects = LazyImport(() => import("./pages/projects"));
 const Blog = LazyImport(() => import("./pages/blog"));
 const Contact = LazyImport(() => import("./pages/contact"));
+// Sub page components
+const ViewPortfolio = LazyImport(() => import("./pages/portfolio/viewPortfolio"));
 
 
 function App() {
@@ -29,6 +31,7 @@ function App() {
 			path: "/",
 			element: <Root/>,
 			children: [
+				// Main page directories
 				{
 					path: "",
 					element: <Suspense fallback={<Loader/>}> <FadeInWrapper><Home/></FadeInWrapper> </Suspense>
@@ -48,6 +51,11 @@ function App() {
 				{
 					path: "contact/",
 					element: <Suspense fallback={<Loader/>}> <FadeInWrapper><Contact/></FadeInWrapper> </Suspense>
+				},
+				// Sub portfolio directories
+				{
+					path: "portfolio/:slug",
+					element: <Suspense fallback={<Loader/>}> <FadeInWrapper><ViewPortfolio/></FadeInWrapper> </Suspense>
 				}
 			]
 		}
