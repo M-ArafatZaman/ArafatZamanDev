@@ -3,8 +3,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
 import {SxProps} from '@mui/material/styles';
 // Other components
@@ -26,16 +24,20 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
         transition: "all 300ms linear",
         "&:hover": {
             transform: "scale(1.03)"
-        }
+        },
+        // Style for the appcard
+        display: "flex",
+        flexDirection: "column",
+        height: "100%"
     };
 
     return (
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={3}>
             <AppCard sx={onHoverStyle}>
                 {/* Title */}
                 <Box sx={{p:2, pb: 1}}>
-                    <Typography variant="h4">{name}</Typography>
-                    {tags.map((str, i) => <Chip label={str} size="small" color="info" sx={{mr: 1}} key={i}/>)}
+                    <Typography variant="h5">{name}</Typography>
+                    {/*tags.map((str, i) => <Chip label={str} size="small" color="info" sx={{mr: 1}} key={i}/>)*/}
                 </Box>
 
                 {/* Image */}
@@ -50,7 +52,7 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
                 </Box>
 
                 {/* Content */}
-                <Box sx={{p: 2}}>
+                <Box sx={{p: 2}} flexGrow={1}>
                     <Typography variant="body2">{short_description}</Typography>
                 </Box>
 

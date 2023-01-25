@@ -1,4 +1,4 @@
-import React, {createRef, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 // @mui components
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -8,15 +8,36 @@ import Divider from '@mui/material/Divider';
 // @mui icons
 import WorkIcon from '@mui/icons-material/Work';
 // Example response for dev
-import {response} from './testResponse';
-import {PortfolioItem} from './types';
+import {PortfolioItem, PortfolioAPIResponse} from './types';
 // Components
 import PortfolioItemGrid from './components/PortfolioItemGrid';
+// Endpoints
+import {BASE, GET_PORTFOLIO_ITEMS} from './ENDPOINT';
 
 /* The portfolio page */
 const Portfolio: React.FC = () => {
 
-    const examplePayload: PortfolioItem[] = Array(5).fill(response.items).flat();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [items, setItems] = useState<PortfolioItem[]>([] as PortfolioItem[]);
+
+    // Fetch data from API endpoint
+    useEffect(() => {
+        // Fetch
+        fetch(`${BASE}${GET_PORTFOLIO_ITEMS}`, {
+            method: "GET",
+            mode: "cors"
+        })
+        .then((response) => response.json())
+        .then((response: PortfolioAPIResponse) => {
+            if (response.status === "OK") {
+                setItems(response.items);
+            }
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
+
+    }, []);
     
     return (
         <Container sx={{py: 2}}>
@@ -29,18 +50,23 @@ const Portfolio: React.FC = () => {
 
             {/* Portfolio cards */}
             <Grid container justifyContent="center" spacing={2}>
-                {examplePayload.map((portfolio, i) => {
+                {
+                    isLoading ? 
+                    <Typography>LOADING</Typography>
+                    : 
+                    items.map((portfolio, i) => {
                     
-                    return (
-                    <PortfolioItemGrid 
-                        key={i}
-                        name={portfolio.name}
-                        short_description={portfolio.short_description}
-                        image={portfolio.imageURL}
-                        tags={portfolio.tags}
-                    />
-                    )
-                })}
+                        return (
+                        <PortfolioItemGrid 
+                            key={i}
+                            name={portfolio.name}
+                            short_description={portfolio.short_description}
+                            image={portfolio.imageURL}
+                            tags={portfolio.tags}
+                        />
+                        )
+                    })
+                }
 
             </Grid>
         </Container>
