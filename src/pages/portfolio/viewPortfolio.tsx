@@ -7,17 +7,27 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
+// Marked, highlight js, and html react parser
+import {marked} from 'marked';
+import hljs from "highlight.js";
+import htmlReactParser from 'html-react-parser';
 // Other components
 import AppCard from '../home/components/AppCard';
 // Types
 import {ViewPortfolioItemAPIResponse, PortfolioItem} from './types';
 import {BASE, VIEW_PORTFOLIO_ITEMS} from './ENDPOINT';
 
+/* 
+The view portfolio page component that retrieves a single portfolio item 
+from the server and renders it.
+It is a page component. It receives the slug parameter from the browserrouter API.
+*/
 const ViewPortfolio: React.FC = () => {
     const params = useParams<{slug: string}>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [data, setData] = useState<PortfolioItem>();
     const [found, setFound] = useState<boolean>(false);
+    const [parsedContent, setParsedContent] = useState<JSX.Element | JSX.Element[] | string>();
 
     useEffect(() => {
         fetch(`${BASE}${VIEW_PORTFOLIO_ITEMS}${params.slug}`, {
@@ -30,6 +40,10 @@ const ViewPortfolio: React.FC = () => {
                 // Found item
                 setData(response.payload);
                 setFound(true);
+                // Parse content
+                const contentMD = marked.parse(response.payload.content);
+                const contentMDParsed = htmlReactParser(contentMD);
+                setParsedContent(contentMDParsed);
             }
             // Else not found. found state is false by default
         })
@@ -37,6 +51,12 @@ const ViewPortfolio: React.FC = () => {
             setIsLoading(false);
         });
     }, []);
+
+    // After content has been parsed
+    useEffect(() => {
+        // This is executed when the content is parsed
+        hljs.highlightAll();
+    }, [parsedContent]);
 
     return (
         <Container sx={{p: 2}}>
@@ -59,7 +79,7 @@ const ViewPortfolio: React.FC = () => {
 
                                     {/* Content */}
                                     <Typography>
-                                        {data?.content}
+                                        {parsedContent}
                                     </Typography>
                                 </Box>
                             </AppCard>
