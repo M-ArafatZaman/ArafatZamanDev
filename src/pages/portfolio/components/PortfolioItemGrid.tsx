@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
+import {SxProps} from '@mui/material/styles';
 // Other components
 import AppCard from '../../home/components/AppCard';
 
@@ -20,9 +21,23 @@ interface PortfolioItemGridProps {
 const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioItemGridProps) => {
     const {name, short_description, image, tags} = props;
 
+    // On hover style
+    const onHoverStyle: SxProps = {
+        transition: "all 300ms linear",
+        "&:hover": {
+            transform: "scale(1.03)"
+        }
+    };
+
     return (
         <Grid item xs={12} md={4}>
-            <AppCard>
+            <AppCard sx={onHoverStyle}>
+                {/* Title */}
+                <Box sx={{p:2, pb: 1}}>
+                    <Typography variant="h4">{name}</Typography>
+                    {tags.map((str, i) => <Chip label={str} size="small" color="info" sx={{mr: 1}} key={i}/>)}
+                </Box>
+
                 {/* Image */}
                 <Box display="flex" justifyContent="center" alignItems="center" sx={{position: "relative"}}>
                     <img src={image} style={{objectFit: "contain", width: "100%"}}/>
@@ -35,16 +50,13 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
                 </Box>
 
                 {/* Content */}
-                <Box sx={{p: 2, pt: 0}}>
-                    <Typography variant="h4">{name}</Typography>
-                    {tags.map((str) => <Chip label={str} size="small" color="info" sx={{mr: 1}}/>)}
-                    <Divider sx={{my: 1}}/>
+                <Box sx={{p: 2}}>
                     <Typography variant="body2">{short_description}</Typography>
                 </Box>
 
                 {/* Button */}
-                <Box sx={{p: 2, backgroundColor: "rgba(0,0,0,.05)"}}>
-                    <Button>View</Button>
+                <Box sx={{p: 2, backgroundColor: "rgba(0,0,0,.1)"}}>
+                    <Button color="info">View</Button>
                 </Box>
             </AppCard>
         </Grid>

@@ -17,7 +17,6 @@ import PortfolioItemGrid from './components/PortfolioItemGrid';
 const Portfolio: React.FC = () => {
 
     const examplePayload: PortfolioItem[] = Array(5).fill(response.items).flat();
-    console.log(examplePayload);
     
     return (
         <Container sx={{py: 2}}>
@@ -30,10 +29,11 @@ const Portfolio: React.FC = () => {
 
             {/* Portfolio cards */}
             <Grid container justifyContent="center" spacing={2}>
-                {examplePayload.map((portfolio) => {
+                {examplePayload.map((portfolio, i) => {
                     
                     return (
                     <PortfolioItemGrid 
+                        key={i}
                         name={portfolio.name}
                         short_description={portfolio.short_description}
                         image={portfolio.imageURL}
