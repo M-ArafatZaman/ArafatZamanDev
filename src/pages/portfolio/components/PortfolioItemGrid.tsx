@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import {SxProps} from '@mui/material/styles';
 // Other components
 import AppCard from '../../home/components/AppCard';
+import { ElementInViewport } from '../../../utils';
 
 /* Each portfolio item - They are each rendered in a grid container  */
 interface PortfolioItemGridProps {
@@ -14,10 +15,13 @@ interface PortfolioItemGridProps {
     short_description: string;
     image: string;
     tags: string[];
+    index: number;
 };
 
+const ANIMATION_CLASSES = ["fadeInLeft", "fadeInUp", "fadeInDown", "fadeInRight"]
+
 const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioItemGridProps) => {
-    const {name, short_description, image, tags} = props;
+    const {name, short_description, image, tags, index} = props;
 
     // On hover style
     const onHoverStyle: SxProps = {
@@ -33,34 +37,36 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
 
     return (
         <Grid item xs={12} md={3}>
-            <AppCard sx={onHoverStyle}>
-                {/* Title */}
-                <Box sx={{p:2, pb: 1}}>
-                    <Typography variant="h5">{name}</Typography>
-                    {/*tags.map((str, i) => <Chip label={str} size="small" color="info" sx={{mr: 1}} key={i}/>)*/}
-                </Box>
+            <ElementInViewport sx={{height: "100%"}} animation={ANIMATION_CLASSES[index % ANIMATION_CLASSES.length]}>
+                <AppCard sx={onHoverStyle}>
+                    {/* Title */}
+                    <Box sx={{p:2, pb: 1}}>
+                        <Typography variant="h5">{name}</Typography>
+                        {/*tags.map((str, i) => <Chip label={str} size="small" color="info" sx={{mr: 1}} key={i}/>)*/}
+                    </Box>
 
-                {/* Image */}
-                <Box display="flex" justifyContent="center" alignItems="center" sx={{position: "relative"}}>
-                    <img src={image} style={{objectFit: "contain", width: "100%"}}/>
-                    {/* Overlay */}
-                    <Box sx={{
-                        position: "absolute",
-                        top: 0, bottom: 0, left: 0, right: 0,
-                        background: "linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1))"
-                    }}/>
-                </Box>
+                    {/* Image */}
+                    <Box display="flex" justifyContent="center" alignItems="center" sx={{position: "relative"}}>
+                        <img src={image} style={{objectFit: "contain", width: "100%"}}/>
+                        {/* Overlay */}
+                        <Box sx={{
+                            position: "absolute",
+                            top: 0, bottom: 0, left: 0, right: 0,
+                            background: "linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1))"
+                        }}/>
+                    </Box>
 
-                {/* Content */}
-                <Box sx={{p: 2}} flexGrow={1}>
-                    <Typography variant="body2">{short_description}</Typography>
-                </Box>
+                    {/* Content */}
+                    <Box sx={{p: 2}} flexGrow={1}>
+                        <Typography variant="body2">{short_description}</Typography>
+                    </Box>
 
-                {/* Button */}
-                <Box sx={{p: 2, backgroundColor: "rgba(0,0,0,.1)"}}>
-                    <Button color="info">View</Button>
-                </Box>
-            </AppCard>
+                    {/* Button */}
+                    <Box sx={{p: 2, backgroundColor: "rgba(0,0,0,.1)"}}>
+                        <Button color="info">View</Button>
+                    </Box>
+                </AppCard>
+            </ElementInViewport>
         </Grid>
     )
 };

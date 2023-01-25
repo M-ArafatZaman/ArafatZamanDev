@@ -58,6 +58,7 @@ const Portfolio: React.FC = () => {
                     
                         return (
                         <PortfolioItemGrid 
+                            index={i}
                             key={i}
                             name={portfolio.name}
                             short_description={portfolio.short_description}
