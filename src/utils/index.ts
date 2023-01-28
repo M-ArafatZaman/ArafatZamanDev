@@ -4,6 +4,7 @@ import FadeInWrapper from './FadeInWrapper';
 import ElementInViewport from './ElementInViewport';
 import {isElementInViewport, isAnyPartOfElementInViewport} from './viewport';
 import LinkIcon from './LinkIcon';
+import generateString from './generateString';
 
 export {
     toHex,
@@ -12,5 +13,6 @@ export {
     ElementInViewport,
     isElementInViewport,
     isAnyPartOfElementInViewport,
-    LinkIcon
+    LinkIcon,
+    generateString
 };
