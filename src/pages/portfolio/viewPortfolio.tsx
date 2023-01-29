@@ -82,56 +82,54 @@ const ViewPortfolio: React.FC = () => {
     }, [parsedJavascript]);
 
     return (
-        <Container sx={{p: 2}}>
-            <Grid container spacing={2}>
-                {
-                    isLoading ? <Typography>LOADING...</Typography> :
+        <Grid container spacing={2}>
+            {
+                isLoading ? <Typography>LOADING...</Typography> :
 
-                    !found ? <Typography>NOT FOUND</Typography> :
-                    
-                    
-                    <>
-                        {/* Portfolio Navbar */}
-                        <Grid item xs={12} md={4}>
-                            <AppCard sx={{backgroundColor: APP_THEME.palette.primary.main}}>
-                                <Box p={2}>
-                                    <Typography variant="h6">Contents</Typography>
-                                    <Divider sx={{my: 1}}/>
-                                    {PContext.items.map((P_ITEMS, i) => (
-                                        <Button fullWidth variant="contained" sx={{backgroundColor: "rgba(255,255,255,0.4)", my: 0.5}}>{P_ITEMS.name}</Button>
-                                    ))}
-                                </Box>
-                            </AppCard>
-                        </Grid>
+                !found ? <Typography>NOT FOUND</Typography> :
+                
+                
+                <>
+                    {/* Portfolio Navbar */}
+                    <Grid item xs={12} md={4}>
+                        <AppCard sx={{backgroundColor: APP_THEME.palette.primary.main}}>
+                            <Box p={2}>
+                                <Typography variant="h6">Contents</Typography>
+                                <Divider sx={{my: 1}}/>
+                                {PContext.items.map((P_ITEMS, i) => (
+                                    <Button fullWidth variant="contained" sx={{backgroundColor: "rgba(255,255,255,0.4)", my: 0.5}}>{P_ITEMS.name}</Button>
+                                ))}
+                            </Box>
+                        </AppCard>
+                    </Grid>
 
-                        {/* Portfolio content */}
-                        <Grid item xs={12} md={8}>
-                            <AppCard>
-                                <Box sx={{p: 3}}>
-                                    {/* Header and tags */}
-                                    <Typography variant="h4" sx={{textDecoration: "underline", mb: 1}}>{data?.name}</Typography>
-                                    {data?.tags.map((str, i) => <Chip label={str} size="small" color="info" sx={{mr: 1}} key={i}/>) }
-                                    
-                                    <Divider sx={{my: 2}}/>
+                    {/* Portfolio content */}
+                    <Grid item xs={12} md={8}>
+                        <AppCard>
+                            <Box sx={{p: 3}}>
+                                {/* Header and tags */}
+                                <Typography variant="h4" sx={{textDecoration: "underline", mb: 1}}>{data?.name}</Typography>
+                                {data?.tags.map((str, i) => <Chip label={str} size="small" color="info" sx={{mr: 1}} key={i}/>) }
+                                
+                                <Divider sx={{my: 2}}/>
 
-                                    {/* Content */}
-                                    <Typography sx={{
-                                        "& img": {
-                                            width: "100%",
-                                            objectFit: "contain"
-                                        }
-                                    }}>
-                                        {parsedContent}
-                                    </Typography>
-                                </Box>
-                            </AppCard>
-                        </Grid>
+                                {/* Content */}
+                                <Typography sx={{
+                                    "& img": {
+                                        width: "100%",
+                                        objectFit: "contain"
+                                    }
+                                }}>
+                                    {parsedContent}
+                                </Typography>
+                            </Box>
+                        </AppCard>
+                    </Grid>
 
-                    </>
+                </>
 
-                }
-            </Grid>
-        </Container>
+            }
+        </Grid>
     )
 };
 
