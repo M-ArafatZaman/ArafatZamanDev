@@ -1,0 +1,86 @@
+/* Container and inner styles */
+.carousel-container, .carousel-inner {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+/* Container item styles */
+.carousel-item {
+    position: absolute;
+    transform: translateX(-100%);
+    transition: all 300ms linear;
+}
+
+/* Active and moving styles */
+.carousel-active {
+    display: block;
+    animation: bringInView 300ms linear;
+    transform: translateX(0);
+
+}
+.carousel-active-prev {
+    display: block;
+    transform: translateX(0);
+    animation: bringInPrev 300ms linear;
+}
+.carousel-remove-prev {
+    display: block;
+    animation: hidePrev 300ms linear;
+}
+
+@keyframes bringInView {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes hidePrev {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes bringInPrev {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Controls styles */
+.carousel-controls {
+    top: 0;
+    left: 0; 
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0);
+}
+
+.carousel-controls-prev, .carousel-controls-next {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.4;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
+.carousel-controls-prev { left: 0; }
+.carousel-controls-next { right:0;}
+.carousel-controls-next:hover, .carousel-controls-prev:hover {
+    opacity: 0.6;
+}

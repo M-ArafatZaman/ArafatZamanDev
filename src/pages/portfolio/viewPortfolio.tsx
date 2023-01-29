@@ -16,6 +16,8 @@ import AppCard from '../home/components/AppCard';
 // Types
 import {ViewPortfolioItemAPIResponse, PortfolioItem} from './types';
 import {BASE, VIEW_PORTFOLIO_ITEMS} from './ENDPOINT';
+// Carousel component
+import {replaceContentWithCarousel} from '../../components/Carousel';
 
 /* 
 The view portfolio page component that retrieves a single portfolio item 
@@ -28,6 +30,7 @@ const ViewPortfolio: React.FC = () => {
     const [data, setData] = useState<PortfolioItem>();
     const [found, setFound] = useState<boolean>(false);
     const [parsedContent, setParsedContent] = useState<JSX.Element | JSX.Element[] | string>();
+    const [parsedJavascript, setParsedJavascript] = useState<string[]>([]);
 
     useEffect(() => {
         fetch(`${BASE}${VIEW_PORTFOLIO_ITEMS}${params.slug}`, {
@@ -40,10 +43,13 @@ const ViewPortfolio: React.FC = () => {
                 // Found item
                 setData(response.payload);
                 setFound(true);
-                // Parse content
+                // Parse content and replace with carousel
                 const contentMD = marked.parse(response.payload.content);
-                const contentMDParsed = htmlReactParser(contentMD);
+                const ReplacedContent = replaceContentWithCarousel(contentMD);
+                // Replace with carousel
+                const contentMDParsed = htmlReactParser(ReplacedContent.html);
                 setParsedContent(contentMDParsed);
+                setParsedJavascript((val) => [...ReplacedContent.js])
             }
             // Else not found. found state is false by default
         })
@@ -56,6 +62,10 @@ const ViewPortfolio: React.FC = () => {
     useEffect(() => {
         // This is executed when the content is parsed
         hljs.highlightAll();
+        // Execute the javascript
+        parsedJavascript.forEach((str) => {
+            eval(str);
+        })
     }, [parsedContent]);
 
     return (
@@ -78,7 +88,12 @@ const ViewPortfolio: React.FC = () => {
                                     <Divider sx={{my: 2}}/>
 
                                     {/* Content */}
-                                    <Typography>
+                                    <Typography sx={{
+                                        "& img": {
+                                            width: "100%",
+                                            objectFit: "contain"
+                                        }
+                                    }}>
                                         {parsedContent}
                                     </Typography>
                                 </Box>
