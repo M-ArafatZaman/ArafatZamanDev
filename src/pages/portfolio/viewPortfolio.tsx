@@ -49,7 +49,7 @@ const ViewPortfolio: React.FC = () => {
                 // Replace with carousel
                 const contentMDParsed = htmlReactParser(ReplacedContent.html);
                 setParsedContent(contentMDParsed);
-                setParsedJavascript((val) => [...ReplacedContent.js])
+                setParsedJavascript(() => [...ReplacedContent.js])
             }
             // Else not found. found state is false by default
         })
@@ -62,11 +62,15 @@ const ViewPortfolio: React.FC = () => {
     useEffect(() => {
         // This is executed when the content is parsed
         hljs.highlightAll();
+    }, [parsedContent]);
+
+    // Execute javascript of all the carousel
+    useEffect(() => {
         // Execute the javascript
         parsedJavascript.forEach((str) => {
             eval(str);
         })
-    }, [parsedContent]);
+    }, [parsedJavascript]);
 
     return (
         <Container sx={{p: 2}}>
@@ -98,6 +102,12 @@ const ViewPortfolio: React.FC = () => {
                                     </Typography>
                                 </Box>
                             </AppCard>
+                        </Grid>
+
+                        <Grid item xs={12} md={4}>
+                            <Box width="100%" display="flex" p={2} justifyContent="center">
+                                TESTs
+                            </Box>
                         </Grid>
                     </>
 
