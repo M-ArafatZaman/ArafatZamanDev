@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {useParams} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
@@ -69,9 +69,11 @@ const ViewPortfolio: React.FC = () => {
 
     // Execute javascript of all the carousel
     useEffect(() => {
-        // Execute the javascript
+        // Execute the javascript after 1000ms
         parsedJavascript.forEach((str) => {
-            eval(str);
+            setTimeout(() => {
+                eval(str);
+            }, 1000);
         })
     }, [parsedJavascript]);
 
