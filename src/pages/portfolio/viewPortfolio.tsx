@@ -21,6 +21,8 @@ import {BASE, VIEW_PORTFOLIO_ITEMS} from './ENDPOINT';
 import {replaceContentWithCarousel} from '../../components/Carousel';
 // App theme
 import {APP_THEME} from '../../appTheme';
+// Portfolio context
+import {PortfolioContext} from './portfolioContext';
 
 /* 
 The view portfolio page component that retrieves a single portfolio item 
@@ -34,6 +36,8 @@ const ViewPortfolio: React.FC = () => {
     const [found, setFound] = useState<boolean>(false);
     const [parsedContent, setParsedContent] = useState<JSX.Element | JSX.Element[] | string>();
     const [parsedJavascript, setParsedJavascript] = useState<string[]>([]);
+    // Context to render navbar
+    const PContext = useContext(PortfolioContext);
 
     useEffect(() => {
         fetch(`${BASE}${VIEW_PORTFOLIO_ITEMS}${params.slug}`, {
@@ -85,18 +89,22 @@ const ViewPortfolio: React.FC = () => {
 
                     !found ? <Typography>NOT FOUND</Typography> :
                     
-                    /* Main portfolio */
+                    
                     <>
+                        {/* Portfolio Navbar */}
                         <Grid item xs={12} md={4}>
                             <AppCard sx={{backgroundColor: APP_THEME.palette.primary.main}}>
                                 <Box p={2}>
                                     <Typography variant="h6">Contents</Typography>
                                     <Divider sx={{my: 1}}/>
-                                    <Button fullWidth variant="contained" sx={{backgroundColor: "rgba(255,255,255,0.4)"}}>LyricsFinder</Button>
+                                    {PContext.items.map((P_ITEMS, i) => (
+                                        <Button fullWidth variant="contained" sx={{backgroundColor: "rgba(255,255,255,0.4)", my: 0.5}}>{P_ITEMS.name}</Button>
+                                    ))}
                                 </Box>
                             </AppCard>
                         </Grid>
 
+                        {/* Portfolio content */}
                         <Grid item xs={12} md={8}>
                             <AppCard>
                                 <Box sx={{p: 3}}>
