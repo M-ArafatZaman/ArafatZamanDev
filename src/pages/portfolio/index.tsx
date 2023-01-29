@@ -8,7 +8,7 @@ import Divider from '@mui/material/Divider';
 // @mui icons
 import WorkIcon from '@mui/icons-material/Work';
 // Example response for dev
-import {PortfolioItem, PortfolioAPIResponse} from './types';
+import {PortfolioItems, PortfolioAPIResponse} from './types';
 // Components
 import PortfolioItemGrid from './components/PortfolioItemGrid';
 // Endpoints
@@ -18,7 +18,7 @@ import {BASE, GET_PORTFOLIO_ITEMS} from './ENDPOINT';
 const Portfolio: React.FC = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [items, setItems] = useState<PortfolioItem[]>([] as PortfolioItem[]);
+    const [items, setItems] = useState<PortfolioItems[]>([] as PortfolioItems[]);
 
     // Fetch data from API endpoint
     useEffect(() => {

@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
 // Marked, highlight js, and html react parser
 import {marked} from 'marked';
 import hljs from "highlight.js";
@@ -18,6 +19,8 @@ import {ViewPortfolioItemAPIResponse, PortfolioItem} from './types';
 import {BASE, VIEW_PORTFOLIO_ITEMS} from './ENDPOINT';
 // Carousel component
 import {replaceContentWithCarousel} from '../../components/Carousel';
+// App theme
+import {APP_THEME} from '../../appTheme';
 
 /* 
 The view portfolio page component that retrieves a single portfolio item 
@@ -74,7 +77,7 @@ const ViewPortfolio: React.FC = () => {
 
     return (
         <Container sx={{p: 2}}>
-            <Grid container>
+            <Grid container spacing={2}>
                 {
                     isLoading ? <Typography>LOADING...</Typography> :
 
@@ -82,6 +85,16 @@ const ViewPortfolio: React.FC = () => {
                     
                     /* Main portfolio */
                     <>
+                        <Grid item xs={12} md={4}>
+                            <AppCard sx={{backgroundColor: APP_THEME.palette.primary.main}}>
+                                <Box p={2}>
+                                    <Typography variant="h6">Contents</Typography>
+                                    <Divider sx={{my: 1}}/>
+                                    <Button fullWidth variant="contained" sx={{backgroundColor: "rgba(255,255,255,0.4)"}}>LyricsFinder</Button>
+                                </Box>
+                            </AppCard>
+                        </Grid>
+
                         <Grid item xs={12} md={8}>
                             <AppCard>
                                 <Box sx={{p: 3}}>
@@ -104,11 +117,6 @@ const ViewPortfolio: React.FC = () => {
                             </AppCard>
                         </Grid>
 
-                        <Grid item xs={12} md={4}>
-                            <Box width="100%" display="flex" p={2} justifyContent="center">
-                                TESTs
-                            </Box>
-                        </Grid>
                     </>
 
                 }
