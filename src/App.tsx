@@ -41,12 +41,16 @@ function App() {
 				},
 				{
 					path: "portfolio/",
-					element: <Suspense fallback={<Loader/>}> <Portfolio/> </Suspense>,
+					element: <Suspense fallback={<Loader/>}> <FadeInWrapper><Portfolio/></FadeInWrapper> </Suspense>,
 					children: [
 						// Sub /portfolio/ paths
 						{
 							path: "",
-							element: <Suspense fallback={<Loader/>}> <FadeInWrapper> <PortfolioItemsPage/> </FadeInWrapper> </Suspense>
+							element: <Suspense> <FadeInWrapper> <PortfolioItemsPage/> </FadeInWrapper> </Suspense>
+						},
+						{
+							path: ":slug/",
+							element: <Suspense> <FadeInWrapper> <ViewPortfolio/> </FadeInWrapper> </Suspense>
 						}
 					]
 				},
@@ -61,11 +65,6 @@ function App() {
 				{
 					path: "contact/",
 					element: <Suspense fallback={<Loader/>}> <FadeInWrapper><Contact/></FadeInWrapper> </Suspense>
-				},
-				// Sub portfolio directories
-				{
-					path: "portfolio/:slug",
-					element: <Suspense fallback={<Loader/>}> <FadeInWrapper><ViewPortfolio/></FadeInWrapper> </Suspense>
 				}
 			]
 		}

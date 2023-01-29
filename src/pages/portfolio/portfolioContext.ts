@@ -23,9 +23,15 @@ export const PortfolioReducer = (tasks: PortfolioContextType, action: PortfolioR
                 items: action.payload.items as PortfolioItems[]
             };
         };
+        case UPDATE_IS_LOADING: {
+            return {
+                ...tasks,
+                isLoading: action.payload.isLoading as boolean
+            };
+        };
         default: {
             return {...tasks}
-        }
+        };
     }
 };
 

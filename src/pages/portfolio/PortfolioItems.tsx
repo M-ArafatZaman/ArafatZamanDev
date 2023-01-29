@@ -1,12 +1,9 @@
 import React, {useContext} from 'react';
 // @mui components
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 // Components
 import PortfolioItemGrid from './components/PortfolioItemGrid';
-// Types
-import {PortfolioItems as PortfolioItemsType} from './types';
 // Context
 import {PortfolioContext} from './portfolioContext';
 
@@ -27,7 +24,7 @@ const PortfolioItems: React.FC = () => {
                     image={portfolio.imageURL}
                     tags={portfolio.tags}
                 />
-            ))};
+            ))}
         </Grid>
     )
 };

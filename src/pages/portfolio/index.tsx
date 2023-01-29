@@ -3,15 +3,12 @@ import {Outlet} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 // @mui icons
 import WorkIcon from '@mui/icons-material/Work';
 // Example response for dev
 import {PortfolioItems, PortfolioAPIResponse} from './types';
-// Components
-import PortfolioItemGrid from './components/PortfolioItemGrid';
 // Endpoints
 import {BASE, GET_PORTFOLIO_ITEMS} from './ENDPOINT';
 // Portfolio Context
@@ -20,6 +17,7 @@ import {
     PortfolioReducer,
     PORTFOLIO_INITIAL_STATE,
     UPDATE_ITEMS,
+    UPDATE_IS_LOADING
 } from './portfolioContext';
 
 /* The portfolio page */
@@ -49,8 +47,13 @@ const Portfolio: React.FC = () => {
             }
         })
         .finally(() => {
-            setIsLoading(false);
-        });
+            dispatch({
+                type: UPDATE_IS_LOADING,
+                payload: {
+                    isLoading: false
+                }
+            })
+        })
 
     }, []);
     
