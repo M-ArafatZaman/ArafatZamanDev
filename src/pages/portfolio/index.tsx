@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useReducer} from 'react';
+import {Outlet} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -13,12 +14,20 @@ import {PortfolioItems, PortfolioAPIResponse} from './types';
 import PortfolioItemGrid from './components/PortfolioItemGrid';
 // Endpoints
 import {BASE, GET_PORTFOLIO_ITEMS} from './ENDPOINT';
+// Portfolio Context
+import { 
+    PortfolioContext,
+    PortfolioReducer,
+    PORTFOLIO_INITIAL_STATE,
+    UPDATE_ITEMS,
+} from './portfolioContext';
 
 /* The portfolio page */
 const Portfolio: React.FC = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [items, setItems] = useState<PortfolioItems[]>([] as PortfolioItems[]);
+    const [pContext, dispatch] = useReducer(PortfolioReducer, PORTFOLIO_INITIAL_STATE);
 
     // Fetch data from API endpoint
     useEffect(() => {
@@ -30,7 +39,13 @@ const Portfolio: React.FC = () => {
         .then((response) => response.json())
         .then((response: PortfolioAPIResponse) => {
             if (response.status === "OK") {
-                setItems(response.items);
+                //setItems(response.items);
+                dispatch({
+                    type: UPDATE_ITEMS,
+                    payload: {
+                        items: response.items
+                    }
+                })
             }
         })
         .finally(() => {
@@ -49,27 +64,9 @@ const Portfolio: React.FC = () => {
             <Divider sx={{mt: 1, mb: 2}}/>
 
             {/* Portfolio cards */}
-            <Grid container justifyContent="center" spacing={2}>
-                {
-                    isLoading ? 
-                    <Typography>LOADING</Typography>
-                    : 
-                    items.map((portfolio, i) => {
-                    
-                        return (
-                        <PortfolioItemGrid 
-                            index={i}
-                            key={i}
-                            name={portfolio.name}
-                            short_description={portfolio.short_description}
-                            image={portfolio.imageURL}
-                            tags={portfolio.tags}
-                        />
-                        )
-                    })
-                }
-
-            </Grid>
+            <PortfolioContext.Provider value={pContext}>
+                <Outlet/>
+            </PortfolioContext.Provider>
         </Container>
     );
 };
