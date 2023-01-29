@@ -1,8 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useNavigate} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
@@ -38,8 +37,13 @@ const ViewPortfolio: React.FC = () => {
     const [parsedJavascript, setParsedJavascript] = useState<string[]>([]);
     // Context to render navbar
     const PContext = useContext(PortfolioContext);
+    // React router navigation hook
+    const navigate = useNavigate();
 
     useEffect(() => {
+        // Initialize loading
+        setIsLoading(true);
+        // Fetch the data
         fetch(`${BASE}${VIEW_PORTFOLIO_ITEMS}${params.slug}`, {
             method: "GET",
             mode: "cors"
@@ -63,7 +67,7 @@ const ViewPortfolio: React.FC = () => {
         .finally(() => {
             setIsLoading(false);
         });
-    }, []);
+    }, [params]);
 
     // After content has been parsed
     useEffect(() => {
@@ -97,7 +101,13 @@ const ViewPortfolio: React.FC = () => {
                                 <Typography variant="h6">Contents</Typography>
                                 <Divider sx={{my: 1}}/>
                                 {PContext.items.map((P_ITEMS, i) => (
-                                    <Button fullWidth variant="contained" sx={{backgroundColor: "rgba(255,255,255,0.4)", my: 0.5}}>{P_ITEMS.name}</Button>
+                                    <Button 
+                                        key={i}
+                                        fullWidth 
+                                        variant="contained" 
+                                        sx={{backgroundColor: "rgba(255,255,255,0.4)", my: 0.5}}
+                                        onClick={() => {navigate(`/portfolio/${P_ITEMS.slug}`)}}
+                                    >{P_ITEMS.name}</Button>
                                 ))}
                             </Box>
                         </AppCard>

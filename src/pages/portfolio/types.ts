@@ -2,6 +2,7 @@ interface PortfolioItems {
     name: string;
     short_description: string;
     imageURL: string;
+    slug: string;
     tags: string[];
 }
 
