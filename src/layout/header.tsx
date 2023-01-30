@@ -24,7 +24,7 @@ const Header: React.FC = () => {
     // Header container styles
     const headerContainerStyles: SxProps = {
         position: "fixed",
-        zIndex: 1000,
+        zIndex: 2000,
         top: 0, left: 0, right: 0,
         padding: "8px",
         pb: 0,
