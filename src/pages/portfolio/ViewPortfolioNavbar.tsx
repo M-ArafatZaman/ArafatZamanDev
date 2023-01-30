@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 // @mui icons
 import MenuIcon from '@mui/icons-material/Menu';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // Other components
 import AppCard from '../home/components/AppCard';
 // App theme
@@ -37,6 +38,18 @@ const ViewPortfolioNavbar: React.FC = () => {
             {/* Buttons */}
             <Collapse in={!collapsed}>
                 <Box p={2} sx={{borderTop: "1px solid rgba(0,0,0,.15)"}}>
+                    <Box sx={{mb: 1}}>
+                        <Typography variant="caption" sx={{color: "rgba(0,0,0,.65)"}}><b>NAVIGATION</b></Typography>
+                        <Button 
+                            variant="contained"
+                            color="info"
+                            startIcon={<ArrowBackIcon/>} 
+                            fullWidth
+                            onClick={() => {navigate(`/portfolio/`)}}
+                        >Go to portfolio</Button>
+                    </Box>
+
+                    <Typography variant="caption" sx={{color: "rgba(0,0,0,.65)"}}><b>PORTFOLIO ITEMS</b></Typography>
                     {PContext.items.map((P_ITEMS, i) => (
                         <Button 
                             key={i}
