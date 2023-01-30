@@ -1,5 +1,5 @@
 import getCarouselJS from "./getCarouselJs";
-import {generateString} from '../utils';
+import {generateString} from '../../utils';
 // RegEx to match carousels in MD
 // Syntax is like
 // <p>[CAROUSEL]</p>
@@ -21,6 +21,7 @@ function replaceContentWithCarousel(html: string): replaceContentWithCarouselTyp
     let match = MATCH_CAROUSEL.exec(html);
     let JAVASCRIPT: string[] = [];
 
+    // Replace content for normal carousel
     while (match !== null) {
         // Get the matched content and filter appropriately
         let matchContent = match[0];
@@ -54,7 +55,6 @@ function replaceContentWithCarousel(html: string): replaceContentWithCarouselTyp
 
         // Get new match
         match = MATCH_CAROUSEL.exec(html);
-        
     };
 
     return {

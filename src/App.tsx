@@ -13,8 +13,9 @@ import {FadeInWrapper, LazyImport} from './utils';
 // Main index and loader
 import Root from './layout';
 import Loader from './layout/loader';
-// Import carousel
-import './components/carousel.css';
+// Import carousel and iPhone carousel
+import './components/Carousel/carousel.css';
+import './components/Carousel/iphone.css';
 // Page components
 const Home = LazyImport(() => import("./pages/home"));
 const Portfolio = LazyImport(() => import("./pages/portfolio"));
