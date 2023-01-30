@@ -7,7 +7,8 @@ import {generateString} from '../utils';
 // <p>[END-CAROUSEL]</p>
 const BEGIN_CAROUSEL = "<p>[CAROUSEL]</p>";
 const END_CAROUSEL = "<p>[END-CAROUSEL]</p>";
-const MATCH_CAROUSEL = new RegExp("<p>\\[CAROUSEL\\]<\\/p>[\\s\\S]*<p>\\[END-CAROUSEL\\]<\\/p>");
+// <p>\\[CAROUSEL\\]<\\/p>[\\s\\S]*<p>\\[END-CAROUSEL\\]<\\/p>
+const MATCH_CAROUSEL = new RegExp("(<p>\\[CAROUSEL\\]<\\/p>)[\\s\\S]+?(<p>\\[END-CAROUSEL\\]<\\/p>)");
 const PARAGRAPH_BEGIN = "<p>";
 const PARAGRAPH_END = "</p>";
 
