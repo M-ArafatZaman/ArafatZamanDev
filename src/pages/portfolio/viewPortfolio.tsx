@@ -22,6 +22,8 @@ import {replaceContentWithCarousel, replaceContentWithIphone} from '../../compon
 import {APP_THEME} from '../../appTheme';
 // Portfolio context
 import {PortfolioContext} from './portfolioContext';
+// Navbar
+import ViewPortfolioNavbar from './ViewPortfolioNavbar';
 
 /* 
 The view portfolio page component that retrieves a single portfolio item 
@@ -97,21 +99,7 @@ const ViewPortfolio: React.FC = () => {
                 <>
                     {/* Portfolio Navbar */}
                     <Grid item xs={12} md={4}>
-                        <AppCard sx={{backgroundColor: APP_THEME.palette.primary.main}}>
-                            <Box p={2}>
-                                <Typography variant="h6">Contents</Typography>
-                                <Divider sx={{my: 1}}/>
-                                {PContext.items.map((P_ITEMS, i) => (
-                                    <Button 
-                                        key={i}
-                                        fullWidth 
-                                        variant="contained" 
-                                        sx={{backgroundColor: "rgba(255,255,255,0.4)", my: 0.5}}
-                                        onClick={() => {navigate(`/portfolio/${P_ITEMS.slug}`)}}
-                                    >{P_ITEMS.name}</Button>
-                                ))}
-                            </Box>
-                        </AppCard>
+                        <ViewPortfolioNavbar/>
                     </Grid>
 
                     {/* Portfolio content */}
