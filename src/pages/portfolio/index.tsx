@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useReducer} from 'react';
+import React, {useEffect, useReducer} from 'react';
 import {Outlet} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
@@ -8,7 +8,7 @@ import Divider from '@mui/material/Divider';
 // @mui icons
 import WorkIcon from '@mui/icons-material/Work';
 // Example response for dev
-import {PortfolioItems, PortfolioAPIResponse} from './types';
+import {PortfolioAPIResponse} from './types';
 // Endpoints
 import {BASE, GET_PORTFOLIO_ITEMS} from './ENDPOINT';
 // Portfolio Context
@@ -23,8 +23,6 @@ import {
 /* The portfolio page */
 const Portfolio: React.FC = () => {
 
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [items, setItems] = useState<PortfolioItems[]>([] as PortfolioItems[]);
     const [pContext, dispatch] = useReducer(PortfolioReducer, PORTFOLIO_INITIAL_STATE);
 
     // Fetch data from API endpoint
