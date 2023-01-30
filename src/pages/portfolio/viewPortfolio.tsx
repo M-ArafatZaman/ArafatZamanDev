@@ -1,12 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {useParams, useNavigate} from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
-import Button from '@mui/material/Button';
 // Marked, highlight js, and html react parser
 import {marked} from 'marked';
 import hljs from "highlight.js";
@@ -18,10 +17,6 @@ import {ViewPortfolioItemAPIResponse, PortfolioItem} from './types';
 import {BASE, VIEW_PORTFOLIO_ITEMS} from './ENDPOINT';
 // Carousel component
 import {replaceContentWithCarousel, replaceContentWithIphone} from '../../components/Carousel';
-// App theme
-import {APP_THEME} from '../../appTheme';
-// Portfolio context
-import {PortfolioContext} from './portfolioContext';
 // Navbar
 import ViewPortfolioNavbar from './ViewPortfolioNavbar';
 
@@ -37,10 +32,6 @@ const ViewPortfolio: React.FC = () => {
     const [found, setFound] = useState<boolean>(false);
     const [parsedContent, setParsedContent] = useState<JSX.Element | JSX.Element[] | string>();
     const [parsedJavascript, setParsedJavascript] = useState<string[]>([]);
-    // Context to render navbar
-    const PContext = useContext(PortfolioContext);
-    // React router navigation hook
-    const navigate = useNavigate();
 
     useEffect(() => {
         // Initialize loading

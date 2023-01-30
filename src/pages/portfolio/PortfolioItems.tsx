@@ -23,6 +23,7 @@ const PortfolioItems: React.FC = () => {
                     short_description={portfolio.short_description}
                     image={portfolio.imageURL}
                     tags={portfolio.tags}
+                    slug={portfolio.slug}
                 />
             ))}
         </Grid>

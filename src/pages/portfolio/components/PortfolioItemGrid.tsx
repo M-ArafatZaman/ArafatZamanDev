@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -15,13 +16,15 @@ interface PortfolioItemGridProps {
     short_description: string;
     image: string;
     tags: string[];
+    slug: string;
     index: number;
 };
 
 const ANIMATION_CLASSES = ["fadeInLeft", "fadeInUp", "fadeInDown", "fadeInRight"]
 
 const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioItemGridProps) => {
-    const {name, short_description, image, tags, index} = props;
+    const {name, short_description, image, slug, index} = props;
+    const navigate = useNavigate();
 
     // On hover style
     const onHoverStyle: SxProps = {
@@ -63,7 +66,7 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
 
                     {/* Button */}
                     <Box sx={{p: 2, backgroundColor: "rgba(0,0,0,.1)"}}>
-                        <Button color="info">View</Button>
+                        <Button color="info" onClick={() => {navigate(`/portfolio/${slug}`)}}>View</Button>
                     </Box>
                 </AppCard>
             </ElementInViewport>
