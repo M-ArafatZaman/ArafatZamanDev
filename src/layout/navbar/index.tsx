@@ -20,13 +20,23 @@ interface NavLinkProps {
 const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
     const {href="", label} = props;
 
+    
     const navigate = useNavigate();
     const currLocation = useLocation();
-    const [active, setActive] = useState<boolean>(currLocation.pathname == href);
+    
+    // is the current location begins with href
+    const isCurrLocation = (): boolean => {
+        if (href !== "/") {
+            return currLocation.pathname.match(new RegExp("^"+href)) !== null;
+        };
+        return currLocation.pathname === "/";
+    };
 
+    const [active, setActive] = useState<boolean>(isCurrLocation());
+    
     // Event listener for when the current location changes
     useEffect(() => {
-        setActive(currLocation.pathname == href);
+        setActive(isCurrLocation());
     }, [currLocation]);
 
     // Even listener for on click
