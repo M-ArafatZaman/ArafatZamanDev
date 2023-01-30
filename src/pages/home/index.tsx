@@ -1,4 +1,4 @@
-import React, {lazy} from 'react';
+import React, {lazy, Suspense} from 'react';
 // @mui components
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -22,10 +22,14 @@ const Home: React.FC = () => {
 
             {/* The first grid with greetings and raspberry container */}
             <Grid container spacing={2} sx={{marginY: 0}}>
-                <GridLayer1/>
+                <Suspense fallback={<Typography>Loading...</Typography>}>
+                    <GridLayer1/>
+                </Suspense>
             
                 {/* The second container containing portfolio, projects, blogs */}
-                <GridLayer2/>
+                <Suspense fallback={<Typography>Loading...</Typography>}>
+                    <GridLayer2/>
+                </Suspense>
 
             </Grid>
 
@@ -40,9 +44,13 @@ const Home: React.FC = () => {
 
             <Grid container spacing={2} paddingY={2}>
                 {/* The third container containing the lyrics finder */}
-                <GridLayer3/>
+                <Suspense fallback={<Typography>Loading...</Typography>}>
+                    <GridLayer3/>
+                </Suspense>
                 {/* The fourth container containing the inperil application */}
-                <GridLayer4/>
+                <Suspense fallback={<Typography>Loading...</Typography>}>
+                    <GridLayer4/>
+                </Suspense>
             </Grid>
         </Container>
     )
