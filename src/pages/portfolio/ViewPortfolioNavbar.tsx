@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -14,6 +14,7 @@ import {PortfolioContext} from './portfolioContext';
 
 const ViewPortfolioNavbar: React.FC = () => {
 
+    const params = useParams<{slug: string}>();
     const PContext = useContext(PortfolioContext);
     const navigate = useNavigate();
 
@@ -29,6 +30,7 @@ const ViewPortfolioNavbar: React.FC = () => {
                         variant="contained" 
                         sx={{backgroundColor: "rgba(255,255,255,0.4)", my: 0.5}}
                         onClick={() => {navigate(`/portfolio/${P_ITEMS.slug}`)}}
+                        disabled={params.slug == P_ITEMS.slug}
                     >{P_ITEMS.name}</Button>
                 ))}
             </Box>
