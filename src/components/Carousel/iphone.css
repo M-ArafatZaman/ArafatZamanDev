@@ -9,7 +9,7 @@
 .iphone {
     border: 10px solid #000;
     border-radius: 40px;
-    width: 300px;
+    width: 250px;
     max-width: 100%;
     position: relative;
     display: flex;
@@ -17,14 +17,14 @@
     padding: 0;
 }
 .iphone img {
-    width: 300px;
+    width: 250px;
     max-width: 100%;
     border-radius: 30px;
 }
 /* Notch and camera */
 .iphone-notch {
     position: absolute;
-    height: 20px;
+    height: 10px;
     width: 100px;
     top: -5;
     background-color: #000;
@@ -33,6 +33,7 @@
     border-bottom-right-radius: 10px;
     padding: 5px;
     padding-left: 10px;
+    padding-bottom: 10px;
 }
 .iphone-camera {
     height: 8px;

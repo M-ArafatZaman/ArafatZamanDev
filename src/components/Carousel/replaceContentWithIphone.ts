@@ -34,7 +34,7 @@ function replaceContentWithIphone(html: string): replaceContentWithIphoneType {
             <div class="iphone">
                 <!-- The notch -->
                 <div class="iphone-notch">
-                    <div id="camera"></div>
+                    <div class="iphone-camera"></div>
                 </div>
         
                 <!-- The carousel -->
