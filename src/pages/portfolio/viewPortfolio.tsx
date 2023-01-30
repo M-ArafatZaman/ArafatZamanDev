@@ -17,7 +17,7 @@ import AppCard from '../home/components/AppCard';
 import {ViewPortfolioItemAPIResponse, PortfolioItem} from './types';
 import {BASE, VIEW_PORTFOLIO_ITEMS} from './ENDPOINT';
 // Carousel component
-import {replaceContentWithCarousel} from '../../components/Carousel';
+import {replaceContentWithCarousel, replaceContentWithIphone} from '../../components/Carousel';
 // App theme
 import {APP_THEME} from '../../appTheme';
 // Portfolio context
@@ -56,11 +56,12 @@ const ViewPortfolio: React.FC = () => {
                 setFound(true);
                 // Parse content and replace with carousel
                 const contentMD = marked.parse(response.payload.content);
-                const ReplacedContent = replaceContentWithCarousel(contentMD);
+                const ReplacedContent1 = replaceContentWithCarousel(contentMD);
+                const ReplacedContentFinal = replaceContentWithIphone(ReplacedContent1.html);
                 // Replace with carousel
-                const contentMDParsed = htmlReactParser(ReplacedContent.html);
+                const contentMDParsed = htmlReactParser(ReplacedContentFinal.html);
                 setParsedContent(contentMDParsed);
-                setParsedJavascript(() => [...ReplacedContent.js])
+                setParsedJavascript(() => [...ReplacedContent1.js, ...ReplacedContentFinal.js])
             }
             // Else not found. found state is false by default
         })
