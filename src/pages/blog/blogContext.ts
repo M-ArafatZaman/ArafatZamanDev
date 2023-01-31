@@ -22,7 +22,7 @@ export const UPDATE_ITEMS = "UPDATE_ITEMS";
 export const UPDATE_IS_LOADING = "UPDATE_IS_LOADING";
 export const BlogsContext = createContext<BlogsContextType>({} as BlogsContextType);
 
-export const PortfolioReducer = (tasks: BlogsContextType, action: PortfolioReducerActionType): BlogsContextType  => {
+export const BlogsReducer = (tasks: BlogsContextType, action: PortfolioReducerActionType): BlogsContextType  => {
     switch (action.type) {
         case UPDATE_ITEMS: {
             return {
