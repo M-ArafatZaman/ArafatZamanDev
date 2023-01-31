@@ -18,7 +18,7 @@ interface ElementInViewportProps {
  * @returns 
  */
 const ElementInViewport: React.FC<ElementInViewportProps> = (props: ElementInViewportProps) => {
-    const {children, animation="fadeIn", delay=1000, sx} = props;
+    const {children, animation="fadeIn", delay=100, sx} = props;
 
     const Style: SxProps = {
         animationDelay: `${delay}ms`,
