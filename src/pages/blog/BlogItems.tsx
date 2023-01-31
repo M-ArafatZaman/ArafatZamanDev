@@ -30,7 +30,7 @@ const BlogItems: React.FC = () => {
                     <Avatar alt="Arafat" src={MugshotJPG} sx={{height: 150, width: 150}} />
                     <Box px={3}>
                         <Typography variant="h5"><b><u>Mohammad Arafat Zaman</u></b></Typography>
-                        <Typography sx={{my: 1}}><i>"Technophile"</i></Typography>
+                        <Typography sx={{mt: 1}}><i>"Technophile"</i></Typography>
                         {/* Social Icons */}
                         <Box display="flex" flexDirection="row">
                             <IconButton sx={{color: "#0072b1"}} size="large"><LinkedInIcon/></IconButton>
