@@ -27,15 +27,15 @@ const ListBlogs: React.FC<ListBlogsProps> = (props: ListBlogsProps) => {
                     {name}
                 </Typography>
                 {/* Date and read time */}
-                <Typography variant="subtitle2" color="GrayText" sx={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+                <Typography variant="caption" color="GrayText" sx={{display: "flex", flexDirection: "row", alignItems: "center", fontWeight: "600"}}>
                     <CalendarIcon/>
                     <Typography variant="inherit">&nbsp;{date_created} |&nbsp;</Typography>
                     <ClockIcon/>
                     <Typography variant="inherit">&nbsp;{read_time} min read</Typography>
                 </Typography>
                 {/* Tags */}
-                <Box display="flex" flexDirection="row" py={1}>
-                    {tags.map((elem, i) => <Chip label={elem} key={i} size="small" sx={{mr: .25}} />)}
+                <Box display="flex" flexDirection="row" py={1} flexWrap="wrap">
+                    {tags.map((elem, i) => <Chip label={elem} key={i} size="small" sx={{m: .5, ml: 0}} />)}
                 </Box>
             </ListItemText>
         </ListItemButton>
