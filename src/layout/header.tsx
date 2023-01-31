@@ -9,6 +9,8 @@ import Navbar from './navbar';
 // Logo imports
 import LOGO from '../media/logo/Logo-filled.svg';
 
+// HeaderRef (Exposed so that its height can easily be accessed)
+export const HeaderRef: React.RefObject<HTMLElement> = createRef<HTMLElement>();
 
 const Header: React.FC = () => {
     const THEME = useTheme();
@@ -31,8 +33,7 @@ const Header: React.FC = () => {
         backdropFilter: "blur(16px)"
     };
 
-    // Header ref and header backdrop ref
-    const HeaderRef: React.RefObject<HTMLElement> = createRef<HTMLElement>();
+    // Header backdrop ref
     const HeaderBackdropRef: React.RefObject<HTMLDivElement> = createRef<HTMLDivElement>();
 
     // Add event listener so that the backdrop mimics the height of the header
