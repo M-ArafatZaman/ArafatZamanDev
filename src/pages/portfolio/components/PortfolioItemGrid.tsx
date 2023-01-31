@@ -40,7 +40,7 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
 
     return (
         <Grid item xs={12} md={3}>
-            <ElementInViewport sx={{height: "100%"}} animation={ANIMATION_CLASSES[index % ANIMATION_CLASSES.length]}>
+            <ElementInViewport sx={{height: "100%"}} animation={ANIMATION_CLASSES[index % ANIMATION_CLASSES.length]} delay={50}>
                 <AppCard sx={onHoverStyle}>
                     {/* Title */}
                     <Box sx={{p:2, pb: 1}}>

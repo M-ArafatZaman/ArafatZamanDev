@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 // @mui components
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import Skeleton from '@mui/material/Skeleton';
 // Components
 import PortfolioItemGrid from './components/PortfolioItemGrid';
 // Context
@@ -13,7 +14,7 @@ const PortfolioItems: React.FC = () => {
     return (
         <Grid container justifyContent="center" spacing={2}>
             {context.isLoading ? 
-            <Typography>LOADING...</Typography>
+            <Typography variant="h1">TEST</Typography>
             :
             context.items.map((portfolio, i) => (
                 <PortfolioItemGrid
