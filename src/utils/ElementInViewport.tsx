@@ -60,7 +60,7 @@ const ElementInViewport: React.FC<ElementInViewportProps> = (props: ElementInVie
                 window.removeEventListener(event, onChange);
             })
         };
-    }, [])
+    }, [ContainerElementRef]);
 
     return (
         <Box sx={Style} ref={ContainerElementRef}>

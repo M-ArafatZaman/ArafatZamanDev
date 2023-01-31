@@ -7,8 +7,6 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 // @mui icons
 import StarIcon from '@mui/icons-material/Star';
-// Utils
-import {ElementInViewport} from '../../utils';
 // Grid layers
 const GridLayer1 = lazy(() => import("./GridLayer1"));
 const GridLayer2 = lazy(() => import("./GridLayer2"));
@@ -35,12 +33,10 @@ const Home: React.FC = () => {
 
             <Divider sx={{my:2}} />
             {/* Feature projects title */}
-            <ElementInViewport delay={500}>
-                <Box display="flex" flexDirection="row" alignItems="center">
-                    <StarIcon fontSize="large" color="warning"/>
-                    <Typography variant="h4" sx={{ml: 1}}>Featured Projects</Typography>
-                </Box>
-            </ElementInViewport>
+            <Box display="flex" flexDirection="row" alignItems="center">
+                <StarIcon fontSize="large" color="warning"/>
+                <Typography variant="h4" sx={{ml: 1}}>Featured Projects</Typography>
+            </Box>
 
             <Grid container spacing={2} paddingY={2}>
                 {/* The third container containing the lyrics finder */}

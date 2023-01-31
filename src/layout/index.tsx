@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from './header';
 import Footer from './footer';
 // Browser router
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 // App theme
@@ -10,6 +10,13 @@ import {APP_THEME} from '../appTheme';
 
 // The main layout that is used throughout the app
 export default function Index() {
+
+    const location = useLocation();
+    // Add event listener so that window scrolls to the top whenever location changes
+    useEffect(() => {
+        window.scrollTo(0,0);
+    }, [location.pathname]);
+
 
     return (
         <Box sx={{
