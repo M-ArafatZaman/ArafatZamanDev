@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import Chip from '@mui/material/Chip';
 // @mui icons
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -16,6 +18,8 @@ import AppCard from '../home/components/AppCard';
 import {BlogsContext} from './blogContext';
 // Photos
 import MugshotJPG from '../../media/photos/mugshot.jpg';
+// Blog components
+import ListBlogs from './components/ListBlogs';
 
 const BlogItems: React.FC = () => {
 
@@ -26,7 +30,7 @@ const BlogItems: React.FC = () => {
             <AppCard sx={{p: 2}}>
                 <>
                 {/* Arafat tag */}
-                <Box display="flex" flexDirection="row" p={3} sx={{borderBottom: "1px solid rgba(0,0,0,.15)"}}>
+                <Box display="flex" flexDirection="row" p={3}>
                     <Avatar alt="Arafat" src={MugshotJPG} sx={{height: 150, width: 150}} />
                     <Box px={3}>
                         <Typography variant="h5"><b><u>Mohammad Arafat Zaman</u></b></Typography>
@@ -42,14 +46,27 @@ const BlogItems: React.FC = () => {
                     </Box>
                 </Box>
 
+
                 {/* Blog lists */}
                 {
                     BContext.isLoading ?
                     <Typography>Loading</Typography>
                     :
-                    BContext.items.map((elem, i) => (
-                        <Typography key={i}>{elem.name}</Typography>
-                    ))
+                    <>
+                    <List sx={{border: "1px solid rgba(0,0,0,.15)", padding: 0}}>
+                        {BContext.items.map((elem, i) => (
+                            <ListBlogs
+                                key={i}
+                                name={elem.name}
+                                date_created={elem.date_created}
+                                slug={elem.slug}
+                                read_time={elem.read_time}
+                                tags={elem.tags}
+                                isLast={i === BContext.items.length - 1}
+                            />
+                        ))}
+                    </List>
+                    </>
                 }
                 </>
             </AppCard>
