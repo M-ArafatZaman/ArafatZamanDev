@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -69,7 +69,9 @@ const SuggestionItem: React.FC<SuggestionItemProps> = (props: SuggestionItemProp
 const Suggestions: React.FC = () => {
 
     const BContext = useContext(BlogsContext);
+    const {slug} = useParams<{slug: string}>(); 
 
+    let items = 0;
     return (
         <AppCard sx={{mt: 1}}>
             <Box sx={{p: 3}}>
@@ -78,14 +80,17 @@ const Suggestions: React.FC = () => {
 
                 <Grid container spacing={2}>
                     {
-                        [0,1,2].map((elem) => {
-                            return <SuggestionItem
-                                key={elem}
-                                name={BContext.items[elem].name}
-                                slug={BContext.items[elem].slug}
-                                date_created={BContext.items[elem].date_created}
-                                read_time={BContext.items[elem].read_time}
-                            />
+                        BContext.items.map((elem, i) => {
+                            if (items < 3 && elem.slug !== slug) {
+                                items++;
+                                return <SuggestionItem
+                                    key={i}
+                                    name={elem.name}
+                                    slug={elem.slug}
+                                    date_created={elem.date_created}
+                                    read_time={elem.read_time}
+                                />
+                            }
                         })
                     }
                 </Grid>
