@@ -13,6 +13,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // Other components
 import AppCard from '../home/components/AppCard';
 import ArafatTag from './components/ArafatTag';
+import Suggestions from './components/Suggestions';
 // Endpoints and types
 import {BASE, READ_BLOG} from './ENDPOINT';
 import {ReadBlogsAPIResponse, BlogItem} from './types';
@@ -106,6 +107,9 @@ const ViewBlog: React.FC = () => {
                     </>
                 }
             </AppCard>
+
+            {/* Suggestions */}
+            <Suggestions/>
         </Box>
     )
 };

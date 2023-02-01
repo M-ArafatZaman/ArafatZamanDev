@@ -34,8 +34,6 @@ const SearchBar: React.FC = () => {
 
     const APP_THEME = useTheme();
 
-    console.log(APP_THEME.breakpoints.up(APP_THEME.breakpoints.values.md));
-
     return (
         <>
         <Box
