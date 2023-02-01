@@ -38,7 +38,7 @@ const BlogItems: React.FC = () => {
         .then((response: GetBlogsAPIResponse) => {
             if (response.status === "OK") {
                 //setItems(response.items);
-                console.log(response);
+                
                 dispatch({
                     type: UPDATE_ITEMS,
                     payload: {

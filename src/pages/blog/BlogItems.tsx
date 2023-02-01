@@ -5,21 +5,25 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import Chip from '@mui/material/Chip';
+import InputBase from '@mui/material/InputBase';
 // @mui icons
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import SearchIcon from '@mui/icons-material/Search';
 // Other components
 import AppCard from '../home/components/AppCard';
+import SearchBar from './components/SearchBar';
 // Context
 import {BlogsContext} from './blogContext';
 // Photos
 import MugshotJPG from '../../media/photos/mugshot.jpg';
 // Blog components
 import ListBlogs from './components/ListBlogs';
+// App theme
+import {APP_THEME} from '../../appTheme';
 
 const BlogItems: React.FC = () => {
 
@@ -53,6 +57,10 @@ const BlogItems: React.FC = () => {
                     <Typography>Loading</Typography>
                     :
                     <>
+                    {/* Search bar */}
+                    <SearchBar/>
+
+                    {/* List of blogs */}
                     <List sx={{border: "1px solid rgba(0,0,0,.15)", padding: 0}}>
                         {BContext.items.map((elem, i) => (
                             <ListBlogs
