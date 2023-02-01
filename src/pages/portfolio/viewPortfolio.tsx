@@ -37,7 +37,7 @@ const ViewPortfolio: React.FC = () => {
         // Initialize loading
         setIsLoading(true);
         // Fetch the data
-        fetch(`${BASE}${VIEW_PORTFOLIO_ITEMS}${params.slug}`, {
+        fetch(`${BASE}${VIEW_PORTFOLIO_ITEMS}${params.slug}/`, {
             method: "GET",
             mode: "cors"
         })

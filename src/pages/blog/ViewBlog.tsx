@@ -28,7 +28,7 @@ const ViewBlog: React.FC = () => {
     useEffect(() => {
         setIsLoading(true);
         // Fetch data
-        fetch(`${BASE}${READ_BLOG}${slug}`, {
+        fetch(`${BASE}${READ_BLOG}${slug}/`, {
             method: "GET",
             mode: "cors"
         })
