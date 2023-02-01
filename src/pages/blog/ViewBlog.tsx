@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import Chip from '@mui/material/Chip';
 // @mui icons
 import CalendarIcon from '@mui/icons-material/CalendarMonth';
 import ClockIcon from '@mui/icons-material/WatchLater';
@@ -12,7 +13,8 @@ import AppCard from '../home/components/AppCard';
 // Endpoints and types
 import {BASE, READ_BLOG} from './ENDPOINT';
 import {ReadBlogsAPIResponse, BlogItem} from './types';
-// Parser and highlighter
+// MD parser, HTML Parser and highlighter
+import {marked} from 'marked';
 import hljs from 'highlight.js';
 import HTMLReactParser from 'html-react-parser';
 
@@ -34,12 +36,10 @@ const ViewBlog: React.FC = () => {
         })
         .then((resp) => resp.json())
         .then((resp: ReadBlogsAPIResponse) => {
-            console.log(resp);
             if (resp.status === "OK" && typeof resp.payload !== "undefined") {
-                console.log(resp);
                 setData(resp.payload);
                 setFound(true);
-                setParsedContent(HTMLReactParser(resp.payload.content));
+                setParsedContent(HTMLReactParser(marked(resp.payload.content)));
             }
         })
         .catch((err) => {
@@ -57,7 +57,7 @@ const ViewBlog: React.FC = () => {
 
     return (
         <Box>
-            <AppCard sx={{p: 2}}>
+            <AppCard sx={{p: 3}}>
                 {
                     isLoading ? <Typography>LOADING...</Typography> :
                     
@@ -66,18 +66,23 @@ const ViewBlog: React.FC = () => {
                     <>
                         <Typography variant="h4" textAlign="center"><u>{data?.name}</u></Typography>
                         {/* Date and read time */}
-                        <Typography variant="caption" color="GrayText" sx={{display: "flex", flexDirection: "row", alignItems: "center", fontWeight: "600"}}>
+                        <Typography variant="caption" color="GrayText" sx={{display: "flex", flexDirection: "row", alignItems: "center", fontWeight: "600", py: 1}}>
                             <CalendarIcon/>
                             <Typography variant="inherit">&nbsp;{data?.date_created} |&nbsp;</Typography>
                             <ClockIcon/>
                             <Typography variant="inherit">&nbsp;{data?.read_time} min read</Typography>
                         </Typography>
+
+                        {/* Tags */}
+                        <Box display="flex" flexDirection="row" py={1} flexWrap="wrap">
+                            {data?.tags.map((elem, i) => <Chip label={elem} key={i} size="small" sx={{m: .5, ml: 0}} />)}
+                        </Box>
                         <Divider sx={{my: 1}}  />
 
                         {/* Content */}
-                        <Box>
-
-                        </Box>
+                        <Typography>
+                            {parsedContent}
+                        </Typography>
                     </>
                 }
             </AppCard>
