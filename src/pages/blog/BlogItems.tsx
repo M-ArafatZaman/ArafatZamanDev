@@ -22,8 +22,8 @@ import {BlogsContext} from './blogContext';
 import MugshotJPG from '../../media/photos/mugshot.jpg';
 // Blog components
 import ListBlogs from './components/ListBlogs';
-// App theme
-import {APP_THEME} from '../../appTheme';
+// Arafat tag
+import ArafatTag from './components/ArafatTag';
 
 const BlogItems: React.FC = () => {
 
@@ -34,22 +34,7 @@ const BlogItems: React.FC = () => {
             <AppCard sx={{p: 2}}>
                 <>
                 {/* Arafat tag */}
-                <Box display="flex" flexDirection="row" p={3}>
-                    <Avatar alt="Arafat" src={MugshotJPG} sx={{height: 150, width: 150}} />
-                    <Box px={3}>
-                        <Typography variant="h5"><b><u>Mohammad Arafat Zaman</u></b></Typography>
-                        <Typography sx={{mt: 1}}><i>"Technophile"</i></Typography>
-                        {/* Social Icons */}
-                        <Box display="flex" flexDirection="row">
-                            <IconButton sx={{color: "#0072b1"}} size="large"><LinkedInIcon/></IconButton>
-                            <IconButton sx={{color: "#d62976"}} size="large"><InstagramIcon/></IconButton>
-                            <IconButton sx={{color: "#3b5998"}} size="large"><FacebookIcon/></IconButton>
-                            <IconButton sx={{color: "#00acee"}} size="large"><TwitterIcon/></IconButton>
-                            <IconButton sx={{color: "#171515"}} size="large"><GitHubIcon/></IconButton>
-                        </Box>
-                    </Box>
-                </Box>
-
+                <ArafatTag/>
 
                 {/* Blog lists */}
                 {
