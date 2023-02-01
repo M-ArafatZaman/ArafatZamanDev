@@ -25,11 +25,11 @@ const ArafatTag: React.FC = () => {
                 <Typography sx={{mt: 1}}><i>"Technophile"</i></Typography>
                 {/* Social Icons */}
                 <Box display="flex" flexDirection="row">
-                    <IconButton sx={{color: "#0072b1"}}><LinkedInIcon/></IconButton>
-                    <IconButton sx={{color: "#d62976"}}><InstagramIcon/></IconButton>
-                    <IconButton sx={{color: "#3b5998"}}><FacebookIcon/></IconButton>
-                    <IconButton sx={{color: "#00acee"}}><TwitterIcon/></IconButton>
-                    <IconButton sx={{color: "#171515"}}><GitHubIcon/></IconButton>
+                    <IconButton sx={{color: "#0072b1"}} href="https://www.linkedin.com/in/m-arafatzaman/" target="_blank"><LinkedInIcon/></IconButton>
+                    <IconButton sx={{color: "#d62976"}} href="https://www.instagram.com/mohammadarafatzaman/" target="_blank"><InstagramIcon/></IconButton>
+                    <IconButton sx={{color: "#3b5998"}} href="https://www.facebook.com/mdarafatzaman01/" target="_blank"><FacebookIcon/></IconButton>
+                    <IconButton sx={{color: "#00acee"}} href="https://twitter.com/mdarafatzaman11" target="_blank"><TwitterIcon/></IconButton>
+                    <IconButton sx={{color: "#171515"}} href="https://github.com/M-ArafatZaman" target="_blank"><GitHubIcon/></IconButton>
                 </Box>
             </Box>
         </Box>
