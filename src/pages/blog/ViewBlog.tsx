@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -31,8 +31,9 @@ const ViewBlog: React.FC = () => {
     const [parsedContent, setParsedContent] = useState<JSX.Element | JSX.Element[] | string>();
     // Navigator
     const navigate = useNavigate();
+    const location = useLocation();
 
-    // Fetch data
+    // Fetch data whenever the location changes
     useEffect(() => {
         setIsLoading(true);
         // Fetch data
@@ -54,7 +55,7 @@ const ViewBlog: React.FC = () => {
         .finally(() => {
             setIsLoading(false);
         })
-    }, []);
+    }, [location.pathname]);
 
     // Highlight once parsed content is loading
     useEffect(() => {
