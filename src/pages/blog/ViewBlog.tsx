@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
+import Button from '@mui/material/Button';
 // @mui icons
 import CalendarIcon from '@mui/icons-material/CalendarMonth';
 import ClockIcon from '@mui/icons-material/WatchLater';
-// App card
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+// Other components
 import AppCard from '../home/components/AppCard';
+import ArafatTag from './components/ArafatTag';
 // Endpoints and types
 import {BASE, READ_BLOG} from './ENDPOINT';
 import {ReadBlogsAPIResponse, BlogItem} from './types';
@@ -25,6 +28,8 @@ const ViewBlog: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [found, setFound] = useState<boolean>(false);
     const [parsedContent, setParsedContent] = useState<JSX.Element | JSX.Element[] | string>();
+    // Navigator
+    const navigate = useNavigate();
 
     // Fetch data
     useEffect(() => {
@@ -83,6 +88,21 @@ const ViewBlog: React.FC = () => {
                         <Typography>
                             {parsedContent}
                         </Typography>
+
+                        {/* Tag */}
+                        <Divider sx={{my: 1}} />
+                        <ArafatTag/>
+                        <Divider sx={{my: 1}} />
+
+                        {/* Facebook plugins */}
+                        <Box>
+
+                            <div className="fb-like" data-href={window.location.href} data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+                            <div className="fb-comments" data-href={window.location.href} data-width="100%" data-numposts="5"></div>
+                        </Box>
+
+                        <Divider sx={{my: 1}} />
+                        <Button variant="contained" startIcon={<ArrowBackIcon/>} color="error" onClick={() => {navigate("/blog/")}}>Go back</Button>
                     </>
                 }
             </AppCard>
