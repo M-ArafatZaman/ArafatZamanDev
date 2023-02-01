@@ -27,6 +27,7 @@ const PortfolioItemsPage = LazyImport(() => import("./pages/portfolio/PortfolioI
 const ViewPortfolio = LazyImport(() => import("./pages/portfolio/ViewPortfolio"));
 // Sub /blog/ page components
 const BlogItems = LazyImport(() => import("./pages/blog/BlogItems"));
+const ViewBlog = LazyImport(() => import("./pages/blog/ViewBlog"));
 
 
 function App() {
@@ -69,6 +70,11 @@ function App() {
 						{
 							path: "",
 							element: <Suspense> <FadeInWrapper> <BlogItems/> </FadeInWrapper> </Suspense>
+						},
+						// Sub view blog path
+						{
+							path: ":slug/",
+							element: <Suspense> <FadeInWrapper> <ViewBlog /> </FadeInWrapper> </Suspense>
 						}
 					]
 				},

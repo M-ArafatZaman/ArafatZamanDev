@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -18,9 +19,15 @@ interface ListBlogsProps extends BlogItems {
 const ListBlogs: React.FC<ListBlogsProps> = (props: ListBlogsProps) => {
 
     const {name, date_created, slug, read_time, tags, isLast} = props;
+    const navigate = useNavigate();
+
+    // Go to the blog page
+    const onClick = () => {
+        navigate(`/blog/${slug}/`);
+    }
 
     return (
-        <ListItemButton divider={!isLast}>
+        <ListItemButton divider={!isLast} onClick={onClick}>
             <ListItemText>
                 {/* Name */}
                 <Typography variant="h6">

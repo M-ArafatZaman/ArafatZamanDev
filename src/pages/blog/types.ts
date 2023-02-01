@@ -23,5 +23,5 @@ export interface BlogItem extends BlogItems {
 export interface ReadBlogsAPIResponse {
     status: string;
     message?: string;
-    payload?: string;
+    payload?: BlogItem;
 }
