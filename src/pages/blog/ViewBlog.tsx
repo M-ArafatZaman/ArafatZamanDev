@@ -21,7 +21,10 @@ import {ReadBlogsAPIResponse, BlogItem} from './types';
 import {marked} from 'marked';
 import hljs from 'highlight.js';
 import HTMLReactParser from 'html-react-parser';
+import ImageExtension from './MDImageRenderer';
 
+// Add a custom image renderer for the marked parser
+marked.use(ImageExtension);
 
 const ViewBlog: React.FC = () => {
     const {slug} = useParams<{slug: string;}>();
@@ -46,7 +49,7 @@ const ViewBlog: React.FC = () => {
             if (resp.status === "OK" && typeof resp.payload !== "undefined") {
                 setData(resp.payload);
                 setFound(true);
-                setParsedContent(HTMLReactParser(marked(resp.payload.content)));
+                setParsedContent(HTMLReactParser(marked.parse(resp.payload.content)));
             }
         })
         .catch((err) => {
@@ -87,7 +90,13 @@ const ViewBlog: React.FC = () => {
                         <Divider sx={{my: 1}}  />
 
                         {/* Content */}
-                        <Typography>
+                        <Typography sx={{
+                            "& img": {
+                                maxHeight: "70vh",
+                                maxWidth: "100%",
+                                objectFit: "contain"
+                            }
+                        }}>
                             {parsedContent}
                         </Typography>
 
