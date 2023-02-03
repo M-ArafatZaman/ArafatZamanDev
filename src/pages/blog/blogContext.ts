@@ -20,6 +20,7 @@ export interface PortfolioReducerActionType {
 
 export const UPDATE_ITEMS = "UPDATE_ITEMS";
 export const UPDATE_IS_LOADING = "UPDATE_IS_LOADING";
+export const DELETE_DATA = "DELETE_DATA";
 export const BlogsContext = createContext<BlogsContextType>({} as BlogsContextType);
 
 export const BlogsReducer = (tasks: BlogsContextType, action: PortfolioReducerActionType): BlogsContextType  => {
@@ -36,6 +37,12 @@ export const BlogsReducer = (tasks: BlogsContextType, action: PortfolioReducerAc
                 isLoading: action.payload.isLoading as boolean
             };
         };
+        case DELETE_DATA: {
+            return {
+                isLoading: true,
+                items: []
+            };
+        }
         default: {
             return {...tasks}
         };

@@ -17,8 +17,10 @@ import {
     BlogsContext,
     BlogsReducer,
     BLOGS_INITIAL_STATE,
+    // Action types
     UPDATE_ITEMS,
-    UPDATE_IS_LOADING
+    UPDATE_IS_LOADING,
+    DELETE_DATA
 } from './blogContext';
 
 
@@ -37,7 +39,6 @@ const BlogItems: React.FC = () => {
         .then((response) => response.json())
         .then((response: GetBlogsAPIResponse) => {
             if (response.status === "OK") {
-                //setItems(response.items);
                 
                 dispatch({
                     type: UPDATE_ITEMS,
@@ -56,6 +57,13 @@ const BlogItems: React.FC = () => {
             })
         })
 
+        // A destructor to empty the context for optimization
+        return () => {
+            dispatch({
+                type: DELETE_DATA,
+                payload: {}
+            })
+        }
     }, []);
     
     return (
