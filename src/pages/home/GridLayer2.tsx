@@ -18,7 +18,7 @@ function GridLayer2() {
         {/* Portfolio */}
         <Grid item xs={12} sm={4}>
             <ElementInViewport animation='fadeInLeft' delay={1000}>
-                <FeatureCard image={portfolioSVG} href="#">
+                <FeatureCard image={portfolioSVG} href="/portfolio/">
                     <Typography variant="h6"><b>Portfolio</b></Typography>
                     <Typography>Explore my portfolio and discover my past work and experiences.</Typography>
                 </FeatureCard>
@@ -28,7 +28,7 @@ function GridLayer2() {
         {/* Projects */}
         <Grid item xs={12} sm={4}>
             <ElementInViewport animation="fadeInUp" delay={1000}>
-                <FeatureCard image={projectSVG} href="#">
+                <FeatureCard image={projectSVG} href="/projects/">
                     <Typography variant="h6"><b>Projects</b></Typography>
                     <Typography>Check out my personal projects and learn more about my interests and skills.</Typography>
                 </FeatureCard>
@@ -38,7 +38,7 @@ function GridLayer2() {
         {/* Blogs */}
         <Grid item xs={12} sm={4}>
             <ElementInViewport animation="fadeInRight" delay={1000}>
-                <FeatureCard image={blogSVG} href="#">
+                <FeatureCard image={blogSVG} href="/blog/">
                     <Typography variant="h6"><b>Blogs</b></Typography>
                     <Typography>Read my latest thoughts and musings on my blog.</Typography>
                 </FeatureCard>

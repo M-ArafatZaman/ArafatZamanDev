@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -16,6 +17,12 @@ interface FeatureCardProps {
 function FeatureCard(props: FeatureCardProps) {
 
     const {children, image, href} = props;
+    const navigate = useNavigate();
+
+    // OnClick go to the href
+    const onClick = () => {
+        navigate(href);
+    };
 
     return (
         <AppCard sx={{
@@ -37,7 +44,7 @@ function FeatureCard(props: FeatureCardProps) {
             </Box>
             <Divider/>
             <Box px={3} py={2} sx={{backgroundColor: APP_THEME.palette.background.paper}}>
-                <Button variant='contained' href={href}>Visit</Button>
+                <Button variant='contained' onClick={onClick}>Visit</Button>
             </Box>
         </AppCard>
     )
