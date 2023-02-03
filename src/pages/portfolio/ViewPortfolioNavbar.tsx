@@ -41,20 +41,21 @@ const ViewPortfolioNavbar: React.FC = () => {
 
     }, [location.pathname]);
 
+    const onResize = () => {
+        if (NavRef.current !== null && HeaderRef.current !== null && NavBackdropRef.current !== null) {
+            // If the navbar backdrop (the element that acts a navbar) is outside the screen
+            // Bring it down using top property
+            if (NavBackdropRef.current.getBoundingClientRect().y <= HeaderRef.current.clientHeight + 16) {
+                NavRef.current.style.top = `${HeaderRef.current.clientHeight - NavBackdropRef.current.getBoundingClientRect().y + 32}px`;
+            } else {
+            // Else just set top to padding
+                NavRef.current.style.top = "16px";
+            }
+        }
+    };
+
     // Constructor to watch for changes to Navbar and header elements and update the event listener
     useEffect(() => {
-        const onResize = () => {
-            if (NavRef.current !== null && HeaderRef.current !== null && NavBackdropRef.current !== null) {
-                // If the navbar backdrop (the element that acts a navbar) is outside the screen
-                // Bring it down using top property
-                if (NavBackdropRef.current.getBoundingClientRect().y <= HeaderRef.current.clientHeight + 16) {
-                    NavRef.current.style.top = `${HeaderRef.current.clientHeight - NavBackdropRef.current.getBoundingClientRect().y + 32}px`;
-                } else {
-                // Else just set top to padding
-                    NavRef.current.style.top = "16px";
-                }
-            }
-        };
 
         window.addEventListener("scroll", onResize);
 
@@ -64,6 +65,14 @@ const ViewPortfolioNavbar: React.FC = () => {
             window.removeEventListener("scroll", onResize);
         }
     }, [NavRef, NavBackdropRef, HeaderRef]);
+
+    // Destructor to remove eventlistener regardless if it has been added
+    useEffect(() => {
+        // Destructor
+        return () => {
+            window.removeEventListener("scroll", onResize);
+        }
+    }, [])
 
     return (
         <>
