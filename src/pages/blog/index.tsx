@@ -21,7 +21,7 @@ import {
     UPDATE_ITEMS,
     UPDATE_IS_LOADING,
     DELETE_DATA
-} from './blogContext';
+} from './reducer';
 
 
 /* The Blog page */

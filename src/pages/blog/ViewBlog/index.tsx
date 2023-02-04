@@ -11,12 +11,12 @@ import CalendarIcon from '@mui/icons-material/CalendarMonth';
 import ClockIcon from '@mui/icons-material/WatchLater';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // Other components
-import AppCard from '../home/components/AppCard';
-import ArafatTag from './components/ArafatTag';
-import Suggestions from './components/Suggestions';
+import AppCard from '../../home/components/AppCard';
+import ArafatTag from '../components/ArafatTag';
+import Suggestions from './Suggestions';
 // Endpoints and types
-import {BASE, READ_BLOG} from './ENDPOINT';
-import {ReadBlogsAPIResponse, BlogItem} from './types';
+import {BASE, READ_BLOG} from '../ENDPOINT';
+import {ReadBlogsAPIResponse, BlogItem} from '../types';
 // MD parser, HTML Parser and highlighter
 import {marked} from 'marked';
 import hljs from 'highlight.js';

@@ -2,28 +2,16 @@ import React, {useContext} from 'react';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import InputBase from '@mui/material/InputBase';
-// @mui icons
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import SearchIcon from '@mui/icons-material/Search';
 // Other components
-import AppCard from '../home/components/AppCard';
-import SearchBar from './components/SearchBar';
+import AppCard from '../../home/components/AppCard';
+import SearchBar from './SearchBar';
 // Context
-import {BlogsContext} from './blogContext';
-// Photos
-import MugshotJPG from '../../media/photos/mugshot.jpg';
+import {BlogsContext} from '../reducer';
 // Blog components
-import ListBlogs from './components/ListBlogs';
+import ListBlogs from './ListBlogs';
 // Arafat tag
-import ArafatTag from './components/ArafatTag';
+import ArafatTag from '../components/ArafatTag';
 
 const BlogItems: React.FC = () => {
 

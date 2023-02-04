@@ -12,7 +12,7 @@ import ClockIcon from '@mui/icons-material/WatchLater';
 // Other components
 import AppCard from '../../home/components/AppCard';
 // Context and types
-import {BlogsContext} from '../blogContext';
+import {BlogsContext} from '../reducer';
 import {BlogItems} from '../types';
 
 
