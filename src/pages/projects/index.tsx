@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useReducer} from 'react';
 // @mui components
 import Box from '@mui/material/Box';
+
 
 /* The projects page */
 const Projects: React.FC = () => {
