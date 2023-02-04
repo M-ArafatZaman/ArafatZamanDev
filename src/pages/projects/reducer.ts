@@ -16,10 +16,11 @@ export const ProjectsContext = createContext<ProjectsContextType>(INITIAL_PROJEC
 // Actions
 export const UPDATE_ITEMS = "UPDATE_ITEMS";
 export const UPDATE_IS_LOADING = "UPDATE_IS_LOADING";
+export const DELETE_ITEMS = "DELETE_ITEMS";
 
 // Action dispatch type
 export interface ProjectsContextAction {
-    type: "UPDATE_ITEMS" | "UPDATE_IS_LOADING";
+    type: "UPDATE_ITEMS" | "UPDATE_IS_LOADING" | "DELETE_ITEMS";
     payload: Partial<ProjectsContextType>;
 };
 
@@ -37,7 +38,13 @@ export const ProjectsReducer = (state=INITIAL_PROJECTS_CONTEXT, action: Projects
                 ...state,
                 isLoading: action.payload.isLoading as ProjectsContextType["isLoading"]
             }
-        }
+        };
+        case DELETE_ITEMS: {
+            return {
+                isLoading: true,
+                items: []
+            }
+        };
         default: {
             return {...state};
         }

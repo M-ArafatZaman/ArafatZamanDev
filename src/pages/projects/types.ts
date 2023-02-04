@@ -5,3 +5,8 @@ export interface ProjectItems {
     imageURL: string;
 };
 
+// API response from /get-projects/
+export interface GetProjectsAPIResponse {
+    status: string;
+    items: ProjectItems[];
+}
