@@ -11,12 +11,12 @@ import {marked} from 'marked';
 import hljs from "highlight.js";
 import htmlReactParser from 'html-react-parser';
 // Other components
-import AppCard from '../home/components/AppCard';
+import AppCard from '../../home/components/AppCard';
 // Types
-import {ViewPortfolioItemAPIResponse, PortfolioItem} from './types';
-import {BASE, VIEW_PORTFOLIO_ITEMS} from './ENDPOINT';
+import {ViewPortfolioItemAPIResponse, PortfolioItem} from '../types';
+import {BASE, VIEW_PORTFOLIO_ITEMS} from '../ENDPOINT';
 // Carousel component
-import {replaceContentWithCarousel, replaceContentWithIphone} from '../../components/Carousel';
+import {replaceContentWithCarousel, replaceContentWithIphone} from '../../../components/Carousel';
 // Navbar
 import ViewPortfolioNavbar from './ViewPortfolioNavbar';
 

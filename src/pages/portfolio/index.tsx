@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 // @mui icons
 import WorkIcon from '@mui/icons-material/Work';
-// Example response for dev
+// @types
 import {PortfolioAPIResponse} from './types';
 // Endpoints
 import {BASE, GET_PORTFOLIO_ITEMS} from './ENDPOINT';
@@ -20,7 +20,7 @@ import {
     UPDATE_ITEMS,
     UPDATE_IS_LOADING,
     DELETE_ITEMS
-} from './portfolioContext';
+} from './reducer';
 
 /* The portfolio page */
 const Portfolio: React.FC = () => {

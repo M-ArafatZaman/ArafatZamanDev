@@ -10,13 +10,13 @@ import Collapse from '@mui/material/Collapse';
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // Other components
-import AppCard from '../home/components/AppCard';
+import AppCard from '../../home/components/AppCard';
 // App theme
-import {APP_THEME} from '../../appTheme';
+import {APP_THEME} from '../../../appTheme';
 // Context
-import {PortfolioContext} from './portfolioContext';
+import {PortfolioContext} from '../reducer';
 // Header ref
-import {HeaderRef} from '../../layout/header';
+import {HeaderRef} from '../../../layout/header';
 
 const ViewPortfolioNavbar: React.FC = () => {
 

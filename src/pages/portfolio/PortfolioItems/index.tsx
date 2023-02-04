@@ -4,9 +4,9 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
 // Components
-import PortfolioItemGrid from './components/PortfolioItemGrid';
+import PortfolioItemGrid from '../components/PortfolioItemGrid';
 // Context
-import {PortfolioContext} from './portfolioContext';
+import {PortfolioContext} from '../reducer';
 
 const PortfolioItems: React.FC = () => {
     const context = useContext(PortfolioContext);
