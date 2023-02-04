@@ -14,7 +14,7 @@ const PortfolioItems: React.FC = () => {
     return (
         <Grid container justifyContent="center" spacing={2}>
             {context.isLoading ? 
-            <Typography variant="h1">TEST</Typography>
+            <Typography>LOADING...</Typography>
             :
             context.items.map((portfolio, i) => (
                 <PortfolioItemGrid
