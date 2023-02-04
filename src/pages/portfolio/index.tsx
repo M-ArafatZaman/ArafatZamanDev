@@ -16,8 +16,10 @@ import {
     PortfolioContext,
     PortfolioReducer,
     PORTFOLIO_INITIAL_STATE,
+    // Action types
     UPDATE_ITEMS,
-    UPDATE_IS_LOADING
+    UPDATE_IS_LOADING,
+    DELETE_ITEMS
 } from './portfolioContext';
 
 /* The portfolio page */
@@ -52,6 +54,14 @@ const Portfolio: React.FC = () => {
                 }
             })
         })
+
+        // Destructor to delete all the items in context
+        return () => {
+            dispatch({
+                type: DELETE_ITEMS,
+                payload: {}
+            })
+        }
 
     }, []);
     
