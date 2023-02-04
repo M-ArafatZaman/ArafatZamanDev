@@ -6,6 +6,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {SxProps} from '@mui/material/styles';
+// @mui icons
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
 // Other components
 import AppCard from '../../home/components/AppCard';
 // Types
@@ -22,30 +24,31 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
     const onHoverStyle: SxProps = {
         transition: "all 300ms linear",
         "&:hover": {
-            transform: "scale(1.03)"
+            transform: "scale(1.03)",
+            backgroundColor: "rgba(0,0,0,.15)"
+        },
+        "&:active": {
+            backgroundColor: "rgba(0,0,0,.45)"
         },
         // Style for the appcard
         display: "flex",
         flexDirection: "column",
-        height: "100%"
+        height: "100%",
+        cursor: "pointer"
     };
 
     return (
         <Grid item xs={12} md={3}>
             <AppCard sx={onHoverStyle}>
                 {/* Title */}
-                <Box sx={{p:2, pb: 1}}>
-                    <Typography variant="h6"><b>{name}</b></Typography>
+                <Box sx={{p:2, pb: 1}} display="flex" flexDirection="row" alignItems="start">
+                    <AccountTreeIcon sx={{mt: .5}} />
+                    <Typography variant="h6" sx={{ml: 1}}><b>{name}</b></Typography>
                 </Box>
 
                 {/* Content */}
-                <Box sx={{p: 2}} flexGrow={1}>
+                <Box sx={{p: 2}}>
                     <Typography variant="body2">{short_description}</Typography>
-                </Box>
-
-                {/* Button */}
-                <Box sx={{p: 2, backgroundColor: "rgba(0,0,0,.1)"}}>
-                    <Button color="info" onClick={() => {navigate(`/projects/${slug}`)}}>View</Button>
                 </Box>
             </AppCard>
         </Grid>
