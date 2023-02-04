@@ -34,12 +34,17 @@ const ViewPortfolio: React.FC = () => {
     const [parsedJavascript, setParsedJavascript] = useState<string[]>([]);
 
     useEffect(() => {
+        // Abort controller
+        const controller: AbortController = new AbortController();
+        const signal: AbortSignal = controller.signal;
+
         // Initialize loading
         setIsLoading(true);
         // Fetch the data
         fetch(`${BASE}${VIEW_PORTFOLIO_ITEMS}${params.slug}/`, {
             method: "GET",
-            mode: "cors"
+            mode: "cors",
+            signal: signal
         })
         .then((response) => response.json())
         .then((response: ViewPortfolioItemAPIResponse) => {
@@ -61,6 +66,13 @@ const ViewPortfolio: React.FC = () => {
         .finally(() => {
             setIsLoading(false);
         });
+
+        // Destuctor / onUnmount
+        return () => {
+            setParsedContent("");
+            setParsedJavascript([]);
+            controller.abort();
+        }
     }, [params]);
 
     // After content has been parsed

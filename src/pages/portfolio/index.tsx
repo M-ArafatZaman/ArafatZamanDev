@@ -29,10 +29,15 @@ const Portfolio: React.FC = () => {
 
     // Fetch data from API endpoint
     useEffect(() => {
+
+        const controller = new AbortController();
+        const signal = controller.signal;
+
         // Fetch
         fetch(`${BASE}${GET_PORTFOLIO_ITEMS}`, {
             method: "GET",
-            mode: "cors"
+            mode: "cors",
+            signal: signal
         })
         .then((response) => response.json())
         .then((response: PortfolioAPIResponse) => {
@@ -61,6 +66,8 @@ const Portfolio: React.FC = () => {
                 type: DELETE_ITEMS,
                 payload: {}
             })
+            // Abort fetch when the component is unmounted
+            controller.abort();
         }
 
     }, []);
