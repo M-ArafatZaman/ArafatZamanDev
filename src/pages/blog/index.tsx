@@ -31,10 +31,15 @@ const BlogItems: React.FC = () => {
 
     // Fetch data from API endpoint
     useEffect(() => {
+        // Abort controller
+        const controller: AbortController = new AbortController();
+        const signal: AbortSignal = controller.signal;
+
         // Fetch
         fetch(`${BASE}${GET_BLOGS}`, {
             method: "GET",
-            mode: "cors"
+            mode: "cors",
+            signal: signal
         })
         .then((response) => response.json())
         .then((response: GetBlogsAPIResponse) => {
@@ -63,6 +68,7 @@ const BlogItems: React.FC = () => {
                 type: DELETE_DATA,
                 payload: {}
             })
+            controller.abort();
         }
     }, []);
     

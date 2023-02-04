@@ -38,11 +38,17 @@ const ViewBlog: React.FC = () => {
 
     // Fetch data whenever the location changes
     useEffect(() => {
+        // Abort controller
+        const controller: AbortController = new AbortController();
+        const signal: AbortSignal = controller.signal;
+
+        setFound(false);
         setIsLoading(true);
         // Fetch data
         fetch(`${BASE}${READ_BLOG}${slug}/`, {
             method: "GET",
-            mode: "cors"
+            mode: "cors",
+            signal: signal
         })
         .then((resp) => resp.json())
         .then((resp: ReadBlogsAPIResponse) => {
@@ -57,7 +63,14 @@ const ViewBlog: React.FC = () => {
         })
         .finally(() => {
             setIsLoading(false);
-        })
+        });
+
+        // Destructor / on unmount
+        return () => {
+            setParsedContent(undefined);
+            setData(undefined);
+            controller.abort();
+        }
     }, [location.pathname]);
 
     // Highlight once parsed content is loading
