@@ -39,6 +39,7 @@ const ViewPortfolio: React.FC = () => {
         const signal: AbortSignal = controller.signal;
 
         // Initialize loading
+        setFound(false);
         setIsLoading(true);
         // Fetch the data
         fetch(`${BASE}${VIEW_PORTFOLIO_ITEMS}${params.slug}/`, {
@@ -69,8 +70,9 @@ const ViewPortfolio: React.FC = () => {
 
         // Destuctor / onUnmount
         return () => {
-            setParsedContent("");
+            setParsedContent(undefined);
             setParsedJavascript([]);
+            setData(undefined);
             controller.abort();
         }
     }, [params]);
