@@ -15,6 +15,7 @@ import AppCard from '../../home/components/AppCard';
 // MD parser and html react parser
 import {marked} from 'marked';
 import HTMLReactParser from 'html-react-parser';
+import hljs from 'highlight.js';
 
 const ViewProject: React.FC = () => {
 
@@ -58,11 +59,19 @@ const ViewProject: React.FC = () => {
             setParsedContent(undefined);
             setData(undefined);
             setFound(false);
+            setIsLoading(true);
             // Abort fetch when the component is unmounted
             controller.abort();
         }
 
     }, [location.pathname]);
+
+    useEffect(() => {
+        // Highlight after 1000ms to ensure all code blocks is properly highlighted
+        setTimeout(() => {
+            hljs.highlightAll();
+        }, 500)
+    }, [parsedContent]);
 
     return (
         <>
