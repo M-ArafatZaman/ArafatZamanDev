@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {useParams, useLocation} from 'react-router-dom';
+import {useParams, useLocation, useNavigate} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 // @mui icons
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // Endpoints
 import {BASE, VIEW_PROJECT_ITEM} from '../ENDPOINT';
 // Types
@@ -26,6 +29,12 @@ const ViewProject: React.FC = () => {
     const [parsedContent, setParsedContent] = useState<ReturnType<typeof HTMLReactParser>>();
     // Router dom
     const location = useLocation();
+    const navigate = useNavigate();
+
+    // Navigate to prev page
+    const goBack = () => {
+        navigate("/projects/");
+    }
 
     useEffect(() => {
         const controller = new AbortController();
@@ -75,31 +84,60 @@ const ViewProject: React.FC = () => {
 
     return (
         <>
-        <AppCard>
-            <Box p={2}>
-                {
-                    isLoading ? 
-                    <Typography>LOADING...</Typography> :
-                    !found ? 
-                    <Typography><b>Not found</b></Typography> :
+        <Grid container spacing={2}>
+            {
+                isLoading ? 
+                <Typography>LOADING...</Typography> :
+                !found ? 
+                <Typography><b>Not found</b></Typography> :
 
-                    // Data is found
-                    <>
-                    {/* Title */}
-                    <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center">
-                        <AccountTreeIcon/>
-                        <Typography variant="h4" sx={{ml: 1}}>{data?.name}</Typography>
-                    </Box>
-                    <Divider sx={{my: 1}} />
+                // Data is found
+                <>
+                {/* Main content */}
+                <Grid item xs={12} md={9}>
+                    <AppCard sx={{p: 2}}>
+                        {/* Title */}
+                        <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center">
+                            <AccountTreeIcon/>
+                            <Typography variant="h4" sx={{ml: 1}}>{data?.name}</Typography>
+                        </Box>
+                        <Divider sx={{my: 1}} />
 
-                    {/* Content */}
-                    <Box p={1}>
-                        {parsedContent}
+                        {/* Content */}
+                        <Box p={1}>
+                            {parsedContent}
+                        </Box>
+
+                        <Divider sx={{my: 1}} />
+                        <Box>
+                            <Button
+                                startIcon={<ArrowBackIcon/>}
+                                variant="contained"
+                                color="error"
+                                onClick={goBack}
+                            >Go back</Button>
+                        </Box>
+                    </AppCard>
+                </Grid>
+
+                {/* Extra content */}
+                <Grid item xs={12} md={3}>
+                    <Box sx={{
+                        width: "100%",
+                        p: 2,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        display: "flex",
+                        flexDirection: "column"
+                    }}>
+                        <img src={data?.imageURL} style={{objectFit: "contain", width: "100%", borderRadius: "8px"}} />
+                        <Typography sx={{mt: 1, fontSize: 12}} variant="body2" color="GrayText">{data?.short_description}</Typography>
                     </Box>
-                    </>
-                }
-            </Box>
-        </AppCard>
+                </Grid>
+                </>
+            }
+        </Grid>
+            
         </>
     )
 };
