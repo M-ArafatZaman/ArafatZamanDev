@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 // @mui components
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -6,17 +6,48 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
 // @mui icons
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import LaunchIcon from '@mui/icons-material/Launch';
+import CloseIcon from '@mui/icons-material/Close';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 // App theme
 import {APP_THEME} from '../../appTheme';
 // Other components
 import AppCard from '../home/components/AppCard';
 import ProgrammerVibin from './media/programmer_vibin.gif';
 
+const EMAIL = "mdarafatzaman1@gmail.com";
+
 /* The Contact page */
 const Contact: React.FC = () => {
+    
+    interface SnackDataType {
+        open: boolean;
+        message: string;
+    }
+    
+    // State manager for snackbar
+    const [snackData, setSnackData] = useState<SnackDataType>({} as SnackDataType);
+    
+    // Close the snackbar
+    const closeSnackbar = () => {
+        setSnackData((prev) => ({...prev, open: false}) );
+    };
+    
+    // Open the snackbar
+    const openSnackbar: (message: string) => () => void = (message: string) => () => {
+        setSnackData(() => ({open: true, message: message}))
+    };
+
+    // Function to copy email to clipboard
+    const copyAddress = () => {
+        navigator.clipboard.writeText(EMAIL);
+        openSnackbar("Copied email to clipboard.")();
+    };
+
 
     return (
         <Container sx={{p: 2}}>
@@ -56,12 +87,15 @@ const Contact: React.FC = () => {
                                     <Box p={2}>
                                         <Typography variant="h5"><u>Email</u></Typography>
                                         <Typography>
-                                            For business inquiries, email me at <Link href="mailTo:mdarafatzaman1@gmail.com">mdarafatzaman1@gmail.com</Link>.
+                                            For business inquiries, email me at <Link href={`mailTo:${EMAIL}`}>{EMAIL}</Link>.
                                         </Typography>
+                                        <Box pt={1}>
+                                            <Button startIcon={<ContentCopyIcon/>} variant="contained" onClick={copyAddress}>Copy Address</Button>
+                                        </Box>
                                     </Box>
 
                                     {/* or  */}
-                                    <Box display="flex" flexDirection="row" alignItems="center" p={2}>
+                                    <Box display="flex" flexDirection="row" alignItems="center" px={2} py={0}>
                                         <Box flexGrow={.5}><Divider/></Box>
                                         <Typography sx={{mx: 1}} variant="caption" color="GrayText">or</Typography>
                                         <Box flexGrow={.5}><Divider/></Box>
@@ -72,6 +106,23 @@ const Contact: React.FC = () => {
                     </Grid>
                 </Box>
             </AppCard>
+
+            {/* Snackbar to alert */}
+            <Snackbar
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left"
+                }}
+                open={snackData.open}
+                autoHideDuration={6000}
+                onClose={closeSnackbar}
+                message={snackData.message}
+                action={
+                    <IconButton onClick={closeSnackbar}>
+                        <CloseIcon htmlColor="#fff"/>
+                    </IconButton>
+                }
+            />
             
         </Container>
     );
