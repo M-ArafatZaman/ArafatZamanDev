@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 // @mui components
-import {
-    Box,
-    Link,
-    SxProps,
-    IconButton
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
+import IconButton from '@mui/material/IconButton';
+import {SxProps} from '@mui/material/styles';
+// @mui icons
 import GitHubIcon from '@mui/icons-material/GitHub';
+import MenuIcon from '@mui/icons-material/Menu';
 // Apptheme
 import {APP_THEME} from '../../appTheme';
 
@@ -20,7 +20,6 @@ interface NavLinkProps {
 const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
     const {href="", label} = props;
 
-    
     const navigate = useNavigate();
     const currLocation = useLocation();
     
@@ -77,37 +76,65 @@ const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
     )
 }
 
+const MOBILE_NAVBAR_WIDTH = 750;
 // The main navbar
 const Navbar: React.FC = () => {
+
+    const [width, setWidth] = useState<number>(window.innerWidth);
+
+    // Event listener to update width
+    useEffect(() => {
+        const updateWidth = () => {
+            setWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", updateWidth);
+
+        // Remove event listener on unmount
+        return () => {
+            window.removeEventListener("resize", updateWidth);
+        }
+    }, []);
     
+    const NAVS = {
+        desktop: (
+            <Box display="flex" flexDirection="row" alignItems="center">
+                <NavLink
+                    label="HOME"
+                    href="/"
+                />
+                <NavLink
+                    label="PORTFOLIO"
+                    href="/portfolio/"
+                    />
+                <NavLink
+                    label="PROJECTS"
+                    href="/projects/"
+                />
+                <NavLink
+                    label="BLOG"
+                    href="/blog/"
+                    />
+                <NavLink
+                    label="CONTACT"
+                    href="/contact/"
+                />
+                {/* Github button */}
+                <IconButton href="https://github.com/M-ArafatZaman" target="_blank">
+                    <GitHubIcon/>
+                </IconButton>
+            </Box>
+        ),
+        mobile: (
+            <Box>Shorter nav</Box>
+        )
+    }
+
     return (
         <>
-        <Box display="flex" flexDirection="row" alignItems="center">
-            <NavLink
-                label="HOME"
-                href="/"
-            />
-            <NavLink
-                label="PORTFOLIO"
-                href="/portfolio/"
-            />
-            <NavLink
-                label="PROJECTS"
-                href="/projects/"
-            />
-            <NavLink
-                label="BLOG"
-                href="/blog/"
-            />
-            <NavLink
-                label="CONTACT"
-                href="/contact/"
-            />
-            {/* Github button */}
-            <IconButton href="https://github.com/M-ArafatZaman" target="_blank">
-                <GitHubIcon/>
-            </IconButton>
-        </Box>
+        {
+            width > MOBILE_NAVBAR_WIDTH ? NAVS["desktop"] : NAVS["mobile"]
+        }
         </>
     )
 };
