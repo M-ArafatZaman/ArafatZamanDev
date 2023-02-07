@@ -15,6 +15,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 // App theme
 import {APP_THEME} from '../../appTheme';
+// Contact form
+import ContactForm from './ContactForm';
 // Other components
 import AppCard from '../home/components/AppCard';
 import ProgrammerVibin from './media/programmer_vibin.gif';
@@ -100,6 +102,9 @@ const Contact: React.FC = () => {
                                         <Typography sx={{mx: 1}} variant="caption" color="GrayText">or</Typography>
                                         <Box flexGrow={.5}><Divider/></Box>
                                     </Box>
+
+                                    {/* Contact form */}
+                                    <ContactForm/>
                                 </Box>
                             </AppCard>
                         </Grid>
