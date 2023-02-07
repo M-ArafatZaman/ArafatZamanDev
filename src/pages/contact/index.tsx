@@ -5,6 +5,10 @@ import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+// @mui icons
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import LaunchIcon from '@mui/icons-material/Launch';
 // App theme
 import {APP_THEME} from '../../appTheme';
 // Other components
@@ -34,16 +38,34 @@ const Contact: React.FC = () => {
                                 <Box
                                     sx={{
                                         p: 2,
-                                        backgroundColor: "rgba(255,255,255,0.6)",
+                                        backgroundColor: "rgba(255,255,255,0.75)",
                                         transition: "all 200ms ease-in-out",
                                         "&:hover": {
-                                            backgroundColor: "rgba(255,255,255,0.85)"
+                                            backgroundColor: "rgba(255,255,255,0.95)"
                                         },
-                                        height: "100%",
-                                        width: "100%"
+                                        height: "100%"
                                     }}
-                                >
-                                    TEST
+                                >   
+                                    {/* Header */}
+                                    <Box display="flex" alignItems="center" justifyContent="center">
+                                        <MailOutlineIcon fontSize='large'/>
+                                        <Typography variant="h4" sx={{ml: 1}}><u>Contact</u></Typography>
+                                    </Box>
+                                    <Divider sx={{my: 1}} />
+                                    {/* Email */}
+                                    <Box p={2}>
+                                        <Typography variant="h5"><u>Email</u></Typography>
+                                        <Typography>
+                                            For business inquiries, email me at <Link href="mailTo:mdarafatzaman1@gmail.com">mdarafatzaman1@gmail.com</Link>.
+                                        </Typography>
+                                    </Box>
+
+                                    {/* or  */}
+                                    <Box display="flex" flexDirection="row" alignItems="center" p={2}>
+                                        <Box flexGrow={.5}><Divider/></Box>
+                                        <Typography sx={{mx: 1}} variant="caption" color="GrayText">or</Typography>
+                                        <Box flexGrow={.5}><Divider/></Box>
+                                    </Box>
                                 </Box>
                             </AppCard>
                         </Grid>
