@@ -95,6 +95,9 @@ const ContactForm: React.FC = () => {
                     severity: "success",
                     message: "Message was successfully sent!"
                 });
+                // Clear inputs
+                setTitle("");
+                setMessage("");
             } else {
                 // else an error occurred
                 snackError();
