@@ -7,6 +7,8 @@ import Typography from '@mui/material/Typography';
 import Icon from '@mui/material/Icon';
 import MailIcon from "@mui/icons-material/Mail";
 
+const TITLE_LENGTH = 255;
+const MESSAGE_LENGTH = 50;
 
 const ContactForm: React.FC = () => {
 
@@ -15,12 +17,12 @@ const ContactForm: React.FC = () => {
 
     // Function to update the title
     const UpdateTitle = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
+        setTitle(e.currentTarget.value.substring(0, TITLE_LENGTH))
     };
 
     // Update the message
     const UpdateMessage = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        setMessage(e.currentTarget.value)
+        setMessage(e.currentTarget.value.substring(0, MESSAGE_LENGTH))
     };
 
     return (
@@ -39,6 +41,7 @@ const ContactForm: React.FC = () => {
                     InputProps={{
                         startAdornment: <Icon className="fas fa-user-secret" sx={{mr: 1}} />
                     }}
+                    helperText={title.length === TITLE_LENGTH ? "Maximum length reached" : ""}
                 />
             </Box>
 
@@ -51,8 +54,8 @@ const ContactForm: React.FC = () => {
                     size="small"
                     variant="outlined"
                     fullWidth
-                    
                     rows={3} multiline
+                    helperText={message.length === MESSAGE_LENGTH ? "Maxmium length reached" : ""}
                 />
             </Box>
         </Box>
