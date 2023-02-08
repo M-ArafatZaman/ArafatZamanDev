@@ -22,7 +22,7 @@ function GridLayer1() {
     return (
         <>
         {/* The software developer container */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} md={6}>
             {/* Wrap the appcard so that it fadesin from left */}
             <ElementInViewport animation='fadeInLeft' delay={500}>
                 <AppCard sx={{
@@ -67,7 +67,7 @@ function GridLayer1() {
         </Grid>
         
         {/* RaspberryPI component */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} md={6}>
             <Box display="flex" flexDirection="column" sx={{height: "100%", width: "100%"}}>  
                 <Box flexGrow={1}>
                     <RaspberryPI/>
