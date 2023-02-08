@@ -16,7 +16,7 @@ function GridLayer2() {
     return (
         <>
         {/* Portfolio */}
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} md={4}>
             <ElementInViewport animation='fadeInLeft' delay={1000}>
                 <FeatureCard image={portfolioSVG} href="/portfolio/">
                     <Typography variant="h6"><b>Portfolio</b></Typography>
@@ -26,7 +26,7 @@ function GridLayer2() {
         </Grid>
 
         {/* Projects */}
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} md={4}>
             <ElementInViewport animation="fadeInUp" delay={1000}>
                 <FeatureCard image={projectSVG} href="/projects/">
                     <Typography variant="h6"><b>Projects</b></Typography>
@@ -36,7 +36,7 @@ function GridLayer2() {
         </Grid>
 
         {/* Blogs */}
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} md={4}>
             <ElementInViewport animation="fadeInRight" delay={1000}>
                 <FeatureCard image={blogSVG} href="/blog/">
                     <Typography variant="h6"><b>Blogs</b></Typography>
