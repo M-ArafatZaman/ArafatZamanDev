@@ -1,15 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useLocation} from 'react-router-dom';
-// @mui components
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import IconButton from '@mui/material/IconButton';
-import {SxProps} from '@mui/material/styles';
-// @mui icons
-import GitHubIcon from '@mui/icons-material/GitHub';
-import MenuIcon from '@mui/icons-material/Menu';
-// Apptheme
-import {APP_THEME} from '../../appTheme';
 // Individual navbars
 import DesktopNavbar from './DesktopNavbar';
 import MobileNavbar from './MobileNavbar';
