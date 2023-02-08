@@ -17,6 +17,8 @@ import TerminalIcon from '@mui/icons-material/Terminal';
 import FeedIcon from '@mui/icons-material/Feed';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import GitHubIcon from '@mui/icons-material/GitHub';
+// The navlink component
+import NavItem from './NavItems';
 
 
 const MobileNavbar: React.FC = () => {
@@ -49,31 +51,35 @@ const MobileNavbar: React.FC = () => {
             <Box>
                 <List>
                     <ListSubheader>Navigation</ListSubheader>
-                    <ListItemButton>
-                        <ListItemIcon><HomeIcon/></ListItemIcon>
-                        <ListItemText>Home</ListItemText>
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon><WorkIcon/></ListItemIcon>
-                        <ListItemText>Portfolio</ListItemText>
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon><TerminalIcon/></ListItemIcon>
-                        <ListItemText>Projects</ListItemText>
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon><FeedIcon/></ListItemIcon>
-                        <ListItemText>Blog</ListItemText>
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon><MailOutlineIcon/></ListItemIcon>
-                        <ListItemText>Contact</ListItemText>
-                    </ListItemButton>
-
+                    <NavItem
+                        href="/"
+                        label="Home"
+                        icon={<HomeIcon/>}
+                    />
+                    <NavItem
+                        href="/portfolio/"
+                        label="Portfolio"
+                        icon={<WorkIcon/>}
+                    />
+                    <NavItem
+                        href="/projects/"
+                        label="Projects"
+                        icon={<TerminalIcon/>}
+                    />
+                    <NavItem
+                        href="/blog/"
+                        label="Blog"
+                        icon={<FeedIcon/>}
+                    />
+                    <NavItem
+                        href="/contact/"
+                        label="Contact"
+                        icon={<MailOutlineIcon/>}
+                    />
                     <Divider/>
 
                     <ListSubheader>Others</ListSubheader>
-                    <ListItemButton>
+                    <ListItemButton href="https://github.com/M-ArafatZaman" target="_blank">
                         <ListItemIcon><GitHubIcon/></ListItemIcon>
                         <ListItemText>Github</ListItemText>
                     </ListItemButton>
