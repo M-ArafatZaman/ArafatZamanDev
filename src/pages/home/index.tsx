@@ -38,16 +38,15 @@ const Home: React.FC = () => {
                 <Typography variant="h4" sx={{ml: 1}}>Featured Projects</Typography>
             </Box>
 
-            <Grid container spacing={2} paddingY={2}>
-                {/* The third container containing the lyrics finder */}
-                <Suspense fallback={<Typography>Loading...</Typography>}>
-                    <GridLayer3/>
-                </Suspense>
-                {/* The fourth container containing the inperil application */}
-                <Suspense fallback={<Typography>Loading...</Typography>}>
-                    <GridLayer4/>
-                </Suspense>
-            </Grid>
+            {/* The third container containing the lyrics finder */}
+            <Suspense fallback={<Typography>Loading...</Typography>}>
+                <GridLayer3/>
+            </Suspense>
+
+            {/* The fourth container containing the inperil application */}
+            <Suspense fallback={<Typography>Loading...</Typography>}>
+                <GridLayer4/>
+            </Suspense>
         </Container>
     )
 };
