@@ -52,8 +52,8 @@ const GridLayer1: React.FC = () => {
                         <Box mb={1}>
                             <TypewriterGreetings/>
                         </Box>
-                        <Button variant="contained" color="primary" sx={{fontWeight: "bold"}} startIcon={<DescriptionIcon/>} download={true} href="resume.pdf">
-                            Download Resume
+                        <Button variant="contained" color="primary" sx={{fontWeight: "bold"}} startIcon={<DescriptionIcon/>} href="resume.pdf" target="_blank">
+                            View Resume
                         </Button>
                         <br/>
                         <Button variant="contained" color="inherit" sx={{fontWeight: "bold", mt: 1}} startIcon={<GitHubIcon/>}
