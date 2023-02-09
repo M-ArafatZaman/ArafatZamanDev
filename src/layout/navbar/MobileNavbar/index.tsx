@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useLocation} from 'react-router-dom';
 // @ mui components
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -24,15 +25,23 @@ import NavItem from './NavItems';
 const MobileNavbar: React.FC = () => {
 
     const [open, setOpen] = useState<boolean>(false);
+    const location = useLocation();
 
+    
+    // Openers and closers of the navigation drawer
     const handleClose = () => {
         setOpen(false);
     }
-
+    
     const handleOpen = () => {
         setOpen(true);
     }
-
+    
+    // Whenever the location is updated, close the drawer
+    useEffect(() => {
+        handleClose();
+    }, [location.pathname]);
+    
     return (
         <>
         <Box display="flex" flexDirection="row" alignItems="center">
