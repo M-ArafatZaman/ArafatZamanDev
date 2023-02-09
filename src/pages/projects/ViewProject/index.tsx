@@ -27,6 +27,23 @@ const ViewProject: React.FC = () => {
     const [found, setFound] = useState<boolean>(false);
     const [data, setData] = useState<ViewProjectAPIResponse["item"]>();
     const [parsedContent, setParsedContent] = useState<ReturnType<typeof HTMLReactParser>>();
+    const [width, setWidth] = useState<number>(window.innerWidth);
+
+    // When the component is mounted
+    // Attach an eventlistener to update the width whenever the width of the window changes
+    // removeEventlistener on component unmount
+    useEffect(() => {
+        const updateWidth = () => {
+            setWidth(window.innerWidth);
+        };
+        window.addEventListener("resize", updateWidth);
+
+        // Destructor
+        return () => {
+            window.removeEventListener("resize", updateWidth);
+        }
+    }, []);
+
     // Router dom
     const location = useLocation();
     const navigate = useNavigate();
@@ -84,7 +101,7 @@ const ViewProject: React.FC = () => {
 
     return (
         <>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} direction={width <= 900 ? "column-reverse" : "row"}>
             {
                 isLoading ? 
                 <Typography>LOADING...</Typography> :
@@ -130,7 +147,7 @@ const ViewProject: React.FC = () => {
                         display: "flex",
                         flexDirection: "column"
                     }}>
-                        <img src={data?.imageURL} style={{objectFit: "contain", width: "100%", borderRadius: "8px"}} />
+                        <img src={data?.imageURL} style={{objectFit: "contain", width: "100%", maxHeight: "300px", borderRadius: "8px"}} />
                         <Typography sx={{mt: 1, fontSize: 12}} variant="body2" color="GrayText">{data?.short_description}</Typography>
                     </Box>
                 </Grid>
