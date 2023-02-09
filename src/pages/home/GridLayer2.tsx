@@ -11,7 +11,7 @@ import blogSVG from '../media/blog.svg';
 // Utils
 import {ElementInViewport} from '../../utils';
 
-function GridLayer2() {
+const GridLayer2: React.FC = () => {
 
     return (
         <>

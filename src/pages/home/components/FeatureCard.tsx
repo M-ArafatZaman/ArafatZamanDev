@@ -14,7 +14,7 @@ interface FeatureCardProps {
     href: string;
 }
 
-function FeatureCard(props: FeatureCardProps) {
+const FeatureCard: React.FC<FeatureCardProps> = (props: FeatureCardProps) => {
 
     const {children, image, href} = props;
     const navigate = useNavigate();

@@ -18,7 +18,7 @@ interface FadeInWrapperProps {
     children: React.ReactNode
 }
 
-function FadeInWrapper(props: FadeInWrapperProps): JSX.Element {
+const FadeInWrapper: React.FC<FadeInWrapperProps> = (props: FadeInWrapperProps) => {
 
     return (
         <Box 

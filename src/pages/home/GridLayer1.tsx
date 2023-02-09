@@ -17,7 +17,7 @@ import backdropSVG from './media/backdrop.png';
 // Util components
 import {ElementInViewport} from '../../utils';
 
-function GridLayer1() {
+const GridLayer1: React.FC = () => {
 
     return (
         <>

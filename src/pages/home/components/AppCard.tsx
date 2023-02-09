@@ -14,7 +14,7 @@ interface AppCardProps {
  * @param props A sx prop similar to @mui components and a children(s)
  * @returns 
  */
-function AppCard(props: AppCardProps) {
+const AppCard: React.FC<AppCardProps> = (props: AppCardProps) => {
     const {children, sx} = props;
 
     const ContainerStyles: SxProps = {

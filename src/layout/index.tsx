@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import {APP_THEME} from '../appTheme';
 
 // The main layout that is used throughout the app
-export default function Index() {
+const Index: React.FC = () => {
 
     const location = useLocation();
     // Add event listener so that window scrolls to the top whenever location changes
@@ -36,4 +36,6 @@ export default function Index() {
             <Footer/>
         </Box>
     );
-}
+};
+
+export default Index;

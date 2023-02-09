@@ -33,7 +33,7 @@ const ProjectItems = LazyImport(() => import("./pages/projects/ProjectItems"));
 const ViewProject = LazyImport(() => import("./pages/projects/ViewProject"));
 
 
-function App() {
+const App: React.FC = () => {
 
 	// Create router
     const Router = createBrowserRouter([
