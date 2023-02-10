@@ -1,4 +1,5 @@
-const BASE = "http://localhost:8000";
+import {BASE} from '../../config';
+
 const GET_PORTFOLIO_ITEMS = "/projects/api/get_portfolio_items/";
 const VIEW_PORTFOLIO_ITEMS = "/projects/api/view_portfolio_item/";
 
