@@ -7,6 +7,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 // Components
 import PortfolioItemGrid from '../components/PortfolioItemGrid';
+import Error from '../../../components/Error';
 // Context
 import {PortfolioContext} from '../reducer';
 
@@ -23,10 +24,7 @@ const PortfolioItems: React.FC = () => {
             // If it is not loading, check for error
             context.error ?
             <Grid item p={2} xs={12}>
-                <Alert severity='error' variant="standard">
-                    <AlertTitle>Error</AlertTitle>
-                    {context.errorMessage}
-                </Alert>
+                <Error message={context.errorMessage} />
             </Grid>
             :
             // Else everything else is fine
