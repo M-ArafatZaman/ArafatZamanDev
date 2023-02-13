@@ -3,6 +3,8 @@ import React, {useContext} from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 // Components
 import PortfolioItemGrid from '../components/PortfolioItemGrid';
 // Context
@@ -13,9 +15,21 @@ const PortfolioItems: React.FC = () => {
 
     return (
         <Grid container justifyContent="center" spacing={2}>
-            {context.isLoading ? 
+            {
+            // While it is loading, show a loading
+            context.isLoading ? 
             <Typography>LOADING...</Typography>
             :
+            // If it is not loading, check for error
+            context.error ?
+            <Grid item p={2} xs={12}>
+                <Alert severity='error' variant="standard">
+                    <AlertTitle>Error</AlertTitle>
+                    {context.errorMessage}
+                </Alert>
+            </Grid>
+            :
+            // Else everything else is fine
             context.items.map((portfolio, i) => (
                 <PortfolioItemGrid
                     index={i}

@@ -19,7 +19,8 @@ import {
     // Action types
     UPDATE_ITEMS,
     UPDATE_IS_LOADING,
-    DELETE_ITEMS
+    DELETE_ITEMS,
+    ERROR
 } from './reducer';
 
 /* The portfolio page */
@@ -49,7 +50,14 @@ const Portfolio: React.FC = () => {
                         items: response.items
                     }
                 })
+            } else {
+                // An error occured
+                dispatch({type: ERROR, payload: {errorMessage: "Sorry, an uncaught server error occured!"}});
             }
+        })
+        .catch(() => {
+            // Handle the error
+            dispatch({type: ERROR, payload: {errorMessage: "Sorry, unable to connect to the server."}})
         })
         .finally(() => {
             dispatch({
