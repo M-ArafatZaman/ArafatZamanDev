@@ -19,7 +19,14 @@ const PortfolioItems: React.FC = () => {
             {
             // While it is loading, show a loading
             context.isLoading ? 
-            <Typography>LOADING...</Typography>
+            [1,2,3,4].map((i) => (
+                <Grid key={i} item xs={12} md={3}>
+                    <Skeleton
+                        variant="rounded"
+                        height={100}
+                    />
+                </Grid>
+            ))
             :
             // If it is not loading, check for error
             context.error ?
