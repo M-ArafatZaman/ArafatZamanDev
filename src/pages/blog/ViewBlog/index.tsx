@@ -14,6 +14,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AppCard from '../../home/components/AppCard';
 import ArafatTag from '../components/ArafatTag';
 import Suggestions from './Suggestions';
+import Error from '../../../components/Error';
+import SkeletonLoader from './SkeletonLoader';
 // Endpoints and types
 import {BASE, READ_BLOG} from '../ENDPOINT';
 import {ReadBlogsAPIResponse, BlogItem} from '../types';
@@ -31,6 +33,7 @@ const ViewBlog: React.FC = () => {
     const [data, setData] = useState<BlogItem>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [found, setFound] = useState<boolean>(false);
+    const [error, setError] = useState<{status: boolean, message: string}>({status: false, message: ""});
     const [parsedContent, setParsedContent] = useState<JSX.Element | JSX.Element[] | string>();
     // Navigator
     const navigate = useNavigate();
@@ -42,8 +45,10 @@ const ViewBlog: React.FC = () => {
         const controller: AbortController = new AbortController();
         const signal: AbortSignal = controller.signal;
 
+        // Initialize states
         setFound(false);
         setIsLoading(true);
+        setError({status: false, message: ""})
         // Fetch data
         fetch(`${BASE}${READ_BLOG}${slug}/`, {
             method: "GET",
@@ -57,9 +62,13 @@ const ViewBlog: React.FC = () => {
                 setFound(true);
                 setParsedContent(HTMLReactParser(marked.parse(resp.payload.content)));
             }
+            // Turn off any errors
+            setError({status: false, message: ""}); 
+            // Else not found
         })
         .catch((err) => {
-            console.log(err);
+            // Set errors
+            setError({status: true, message: "Sorry, an uncaught server error occured."});
         })
         .finally(() => {
             setIsLoading(false);
@@ -82,10 +91,19 @@ const ViewBlog: React.FC = () => {
         <Box>
             <AppCard sx={{p: 3}}>
                 {
-                    isLoading ? <Typography>LOADING...</Typography> :
+                    // If it is still loading
+                    isLoading ? <SkeletonLoader/> :
                     
-                    !found ? <Typography>Not found</Typography> :
-                    
+                    // Else check for erros
+                    error.status ?
+                    <Error message={error.message} />
+                    :
+
+                    // Else check if blog is found or not found
+                    !found ? 
+                    <Error message="404 - No blogs found." />
+                    :
+                    // All data is sccurate
                     <>
                         <Typography variant="h4" textAlign="center"><u>{data?.name}</u></Typography>
                         {/* Date and read time */}
