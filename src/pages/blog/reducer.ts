@@ -55,7 +55,7 @@ export const BlogsReducer = (tasks: BlogsContextType, action: PortfolioReducerAc
         case ERROR: {
             return {
                 ...tasks,
-                error: false,
+                error: true,
                 errorMessage: action.payload?.errorMessage || "An unknown error occured."
             }
         }
