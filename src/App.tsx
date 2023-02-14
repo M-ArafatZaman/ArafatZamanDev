@@ -13,6 +13,7 @@ import {FadeInWrapper, LazyImport} from './utils';
 // Main index and loader
 import Root from './layout';
 import Loader from './layout/loader';
+import P404 from './pages/404';
 // Import carousel and iPhone carousel
 import './components/Carousel/carousel.css';
 import './components/Carousel/iphone.css';
@@ -95,6 +96,11 @@ const App: React.FC = () => {
 				{
 					path: "contact/",
 					element: <Suspense fallback={<Loader/>}> <FadeInWrapper><Contact/></FadeInWrapper> </Suspense>
+				},
+				// 404 page
+				{
+					path: "*",
+					element: <P404/>
 				}
 			]
 		}
