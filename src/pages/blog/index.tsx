@@ -6,7 +6,6 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 // @mui icons
-import LaptopMacIcon from '@mui/icons-material/LaptopMac';
 import FeedIcon from '@mui/icons-material/Feed';
 // Blog types
 import {GetBlogsAPIResponse} from './types';
@@ -18,9 +17,11 @@ import {
     BlogsReducer,
     BLOGS_INITIAL_STATE,
     // Action types
+    INITIALIZE,
     UPDATE_ITEMS,
     UPDATE_IS_LOADING,
-    DELETE_DATA
+    DELETE_DATA,
+    ERROR
 } from './reducer';
 
 
@@ -35,6 +36,9 @@ const BlogItems: React.FC = () => {
         const controller: AbortController = new AbortController();
         const signal: AbortSignal = controller.signal;
 
+        // Dispatch an initialize request
+        dispatch({type: INITIALIZE});
+
         // Fetch
         fetch(`${BASE}${GET_BLOGS}`, {
             method: "GET",
@@ -44,14 +48,21 @@ const BlogItems: React.FC = () => {
         .then((response) => response.json())
         .then((response: GetBlogsAPIResponse) => {
             if (response.status === "OK") {
-                
+                // Found all blogs
                 dispatch({
                     type: UPDATE_ITEMS,
                     payload: {
                         items: response.response
                     }
                 })
+            } else {
+                // An error occured while getting blogs
+                dispatch({ type: ERROR, payload: {errorMessage: "Sorry, an uncaught server error occured."}});
             }
+        })
+        .catch(() => {
+            // An error occured
+            dispatch({ type: ERROR, payload: {errorMessage: "Sorry, an uncaught error occured."}})
         })
         .finally(() => {
             dispatch({
@@ -64,10 +75,7 @@ const BlogItems: React.FC = () => {
 
         // A destructor to empty the context for optimization
         return () => {
-            dispatch({
-                type: DELETE_DATA,
-                payload: {}
-            })
+            dispatch({ type: DELETE_DATA })
             controller.abort();
         }
     }, []);
