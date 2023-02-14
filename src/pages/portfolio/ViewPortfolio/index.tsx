@@ -6,12 +6,14 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
+import Skeleton from '@mui/material/Skeleton';
 // Marked, highlight js, and html react parser
 import {marked} from 'marked';
 import hljs from "highlight.js";
 import htmlReactParser from 'html-react-parser';
 // Other components
 import AppCard from '../../home/components/AppCard';
+import Error from '../../../components/Error';
 // Types
 import {ViewPortfolioItemAPIResponse, PortfolioItem} from '../types';
 import {BASE, VIEW_PORTFOLIO_ITEMS} from '../ENDPOINT';
@@ -30,6 +32,7 @@ const ViewPortfolio: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [data, setData] = useState<PortfolioItem>();
     const [found, setFound] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>("Not found");
     const [parsedContent, setParsedContent] = useState<JSX.Element | JSX.Element[] | string>();
     const [parsedJavascript, setParsedJavascript] = useState<string[]>([]);
 
@@ -61,8 +64,14 @@ const ViewPortfolio: React.FC = () => {
                 const contentMDParsed = htmlReactParser(ReplacedContentFinal.html);
                 setParsedContent(contentMDParsed);
                 setParsedJavascript(() => [...ReplacedContent1.js, ...ReplacedContentFinal.js])
+            } else {
+                // Else not found. found state is false by default
+                setFound(false);
+                setErrorMessage("Not found.");
             }
-            // Else not found. found state is false by default
+        })
+        .catch(() => {
+            setErrorMessage("Sorry, an unknown server error occured!")
         })
         .finally(() => {
             setIsLoading(false);
@@ -96,10 +105,22 @@ const ViewPortfolio: React.FC = () => {
     return (
         <Grid container spacing={2}>
             {
-                isLoading ? <Typography>LOADING...</Typography> :
-
-                !found ? <Typography>NOT FOUND</Typography> :
+                isLoading ?
+                // A skeleton loader
+                <>
+                    <Grid item xs={12} md={4}>
+                        <Skeleton variant="rounded" height={100}/>
+                    </Grid>
+                    <Grid item xs={12} md={8}>
+                        <Skeleton variant="rounded" height={100}/>
+                    </Grid>
+                </>       
+                :
                 
+                // If nothing is found, show an error
+                !found ? 
+                <Grid item xs={12}><Error message={errorMessage} /></Grid>
+                :
                 
                 <>
                     {/* Portfolio Navbar */}
