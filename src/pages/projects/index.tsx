@@ -20,7 +20,8 @@ import {
     UPDATE_ITEMS,
     UPDATE_IS_LOADING,
     DELETE_ITEMS,
-    ERROR
+    ERROR,
+    INITIALIZE
 } from './reducer';
 
 /* The portfolio page */
@@ -35,10 +36,7 @@ const Portfolio: React.FC = () => {
         const signal = controller.signal;
 
         // Initialize loading
-        dispatch({
-            type: UPDATE_IS_LOADING,
-            payload: {isLoading: true}
-        })
+        dispatch({type: INITIALIZE})
 
         // Fetch
         fetch(`${BASE}${GET_PROJECTS_ITEMS}`, {
