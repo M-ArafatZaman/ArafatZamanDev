@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 // @mui components
 import {SxProps} from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -29,10 +30,10 @@ interface CustomLinkProps {
 }
 
 const AppLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
-    const {children, href="#", target="_self", startIcon} = props;
-
+    const {children, href="#", target="_blank", startIcon} = props;
+    
     let iconStyles: SxProps = {};
-
+    
     if (typeof startIcon != "undefined") {
         iconStyles = {
             pl: 1
@@ -55,12 +56,25 @@ const AppLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
         },
         ...iconStyles
     }
+    
+    const navigate = useNavigate();
+    // On click
+    const onClick = (e: React.MouseEvent) => {
+        // Regex
+        const externalWebsite = /^(?!https?:\/\/)/;
+        if (href.match(externalWebsite) !== null) {
+            // Then href is not an external website
+            e.preventDefault();
+            navigate(href);
+        }
+        // Else go ahead.
+    }
 
     return (
         <Box>
             <Box display="flex" flexDirection="row" alignItems="center">
                 {startIcon}
-                <Link href={href} sx={LinkStyles} target={target}>{children}</Link>
+                <Link href={href} sx={LinkStyles} target={target} onClick={onClick}>{children}</Link>
             </Box>
         </Box>
     )
@@ -102,10 +116,10 @@ const Footer: React.FC = () => {
                                     <Typography variant="h6" sx={{color: "#fff", pl: 1}}>Explore</Typography>
                                 </Box>
                                 <Box p={2} pt={0}>
-                                    <AppLink>Portfolio</AppLink>
-                                    <AppLink>Projects</AppLink>
-                                    <AppLink>Blog</AppLink>
-                                    <AppLink>Contact</AppLink>
+                                    <AppLink href="/portfolio/">Portfolio</AppLink>
+                                    <AppLink href="/projects/">Projects</AppLink>
+                                    <AppLink href="/blog/">Blog</AppLink>
+                                    <AppLink href="/contact/">Contact</AppLink>
                                 </Box>
                             </Box>
                         </Grid>
@@ -119,11 +133,26 @@ const Footer: React.FC = () => {
                                     <Typography variant="h6" sx={{color: "#fff", pl: 1}}>Socials</Typography>
                                 </Box>
                                 <Box p={2} pt={0}>
-                                    <AppLink startIcon={<LinkedInIcon sx={{color: "#0072b1"}}/>}>LinkedIn</AppLink>
-                                    <AppLink startIcon={<TwitterIcon sx={{color: "#00acee"}}/>}>Twitter</AppLink>
-                                    <AppLink startIcon={<FacebookIcon sx={{color: "#3b5998"}}/>}>Facebook</AppLink>
-                                    <AppLink startIcon={<InstagramIcon sx={{color: "#d62976"}}/>}>Instagram</AppLink>
-                                    <AppLink startIcon={<GitHubIcon sx={{color: "#171515"}}/>}>Github</AppLink>
+                                    <AppLink 
+                                        startIcon={<LinkedInIcon sx={{color: "#0072b1"}}/>}
+                                        href="https://www.linkedin.com/in/m-arafatzaman/"
+                                    >LinkedIn</AppLink>
+                                    <AppLink 
+                                        startIcon={<TwitterIcon sx={{color: "#00acee"}}/>}
+                                        href="https://twitter.com/mdarafatzaman11"    
+                                    >Twitter</AppLink>
+                                    <AppLink 
+                                        startIcon={<FacebookIcon sx={{color: "#3b5998"}}/>}
+                                        href="https://www.facebook.com/mdarafatzaman01/"
+                                    >Facebook</AppLink>
+                                    <AppLink 
+                                        startIcon={<InstagramIcon sx={{color: "#d62976"}}/>}
+                                        href="https://www.instagram.com/mohammadarafatzaman/"
+                                    >Instagram</AppLink>
+                                    <AppLink 
+                                        startIcon={<GitHubIcon sx={{color: "#171515"}}/>}
+                                        href="https://github.com/M-ArafatZaman"
+                                    >Github</AppLink>
                                 </Box>
                             </Box>
                         </Grid>
