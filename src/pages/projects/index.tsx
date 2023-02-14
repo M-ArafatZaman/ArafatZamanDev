@@ -19,7 +19,8 @@ import {
     // Action types
     UPDATE_ITEMS,
     UPDATE_IS_LOADING,
-    DELETE_ITEMS
+    DELETE_ITEMS,
+    ERROR
 } from './reducer';
 
 /* The portfolio page */
@@ -32,6 +33,12 @@ const Portfolio: React.FC = () => {
 
         const controller = new AbortController();
         const signal = controller.signal;
+
+        // Initialize loading
+        dispatch({
+            type: UPDATE_IS_LOADING,
+            payload: {isLoading: true}
+        })
 
         // Fetch
         fetch(`${BASE}${GET_PROJECTS_ITEMS}`, {
@@ -49,7 +56,20 @@ const Portfolio: React.FC = () => {
                         items: response.items
                     }
                 })
+            } else {
+                // An error occured
+                dispatch({
+                    type: ERROR,
+                    payload: {errorMessage: "Sorry, an unknown server error occured!"}
+                })
             }
+        })
+        .catch(() => {
+            // Couldnt connect to the server
+            dispatch({
+                type: ERROR,
+                payload: {errorMessage: "Sorry, an unknown server error occured!"}
+            })
         })
         .finally(() => {
             dispatch({
