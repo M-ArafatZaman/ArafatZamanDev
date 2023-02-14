@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import Skeleton from '@mui/material/Skeleton';
 // @mui icons
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -15,6 +16,7 @@ import {BASE, VIEW_PROJECT_ITEM} from '../ENDPOINT';
 import {ViewProjectAPIResponse} from '../types';
 // Other components
 import AppCard from '../../home/components/AppCard';
+import Error from '../../../components/Error';
 // MD parser and html react parser
 import {marked} from 'marked';
 import HTMLReactParser from 'html-react-parser';
@@ -25,6 +27,7 @@ const ViewProject: React.FC = () => {
     const {slug} = useParams<{slug: string}>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [found, setFound] = useState<boolean>(false);
+    const [error, setError] = useState<{status: boolean, message: string}>({status: false, message: ""});
     const [data, setData] = useState<ViewProjectAPIResponse["item"]>();
     const [parsedContent, setParsedContent] = useState<ReturnType<typeof HTMLReactParser>>();
     const [width, setWidth] = useState<number>(window.innerWidth);
@@ -60,6 +63,7 @@ const ViewProject: React.FC = () => {
         // Initialize loading
         setIsLoading(true); 
         setFound(false);
+        setError({status: false, message: ""}); // Reset any error messages
 
         // Fetch
         fetch(`${BASE}${VIEW_PROJECT_ITEM}${slug}/`, {
@@ -72,8 +76,16 @@ const ViewProject: React.FC = () => {
             if (response.status === "OK") {
                 setData(response.item);
                 setFound(true);
+                setError({status: false, message: ""});
                 setParsedContent(HTMLReactParser(marked(response.item.content)));
+            } else {
+                // Else, NOT FOUND
+                setFound(false);
             }
+        })
+        .catch(() => {
+            // An error occured
+            setError({status: true, message: "Sorry, an unknown error occured."});
         })
         .finally(() => {
             setIsLoading(false);
@@ -86,6 +98,7 @@ const ViewProject: React.FC = () => {
             setData(undefined);
             setFound(false);
             setIsLoading(true);
+            setError({status: false, message: ""}); 
             // Abort fetch when the component is unmounted
             controller.abort();
         }
@@ -103,11 +116,25 @@ const ViewProject: React.FC = () => {
         <>
         <Grid container spacing={2} direction={width <= 900 ? "column-reverse" : "row"}>
             {
-                isLoading ? 
-                <Typography>LOADING...</Typography> :
-                !found ? 
-                <Typography><b>Not found</b></Typography> :
-
+                // Show a loader while it is loading
+                isLoading ?
+                <>
+                <Grid item xs={12} md={9}>
+                    <Skeleton variant="rounded" height={100} />
+                </Grid>
+                <Grid item xs={12} md={3}>
+                    <Skeleton variant="rounded" height={100} />
+                </Grid>  
+                </> 
+                :
+                // Else check for errors
+                error.status ? 
+                <Grid item xs={12}><Error message={error.message} /></Grid>
+                :
+                // Else check if no data is found
+                !found ?
+                <Grid item xs={12}><Error message="Not found." /></Grid>
+                :
                 // Data is found
                 <>
                 {/* Main content */}
