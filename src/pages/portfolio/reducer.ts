@@ -13,6 +13,7 @@ export interface PortfolioReducerActionType {
     payload?: Partial<PortfolioContextType>;
 }
 
+export const INITIALIZE = "INITIALIZE";
 export const UPDATE_ITEMS = "UPDATE_ITEMS";
 export const UPDATE_IS_LOADING = "UPDATE_IS_LOADING";
 export const DELETE_ITEMS = "DELETE_ITEMS";
