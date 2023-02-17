@@ -1,6 +1,6 @@
 import {lazy} from 'react';
 
-const MINIMUM_DELAY: number = 1000;
+const MINIMUM_DELAY: number = 0;
 
 interface ImportReturnType {
     default: React.ComponentType<any>;
