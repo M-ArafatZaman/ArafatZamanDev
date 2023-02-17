@@ -24,7 +24,7 @@ const GridLayer1: React.FC = () => {
         {/* The software developer container */}
         <Grid item xs={12} md={6}>
             {/* Wrap the appcard so that it fadesin from left */}
-            <ElementInViewport animation='fadeInLeft' delay={500}>
+            <ElementInViewport delay={100}>
                 <AppCard sx={{
                     padding: 4,
                     paddingY: 8

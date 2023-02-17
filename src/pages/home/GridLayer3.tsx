@@ -21,7 +21,7 @@ const GridLayer3: React.FC = () => {
         <Grid container spacing={2} paddingY={2}>
 
             <Grid item xs={12} md={4}>
-                <ElementInViewport animation="fadeInLeft" delay={500} sx={{height: "100%"}}>
+                <ElementInViewport sx={{height: "100%"}}>
                     <Box display="flex" justifyContent="center" alignItems="center" p={3} height="100%">
                         <img src={AstronautGIF} style={{objectFit: "contain", height: "250px"}} />
                     </Box>
@@ -29,7 +29,7 @@ const GridLayer3: React.FC = () => {
             </Grid>
 
             <Grid item xs={12} md={8}>
-                <ElementInViewport animation="fadeInRight" delay={500}>
+                <ElementInViewport>
                     <AppCard>
                         <Box p={2}>
                             {/* The lyrics finder */}
