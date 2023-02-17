@@ -8,10 +8,10 @@ import Divider from '@mui/material/Divider';
 // @mui icons
 import StarIcon from '@mui/icons-material/Star';
 // Grid layers
-const GridLayer1 = lazy(() => import("./GridLayer1"));
-const GridLayer2 = lazy(() => import("./GridLayer2"));
-const GridLayer3 = lazy(() => import("./GridLayer3"));
-const GridLayer4 = lazy(() => import("./GridLayer4"));
+import GridLayer1 from './GridLayer1';
+import GridLayer2 from './GridLayer2';
+import GridLayer3 from './GridLayer3';
+import GridLayer4 from './GridLayer4';
 
 const Home: React.FC = () => {
 
@@ -20,14 +20,10 @@ const Home: React.FC = () => {
 
             {/* The first grid with greetings and raspberry container */}
             <Grid container spacing={2} sx={{marginY: 0}}>
-                <Suspense fallback={<Typography>Loading...</Typography>}>
-                    <GridLayer1/>
-                </Suspense>
+                <GridLayer1/>
             
                 {/* The second container containing portfolio, projects, blogs */}
-                <Suspense fallback={<Typography>Loading...</Typography>}>
-                    <GridLayer2/>
-                </Suspense>
+                <GridLayer2/>
 
             </Grid>
 
@@ -39,14 +35,10 @@ const Home: React.FC = () => {
             </Box>
 
             {/* The third container containing the lyrics finder */}
-            <Suspense fallback={<Typography>Loading...</Typography>}>
-                <GridLayer3/>
-            </Suspense>
+            <GridLayer3/>
 
             {/* The fourth container containing the inperil application */}
-            <Suspense fallback={<Typography>Loading...</Typography>}>
-                <GridLayer4/>
-            </Suspense>
+            <GridLayer4/>
         </Container>
     )
 };

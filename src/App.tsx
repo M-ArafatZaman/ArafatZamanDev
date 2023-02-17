@@ -18,7 +18,7 @@ import P404 from './pages/404';
 import './components/Carousel/carousel.css';
 import './components/Carousel/iphone.css';
 // Page components
-const Home = LazyImport(() => import("./pages/home"));
+import Home from './pages/home';
 const Portfolio = LazyImport(() => import("./pages/portfolio"));
 const Projects = LazyImport(() => import("./pages/projects"));
 const Blog = LazyImport(() => import("./pages/blog"));
@@ -45,7 +45,7 @@ const App: React.FC = () => {
 				// Main page directories
 				{
 					path: "",
-					element: <Suspense fallback={<Loader/>}> <FadeInWrapper><Home/></FadeInWrapper> </Suspense>
+					element: <FadeInWrapper><Home/></FadeInWrapper>
 				},
 				{
 					path: "portfolio/",
