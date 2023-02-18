@@ -3,7 +3,7 @@ import React, {useContext} from 'react';
 import Grid from '@mui/material/Grid';
 import Skeleton from '@mui/material/Skeleton';
 // Components
-import PortfolioItemGrid from '../components/PortfolioItemGrid';
+import PortfolioItemGrid from './PortfolioItemGrid';
 import Error from '../../../components/Error';
 // Context
 import {PortfolioContext} from '../reducer';

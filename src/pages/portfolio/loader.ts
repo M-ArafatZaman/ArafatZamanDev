@@ -1,5 +1,5 @@
 import {BASE} from '../../config';
-import { defer, LoaderFunction, LoaderFunctionArgs} from 'react-router-dom';
+import { defer, LoaderFunctionArgs} from 'react-router-dom';
 
 // Fetch function to get portfolio items
 const GET_PORTFOLIO_ITEMS = "/projects/api/get_portfolio_items/";
