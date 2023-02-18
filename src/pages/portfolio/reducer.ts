@@ -36,6 +36,7 @@ export const PortfolioReducer = (tasks: PortfolioContextType, action: PortfolioR
                 isLoading: action.payload?.isLoading as boolean
             };
         };
+        case INITIALIZE:
         case DELETE_ITEMS: {
             return {
                 isLoading: true,
