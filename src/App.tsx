@@ -19,6 +19,7 @@ import './components/Carousel/carousel.css';
 import './components/Carousel/iphone.css';
 // Loaders
 import {GetPortfolioItemsLoader, ViewPortfolioItemLoader} from './pages/portfolio/loader';
+import {GetProjectsLoader, ViewProjectLoader} from './pages/projects/loader';
 // Page components
 import Home from './pages/home';
 const Portfolio = LazyImport(() => import("./pages/portfolio"));
@@ -68,6 +69,7 @@ const App: React.FC = () => {
 				},
 				{
 					path: "projects/",
+					loader: GetProjectsLoader,
 					element: <Suspense fallback={<Loader/>}> <FadeInWrapper><Projects/></FadeInWrapper> </Suspense>,
 					children: [
 						// Sub /projects/ paths
@@ -77,6 +79,7 @@ const App: React.FC = () => {
 						},
 						{
 							path: ":slug/",
+							loader: ViewProjectLoader,
 							element: <Suspense> <FadeInWrapper> <ViewProject/> </FadeInWrapper> </Suspense>
 						}
 					]

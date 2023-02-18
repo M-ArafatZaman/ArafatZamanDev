@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams, useLocation, useNavigate} from 'react-router-dom';
+import {useNavigate, useLoaderData} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -10,8 +10,6 @@ import Skeleton from '@mui/material/Skeleton';
 // @mui icons
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-// Endpoints
-import {BASE, VIEW_PROJECT_ITEM} from '../ENDPOINT';
 // Types
 import {ViewProjectAPIResponse} from '../types';
 // Other components
@@ -24,13 +22,20 @@ import hljs from 'highlight.js';
 
 const ViewProject: React.FC = () => {
 
-    const {slug} = useParams<{slug: string}>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [found, setFound] = useState<boolean>(false);
-    const [error, setError] = useState<{status: boolean, message: string}>({status: false, message: ""});
+    const [error, setError] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>("");
     const [data, setData] = useState<ViewProjectAPIResponse["item"]>();
     const [parsedContent, setParsedContent] = useState<ReturnType<typeof HTMLReactParser>>();
     const [width, setWidth] = useState<number>(window.innerWidth);
+    // Data api from the loader
+    const dataAPI = useLoaderData() as {response: Promise<Response>};
+
+    // Clear data whenever the component is mounted or unmounted
+    const init = () => {
+        setIsLoading(true); setError(false); setErrorMessage("");
+        setData(undefined); setParsedContent(undefined);
+    }
 
     // When the component is mounted
     // Attach an eventlistener to update the width whenever the width of the window changes
@@ -48,7 +53,6 @@ const ViewProject: React.FC = () => {
     }, []);
 
     // Router dom
-    const location = useLocation();
     const navigate = useNavigate();
 
     // Navigate to prev page
@@ -56,54 +60,37 @@ const ViewProject: React.FC = () => {
         navigate("/projects/");
     }
 
+    // Use the dataAPI from the loader to update data
     useEffect(() => {
-        const controller = new AbortController();
-        const signal = controller.signal;
-
-        // Initialize loading
-        setIsLoading(true); 
-        setFound(false);
-        setError({status: false, message: ""}); // Reset any error messages
+        // Initialize states
+        init();
 
         // Fetch
-        fetch(`${BASE}${VIEW_PROJECT_ITEM}${slug}/`, {
-            method: "GET",
-            mode: "cors",
-            signal: signal
-        })
+        dataAPI.response
         .then((response) => response.json())
         .then((response: ViewProjectAPIResponse) => {
             if (response.status === "OK") {
                 setData(response.item);
-                setFound(true);
-                setError({status: false, message: ""});
+                setError(false); setErrorMessage("");
                 setParsedContent(HTMLReactParser(marked(response.item.content)));
             } else {
                 // Else, NOT FOUND
-                setFound(false);
+                throw 404;
             }
         })
-        .catch(() => {
+        .catch((e) => {
             // An error occured
-            setError({status: true, message: "Sorry, an unknown error occured."});
+            setError(true);
+            setErrorMessage(e === 404 ? "Not found." : "Sorry, an unknown error occured.");
         })
         .finally(() => {
             setIsLoading(false);
         })
 
         // Destructor to delete all the items in context
-        return () => {
-            // Delete all items
-            setParsedContent(undefined);
-            setData(undefined);
-            setFound(false);
-            setIsLoading(true);
-            setError({status: false, message: ""}); 
-            // Abort fetch when the component is unmounted
-            controller.abort();
-        }
+        return () => init();
 
-    }, [location.pathname]);
+    }, [dataAPI]);
 
     useEffect(() => {
         // Highlight after 1000ms to ensure all code blocks is properly highlighted
@@ -128,12 +115,8 @@ const ViewProject: React.FC = () => {
                 </> 
                 :
                 // Else check for errors
-                error.status ? 
-                <Grid item xs={12}><Error message={error.message} /></Grid>
-                :
-                // Else check if no data is found
-                !found ?
-                <Grid item xs={12}><Error message="Not found." /></Grid>
+                error ? 
+                <Grid item xs={12}><Error message={errorMessage} /></Grid>
                 :
                 // Data is found
                 <>

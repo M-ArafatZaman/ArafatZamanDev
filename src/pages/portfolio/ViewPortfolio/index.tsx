@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useParams, useLoaderData} from 'react-router-dom';
+import {useLoaderData} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
