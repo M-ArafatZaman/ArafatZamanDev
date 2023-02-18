@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLoaderData } from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -16,8 +16,6 @@ import ArafatTag from '../components/ArafatTag';
 import Suggestions from './Suggestions';
 import Error from '../../../components/Error';
 import SkeletonLoader from './SkeletonLoader';
-// Endpoints and types
-import {BASE, READ_BLOG} from '../ENDPOINT';
 import {ReadBlogsAPIResponse, BlogItem} from '../types';
 // MD parser, HTML Parser and highlighter
 import {marked} from 'marked';
@@ -29,58 +27,53 @@ import ImageExtension from './MDImageRenderer';
 marked.use(ImageExtension);
 
 const ViewBlog: React.FC = () => {
-    const {slug} = useParams<{slug: string;}>();
-    const [data, setData] = useState<BlogItem>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [found, setFound] = useState<boolean>(false);
-    const [error, setError] = useState<{status: boolean, message: string}>({status: false, message: ""});
+    const [error, setError] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>("");
+    const [data, setData] = useState<BlogItem>();
     const [parsedContent, setParsedContent] = useState<JSX.Element | JSX.Element[] | string>();
+    // DataAPI from the loader
+    const dataAPI = useLoaderData() as {response: Promise<Response>};
     // Navigator
     const navigate = useNavigate();
-    const location = useLocation();
+
+    // Clear state data
+    const clearStates = () => {
+        setIsLoading(true); setError(false); setErrorMessage("");
+        setData(undefined); setParsedContent(undefined);  
+    };
 
     // Fetch data whenever the location changes
     useEffect(() => {
-        // Abort controller
-        const controller: AbortController = new AbortController();
-        const signal: AbortSignal = controller.signal;
-
         // Initialize states
-        setFound(false);
-        setIsLoading(true);
-        setError({status: false, message: ""})
+        clearStates();
+
         // Fetch data
-        fetch(`${BASE}${READ_BLOG}${slug}/`, {
-            method: "GET",
-            mode: "cors",
-            signal: signal
-        })
+        dataAPI.response
         .then((resp) => resp.json())
         .then((resp: ReadBlogsAPIResponse) => {
             if (resp.status === "OK" && typeof resp.payload !== "undefined") {
                 setData(resp.payload);
-                setFound(true);
+                setError(false);
                 setParsedContent(HTMLReactParser(marked.parse(resp.payload.content)));
+            } else {
+                // Else an error occured
+                throw 404;
             }
-            // Turn off any errors
-            setError({status: false, message: ""}); 
-            // Else not found
+            
         })
-        .catch((err) => {
+        .catch((e) => {
             // Set errors
-            setError({status: true, message: "Sorry, an uncaught server error occured."});
+            setError(true);
+            setErrorMessage(e === 404 ? "Not found." : "Sorry, an unknown error occured.")
         })
         .finally(() => {
             setIsLoading(false);
         });
 
         // Destructor / on unmount
-        return () => {
-            setParsedContent(undefined);
-            setData(undefined);
-            controller.abort();
-        }
-    }, [location.pathname]);
+        return () => clearStates();
+    }, [dataAPI]);
 
     // Highlight once parsed content is loading
     useEffect(() => {
@@ -95,13 +88,8 @@ const ViewBlog: React.FC = () => {
                     isLoading ? <SkeletonLoader/> :
                     
                     // Else check for erros
-                    error.status ?
-                    <Error message={error.message} />
-                    :
-
-                    // Else check if blog is found or not found
-                    !found ? 
-                    <Error message="404 - No blogs found." />
+                    error ?
+                    <Error message={errorMessage} />
                     :
                     // All data is sccurate
                     <>

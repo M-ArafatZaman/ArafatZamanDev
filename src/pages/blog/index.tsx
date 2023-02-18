@@ -1,5 +1,5 @@
 import React, {useEffect, useReducer} from 'react';
-import {Outlet} from 'react-router-dom';
+import {Outlet, useLoaderData} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -9,8 +9,6 @@ import Divider from '@mui/material/Divider';
 import FeedIcon from '@mui/icons-material/Feed';
 // Blog types
 import {GetBlogsAPIResponse} from './types';
-// Endpoints
-import {BASE, GET_BLOGS} from './ENDPOINT';
 // Context
 import {
     BlogsContext,
@@ -24,27 +22,23 @@ import {
     ERROR
 } from './reducer';
 
-
 /* The Blog page */
 const BlogItems: React.FC = () => {
 
     const [pContext, dispatch] = useReducer(BlogsReducer, BLOGS_INITIAL_STATE);
+    // dataAPI from the loader
+    const dataAPI = useLoaderData() as {response: Promise<Response>};
+
+    // Clear reducer state when the component is mounted and unmounted
+    useEffect(() => {
+        dispatch({type: INITIALIZE});
+        return () => dispatch({type: DELETE_DATA});
+    }, [])
 
     // Fetch data from API endpoint
     useEffect(() => {
-        // Abort controller
-        const controller: AbortController = new AbortController();
-        const signal: AbortSignal = controller.signal;
-
-        // Dispatch an initialize request
-        dispatch({type: INITIALIZE});
-
         // Fetch
-        fetch(`${BASE}${GET_BLOGS}`, {
-            method: "GET",
-            mode: "cors",
-            signal: signal
-        })
+        dataAPI.response
         .then((response) => response.json())
         .then((response: GetBlogsAPIResponse) => {
             if (response.status === "OK") {
@@ -57,7 +51,7 @@ const BlogItems: React.FC = () => {
                 })
             } else {
                 // An error occured while getting blogs
-                dispatch({ type: ERROR, payload: {errorMessage: "Sorry, an uncaught server error occured."}});
+                throw 400;
             }
         })
         .catch(() => {
@@ -71,14 +65,8 @@ const BlogItems: React.FC = () => {
                     isLoading: false
                 }
             })
-        })
-
-        // A destructor to empty the context for optimization
-        return () => {
-            dispatch({ type: DELETE_DATA })
-            controller.abort();
-        }
-    }, []);
+        });
+    }, [dataAPI]);
     
     return (
         <Container sx={{py: 2}}>
