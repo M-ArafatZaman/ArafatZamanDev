@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useLoaderData} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -16,7 +16,6 @@ import AppCard from '../../home/components/AppCard';
 import Error from '../../../components/Error';
 // Types
 import {ViewPortfolioItemAPIResponse, PortfolioItem} from '../types';
-import {BASE, VIEW_PORTFOLIO_ITEMS} from '../ENDPOINT';
 // Carousel component
 import {replaceContentWithCarousel, replaceContentWithIphone} from '../../../components/Carousel';
 // Navbar
@@ -28,34 +27,39 @@ from the server and renders it.
 It is a page component. It receives the slug parameter from the browserrouter API.
 */
 const ViewPortfolio: React.FC = () => {
-    const params = useParams<{slug: string}>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [data, setData] = useState<PortfolioItem>();
-    const [found, setFound] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>("Not found");
     const [parsedContent, setParsedContent] = useState<JSX.Element | JSX.Element[] | string>();
     const [parsedJavascript, setParsedJavascript] = useState<string[]>([]);
+    // The data fetched from API
+    const dataAPI = useLoaderData() as {response: Promise<Response>};
+    
+    // Function to initialize and delete all state data
+    const init = () => {
+        setIsLoading(true); setData(undefined); setError(false); setErrorMessage("");
+        setParsedContent(undefined); setParsedJavascript([]);
+    };
 
+    // On component mount and unmount, clear the data
     useEffect(() => {
-        // Abort controller
-        const controller: AbortController = new AbortController();
-        const signal: AbortSignal = controller.signal;
+        init();
+        return () => init();  
+    }, [])
 
-        // Initialize loading
-        setFound(false);
-        setIsLoading(true);
-        // Fetch the data
-        fetch(`${BASE}${VIEW_PORTFOLIO_ITEMS}${params.slug}/`, {
-            method: "GET",
-            mode: "cors",
-            signal: signal
-        })
+    // Using the data fetched from the loader
+    useEffect(() => {
+        // Initialize first
+        init();
+        // Work with data
+        dataAPI.response
         .then((response) => response.json())
         .then((response: ViewPortfolioItemAPIResponse) => {
             if (response.status == "OK") {
                 // Found item
                 setData(response.payload);
-                setFound(true);
+                setError(false);
                 // Parse content and replace with carousel
                 const contentMD = marked.parse(response.payload.content);
                 const ReplacedContent1 = replaceContentWithCarousel(contentMD);
@@ -66,12 +70,12 @@ const ViewPortfolio: React.FC = () => {
                 setParsedJavascript(() => [...ReplacedContent1.js, ...ReplacedContentFinal.js])
             } else {
                 // Else not found. found state is false by default
-                setFound(false);
-                setErrorMessage("Not found.");
+                throw 404;
             }
         })
-        .catch(() => {
-            setErrorMessage("Sorry, an unknown server error occured!")
+        .catch((e) => {
+            // An error occured
+            setErrorMessage(e === 404 ? "Not found." : "Sorry, an unknown server error occured!");
         })
         .finally(() => {
             setIsLoading(false);
@@ -79,12 +83,9 @@ const ViewPortfolio: React.FC = () => {
 
         // Destuctor / onUnmount
         return () => {
-            setParsedContent(undefined);
-            setParsedJavascript([]);
-            setData(undefined);
-            controller.abort();
+            init();
         }
-    }, [params]);
+    }, [dataAPI]);
 
     // After content has been parsed
     useEffect(() => {
@@ -117,8 +118,8 @@ const ViewPortfolio: React.FC = () => {
                 </>       
                 :
                 
-                // If nothing is found, show an error
-                !found ? 
+                // If there is an error, show an error
+                error ? 
                 <Grid item xs={12}><Error message={errorMessage} /></Grid>
                 :
                 

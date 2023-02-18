@@ -1,10 +1,7 @@
 import React, {useContext} from 'react';
 // @mui components
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 // Components
 import PortfolioItemGrid from '../components/PortfolioItemGrid';
 import Error from '../../../components/Error';

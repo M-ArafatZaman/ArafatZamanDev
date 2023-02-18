@@ -9,8 +9,6 @@ import Divider from '@mui/material/Divider';
 import WorkIcon from '@mui/icons-material/Work';
 // @types
 import {PortfolioAPIResponse} from './types';
-// Endpoints
-import {BASE, GET_PORTFOLIO_ITEMS} from './ENDPOINT';
 // Portfolio Context
 import { 
     PortfolioContext,
