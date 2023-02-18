@@ -14,9 +14,13 @@ import {FadeInWrapper, LazyImport} from './utils';
 import Root from './layout';
 import Loader from './layout/loader';
 import P404 from './pages/404';
+// Some other components
+import Error from './components/Error';
 // Import carousel and iPhone carousel
 import './components/Carousel/carousel.css';
 import './components/Carousel/iphone.css';
+// Loaders
+import {GetPortfolioItems as GetPortfolioItemsLoader} from './pages/portfolio/loader';
 // Page components
 import Home from './pages/home';
 const Portfolio = LazyImport(() => import("./pages/portfolio"));
@@ -49,6 +53,7 @@ const App: React.FC = () => {
 				},
 				{
 					path: "portfolio/",
+					loader: GetPortfolioItemsLoader,
 					element: <Suspense fallback={<Loader/>}> <FadeInWrapper><Portfolio/></FadeInWrapper> </Suspense>,
 					children: [
 						// Sub /portfolio/ paths

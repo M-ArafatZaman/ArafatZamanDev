@@ -1,5 +1,5 @@
 import React, {useEffect, useReducer} from 'react';
-import {Outlet} from 'react-router-dom';
+import {Outlet, useLoaderData} from 'react-router-dom';
 // @mui components
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -28,61 +28,42 @@ import {
 const Portfolio: React.FC = () => {
 
     const [pContext, dispatch] = useReducer(PortfolioReducer, PORTFOLIO_INITIAL_STATE);
+    const data = useLoaderData() as {response: Promise<Response>};
+
+    // Initialize when the component is mounted and delete when the component is unmounted
+    useEffect(() => {
+        dispatch({type: INITIALIZE});
+        return () => {
+            dispatch({type: DELETE_ITEMS});
+        }
+    }, [])
 
     // Fetch data from API endpoint
     useEffect(() => {
-
-        const controller = new AbortController();
-        const signal = controller.signal;
-
-        // Initialize loading
-        dispatch({type: INITIALIZE});
-
-        // Fetch
-        fetch(`${BASE}${GET_PORTFOLIO_ITEMS}`, {
-            method: "GET",
-            mode: "cors",
-            signal: signal
-        })
-        .then((response) => response.json())
-        .then((response: PortfolioAPIResponse) => {
-            if (response.status === "OK") {
-                //setItems(response.items);
+        data.response
+        .then((resp) => resp.json())
+        .then((resp: PortfolioAPIResponse) => {
+            if (resp.status === "OK") {
+                // Received all items successfully
                 dispatch({
                     type: UPDATE_ITEMS,
-                    payload: {
-                        items: response.items
-                    }
+                    payload: {items: resp.items}
                 })
             } else {
-                // An error occured
-                dispatch({type: ERROR, payload: {errorMessage: "Sorry, an uncaught server error occured!"}});
+                throw "Unexpected response";
             }
         })
         .catch(() => {
-            // Handle the error
-            dispatch({type: ERROR, payload: {errorMessage: "Sorry, unable to connect to the server."}})
+            // An error occured
+            dispatch({
+                type: ERROR,
+                payload: {errorMessage: "Sorry, an unknown error occured."}
+            })
         })
         .finally(() => {
-            dispatch({
-                type: UPDATE_IS_LOADING,
-                payload: {
-                    isLoading: false
-                }
-            })
+            dispatch({type: UPDATE_IS_LOADING, payload: {isLoading: false}});
         })
-
-        // Destructor to delete all the items in context
-        return () => {
-            dispatch({
-                type: DELETE_ITEMS,
-                payload: {}
-            })
-            // Abort fetch when the component is unmounted
-            controller.abort();
-        }
-
-    }, []);
+    }, [data]);
     
     return (
         <Container sx={{py: 2}}>
