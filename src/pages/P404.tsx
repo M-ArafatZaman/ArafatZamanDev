@@ -3,8 +3,7 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import useTheme from '@mui/material/styles/useTheme';
-
+import {useTheme} from '@mui/material/styles';
 
 const P404: React.FC = () => {
     const APP_THEME = useTheme();

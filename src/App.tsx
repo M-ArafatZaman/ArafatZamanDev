@@ -13,7 +13,7 @@ import {FadeInWrapper, LazyImport} from './utils';
 // Main index and loader
 import Root from './layout';
 import Loader from './layout/loader';
-import P404 from './pages/404';
+import P404 from './pages/P404';
 // Import carousel and iPhone carousel
 import './components/Carousel/carousel.css';
 import './components/Carousel/iphone.css';
