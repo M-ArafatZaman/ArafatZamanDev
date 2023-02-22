@@ -10,7 +10,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import DescriptionIcon from '@mui/icons-material/Description';
 // Other components
 import AppCard from './components/AppCard';
-import RaspberryPI from './raspberry';
+// import RaspberryPI from './raspberry';
 import TypewriterGreetings from './components/TypewriterGreetings';
 // SVGs
 import backdropSVG from './media/backdrop.png';
@@ -70,7 +70,7 @@ const GridLayer1: React.FC = () => {
         <Grid item xs={12} md={6}>
             <Box display="flex" flexDirection="column" sx={{height: "100%", width: "100%"}}>  
                 <Box flexGrow={1}>
-                    <RaspberryPI/>
+                    {/* <RaspberryPI/> */}
                 </Box>
                 
                 {/* Raspberry PI tag */}
