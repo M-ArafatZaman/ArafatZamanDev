@@ -9,6 +9,7 @@
     "@lottiefiles/react-lottie-player": "^3.5.0",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.2",
+    "@react-three/fiber": "^8.11.2",
     "@reduxjs/toolkit": "^1.9.1",
     "animate.css": "^4.1.1",
     "highlight.js": "^11.7.0",
