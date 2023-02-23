@@ -39,20 +39,15 @@ const GridLayer3: React.FC = () => {
                             </Box>
 
                             <Divider sx={{my: 1}}/>
-                            <Typography sx={{mb: 1}}>
-                                LyricsFinder is an online web application that users can use to search their playlist for songs that match specific lyrics.
-                            </Typography>
-                            <Typography sx={{mb: 1}}>
-                                It utilizes the <LinkIcon href="https://developer.spotify.com/documentation/web-api/" target="_blank" icon={<LaunchIcon fontSize="small"/>}>Spotify Developer's API</LinkIcon> and <LinkIcon href="https://docs.genius.com/" target="_blank" icon={<LaunchIcon fontSize="small" />}>Genius API</LinkIcon> to iteratively search songs for their respective lyrics.
-                            </Typography>
-                            <Typography sx={{mb: 1}}>
-                                Firstly, it uses the Genius API's search endpoint to search for lyrics. It then goes through all the results and ranks them based on how likely it is that the lyrics retrieved is actually the song.
-                            </Typography>
+
                             <Typography>
-                                After the lyrics has been retrieved, the server returns the results following REST API protocols. The frontend client uses the results and renders them accordingly.
-                            </Typography>
-                            <Typography>
-                                You can check out the project <LinkIcon href="https://lyrics-finder-02nb.onrender.com/" target="_blank" icon={<LaunchIcon fontSize="small"/>}>here</LinkIcon>.
+                                LyricsFinder is a web application that I created to empower users to search their playlists for specific song lyrics with ease and precision.
+                                <br/><br/>
+                                Built on a foundation of cutting-edge technology, LyricsFinder leverages the <LinkIcon href="https://developer.spotify.com/documentation/web-api/" target="_blank" icon={<LaunchIcon fontSize="small"/>}>Spotify Developer's API</LinkIcon> and <LinkIcon href="https://docs.genius.com/" target="_blank" icon={<LaunchIcon fontSize="small" />}>Genius API</LinkIcon> to iteratively search songs for their respective lyrics, providing users with accurate and relevant results.
+                                <br/><br/>
+                                Through a meticulously designed workflow, LyricsFinder utilizes the Genius API's search endpoint to search for lyrics and then ranks the results based on their likelihood of being a match for the requested song. The server then returns the results in accordance with REST API protocols, which are used by the frontend client to render the results in a visually appealing and intuitive manner.
+                                <br/><br/>
+                                LyricsFinder is a testament to my passion for leveraging the latest technology to build innovative and user-centric web applications. I invite you to explore the project <LinkIcon href="https://lyrics-finder-02nb.onrender.com/" target="_blank" icon={<LaunchIcon fontSize="small"/>}>here</LinkIcon> and see for yourself how it can enhance your music listening experience.
                             </Typography>
                         </Box>
                     </AppCard>
