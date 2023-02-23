@@ -48,17 +48,15 @@ const GridLayer4: React.FC = () => {
                             </Box>
 
                             <Divider sx={{my: 1}}/>
-                            <Typography sx={{mb: 1}}>
-                                InPeril is a mobile application which helps to track users when they are in danger and relays their live-location to their emergency contact(s).
-                            </Typography>
-                            <Typography sx={{mb: 1}}>
-                                It is made using React-Native, nativebase (design library), Redux, Firebase and more React Native libraries.
-                            </Typography>
-                            <Typography sx={{mb: 1}}>
-                                This was my first <b>fully-fledged</b> React-Native project that utilizes core ReactNative features for implementing mobile rich features and application.
-                            </Typography>
-                            <Typography sx={{mb: 1}}>
-                                You can download it on Android <LinkIcon href="https://play.google.com/store/apps/details?id=com.inperil" target="_blank" icon={<LaunchIcon fontSize="small"/>}>here</LinkIcon>.
+
+                            <Typography>
+                                InPeril is a powerful and innovative mobile application designed to provide users with enhanced safety and security measures.
+                                <br/><br/>
+                                Utilizing the latest technologies, including <b>React-Native</b>, nativebase design library, Redux, Firebase, and several other cutting-edge React Native libraries, InPeril seamlessly integrates robust mobile features, including <b>live-location tracking</b>, emergency contact alerts, and an intuitive UI/UX design.
+                                <br/><br/>
+                                I'm particularly proud of this project, as it represents a significant milestone in my journey as a mobile application developer. Through InPeril, I've been able to showcase my ability to craft sophisticated and powerful applications that meet the needs and expectations of modern users.
+                                <br/><br/>
+                                Whether you're an avid traveler, outdoor enthusiast, or simply seeking an added layer of security in your daily life, InPeril offers a powerful and reliable solution that empowers you to navigate the world with confidence. Download it now on <LinkIcon href="https://play.google.com/store/apps/details?id=com.inperil" target="_blank" icon={<LaunchIcon fontSize="small"/>}>AndroidOS</LinkIcon> and experience the power of InPeril for yourself.
                             </Typography>
                         </Box>
                     </AppCard>
