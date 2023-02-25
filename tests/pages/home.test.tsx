@@ -5,25 +5,25 @@ import {render, screen, waitFor} from '@testing-library/react';
 import Home from '../../src/pages/home';
 
 
-test("The home page renders correctly", () => {
-    render(
+test("The home page renders correctly", async () => {
+    const {findByText, getByText} = render(
         <BrowserRouter>
             <Home/>
         </BrowserRouter>
     );
-    
+
     // The "VISIT" button for the portfolio sections are rendered correctly
-    waitFor(() => {
-        expect(screen.findByText("VISIT")).toBeTruthy();
-    })
+    await waitFor(() => {
+        return expect(findByText("VISIT")).toBeTruthy();
+    });
 
     // Expect InPeril title to be rendered
-    waitFor(() => {
-        expect(screen.getByText("InPeril")).toBeTruthy();
+    await waitFor(() => {
+        return expect(getByText("InPeril")).toBeTruthy();
     })
 
     // Expect LyricsFinder title to be rendered
-    waitFor(() => {
-        expect(screen.getByText("LyricsFinder")).toBeTruthy();
+    await waitFor(() => {
+        return expect(getByText("LyricsFinder")).toBeTruthy();
     })
 })
