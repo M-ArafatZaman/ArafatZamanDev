@@ -2,7 +2,7 @@ import React from 'react';
 // @mui components
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import useTheme from '@mui/material/styles/useTheme';
+import { useTheme } from '@mui/material/styles';
 
 interface ErrorProps {
     message?: string;

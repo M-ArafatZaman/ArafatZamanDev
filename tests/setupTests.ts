@@ -11,7 +11,7 @@ afterAll(() => {
 });
 
 // Mock the raspberry pi component
-jest.mock("./pages/home/raspberry", () => {
+jest.mock("../src/pages/home/raspberry", () => {
     const Fn: React.FC = () => {
         return React.createElement("span");
     };

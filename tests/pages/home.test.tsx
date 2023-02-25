@@ -1,9 +1,7 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
-import "jest-canvas-mock";
-import {render, screen, waitFor} from '@testing-library/react';
+import {render, waitFor} from '@testing-library/react';
 import Home from '../../src/pages/home';
-
 
 test("The home page renders correctly", async () => {
     const {findByText, getByText} = render(
