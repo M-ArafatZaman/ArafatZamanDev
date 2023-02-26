@@ -41,13 +41,12 @@ const Portfolio: React.FC = () => {
         data.response
         .then((resp) => resp.json())
         .then((resp: PortfolioAPIResponse) => {
-            console.log(resp);
             if (resp.status === "OK") {
                 // Received all items successfully
                 dispatch({
                     type: UPDATE_ITEMS,
                     payload: {items: resp.items}
-                })
+                });
             } else {
                 throw "Unexpected response";
             }

@@ -1,25 +1,14 @@
 import React from 'react';
-import fetchMock from 'jest-fetch-mock';
 import {render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../../src/App';
-import {setupServer} from 'msw/node';
-import MockPortfolioHandlers, {MockErrorHandlers} from '../mocks/portfolioHandler';
+import {server} from '../setupTests';
+import {MockPortfolioErrorHandlers} from '../mocks';
 
-const successServer = setupServer(...MockPortfolioHandlers);
 // Test runner for success cases
-describe("Portfolio page app test - Success", () => {
-    beforeAll(() => {
-        fetchMock.enableMocks();
-        fetchMock.dontMock();
-        successServer.listen();
-    });
-    afterAll(() => {
-        successServer.resetHandlers();
-        successServer.close();
-    })
+describe("Success Tests", () => {
 
-    it("List all portfolio item - Success", async () => {
+    it("List all portfolio item", async () => {
         // Check if all items are rendered properly
         const { getByText } = render(
             <App/>
@@ -28,21 +17,18 @@ describe("Portfolio page app test - Success", () => {
         // Go to the portfolio page
         await user.click(getByText("PORTFOLIO"));
 
-//        await waitFor(() => expect(getByText("Error")).toBeFalsy());
         await waitFor(() => expect(getByText("Portfolio Item 1")).toBeTruthy());
-    }, 3000)
+    });
 });
 
-const errorServer = setupServer(...MockErrorHandlers);
+
 // Test runner
-describe("Portfolio page app test - Errors", () => {
-    beforeAll(() => {
-        fetchMock.enableMocks();
-        fetchMock.dontMock();
-        errorServer.listen();
-    });
+describe("Error Tests", () => {
     
-    it("List all portfolio items - Error", async () => {
+    it("List all portfolio items", async () => {
+        // @override to add the error handlers
+        server.use(...MockPortfolioErrorHandlers);
+
         // Check if all items are rendered properly
         const { getByText } = render(
             <App/>
@@ -53,9 +39,4 @@ describe("Portfolio page app test - Errors", () => {
         
         await waitFor(() => expect(getByText("Error")).toBeTruthy());
     });
-
-    afterAll(() => {
-        errorServer.resetHandlers();
-        errorServer.close();
-    })
 });

@@ -12,12 +12,12 @@ const MockPortfolioHandlers = [
     rest.get(GET_PORTFOLIO_ENDPOINT, (req, res, ctx) => {
 
         const response: PortfolioAPIResponse = {
-            status: "200",
+            status: "OK",
             items: [
                 {
                     name: "Portfolio Item 1",
                     short_description: "Description",
-                    imageURL: "NULL",
+                    imageURL: "https://arafatzaman.dev/logo.png",
                     slug: "portfolio-item-1",
                     tags: ["tag1"]
                 }
@@ -35,7 +35,12 @@ const MockPortfolioHandlers = [
 const MockErrorHandlers = [
     // All portfolio items
     rest.get(GET_PORTFOLIO_ENDPOINT, (req, res, ctx) => {
-        return res(ctx.status(404))
+        return res.once(
+            ctx.status(404),
+            ctx.json({
+                status: "404",
+            })
+        )
     })
 ]
 

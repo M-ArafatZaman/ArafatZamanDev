@@ -5,10 +5,26 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import "jest-canvas-mock";
+import fetchMock from 'jest-fetch-mock';
+import {MockPortfolioHandler} from './mocks';
+import {setupServer} from 'msw/node';
 window.scrollTo = jest.fn();
+
+export const server = setupServer(...MockPortfolioHandler);
+
+beforeAll(() => {
+    fetchMock.enableMocks();
+    fetchMock.dontMock();
+    server.listen();
+});
+
+afterEach(() => {
+    server.resetHandlers();
+});
 
 afterAll(() => {
     jest.clearAllMocks();
+    server.close();
 });
 
 // Mock the raspberry pi component
