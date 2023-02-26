@@ -41,6 +41,7 @@ const Portfolio: React.FC = () => {
         data.response
         .then((resp) => resp.json())
         .then((resp: PortfolioAPIResponse) => {
+            console.log(resp);
             if (resp.status === "OK") {
                 // Received all items successfully
                 dispatch({
