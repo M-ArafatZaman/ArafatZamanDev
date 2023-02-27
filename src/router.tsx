@@ -1,5 +1,5 @@
 import React, {Suspense} from 'react';
-import {createBrowserRouter} from 'react-router-dom';
+import {createBrowserRouter, RouteObject} from 'react-router-dom';
 import {LazyImport, FadeInWrapper} from './utils';
 // Main index, loader, and error page;
 import Root from './layout';
@@ -26,8 +26,7 @@ const ViewBlog = LazyImport(() => import("./pages/blog/ViewBlog"));
 const ProjectItems = LazyImport(() => import("./pages/projects/ProjectItems"));
 const ViewProject = LazyImport(() => import("./pages/projects/ViewProject"));
 
-
-const Router = createBrowserRouter([
+export const ROUTES: RouteObject[] = [
     {
         path: "/",
         element: <Root/>,
@@ -100,6 +99,8 @@ const Router = createBrowserRouter([
             }
         ]
     }
-]);
+]
+
+const Router = createBrowserRouter(ROUTES);
 
 export default Router;
