@@ -8,7 +8,13 @@ import "jest-canvas-mock";
 import fetchMock from 'jest-fetch-mock';
 import {MockPortfolioHandler} from './mocks';
 import {setupServer} from 'msw/node';
+import {TextEncoder, TextDecoder} from 'util';
 window.scrollTo = jest.fn();
+
+type A = typeof window.TextDecoder;
+// Add text encoders and decoders polyfill
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder as A;
 
 export const server = setupServer(...MockPortfolioHandler);
 
@@ -20,6 +26,7 @@ beforeAll(() => {
 
 afterEach(() => {
     server.resetHandlers();
+    server.restoreHandlers();
 });
 
 afterAll(() => {

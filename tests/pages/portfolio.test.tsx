@@ -1,7 +1,7 @@
 import React from 'react';
-import {render, screen, waitFor} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import App from '../../src/App';
+import {render, screen, waitFor, waitForElementToBeRemoved} from '@testing-library/react';
+import {createMemoryRouter, RouterProvider} from 'react-router-dom';
+import {ROUTES} from '../../src/router';
 import {server} from '../setupTests';
 import {MockPortfolioErrorHandlers} from '../mocks';
 
@@ -9,16 +9,31 @@ import {MockPortfolioErrorHandlers} from '../mocks';
 describe("Success Tests", () => {
 
     it("List all portfolio item", async () => {
-        // Check if all items are rendered properly
-        const { getByText } = render(
-            <App/>
-        );
-        const user = userEvent.setup();
-        // Go to the portfolio page
-        await user.click(getByText("PORTFOLIO"));
+        // Create the router
+        const router = createMemoryRouter(ROUTES, {
+            initialEntries: ["/portfolio/"],
+            initialIndex: 0
+        });
 
-        await waitFor(() => expect(getByText("Portfolio Item 1")).toBeTruthy());
+        // Check if all items are rendered properly
+        const { getByText } = render( <RouterProvider router={router} /> );
+        
+        // Wait until the lottie is loaded
+        await waitFor(() => expect(document.getElementById("lottie")).toBeTruthy());
+        // Now wait again until the lottie is removed
+        await waitForElementToBeRemoved(document.getElementById("lottie"));
+        // NOW we check if portfolio item 1 exists
+        await waitFor(() => getByText("Portfolio Item 1"));
     });
+
+
+    // it("Views portfolio item", async () => {
+    //     // Check if a portfolio is being viewed correctly
+    //     // Render the app
+    //     const {getByText, getByRole} = render(<App/>);
+
+
+    // })
 });
 
 
@@ -29,13 +44,14 @@ describe("Error Tests", () => {
         // @override to add the error handlers
         server.use(...MockPortfolioErrorHandlers);
 
+        // Create the router
+        const router = createMemoryRouter(ROUTES, {
+            initialEntries: ["/portfolio/"],
+            initialIndex: 0
+        });
+
         // Check if all items are rendered properly
-        const { getByText } = render(
-            <App/>
-        );
-        const user = userEvent.setup();
-        // Go to the portfolio page
-        await user.click(getByText("PORTFOLIO"));
+        const { getByText } = render( <RouterProvider router={router} /> );
         
         await waitFor(() => expect(getByText("Error")).toBeTruthy());
     });
