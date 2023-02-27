@@ -75,6 +75,7 @@ const ViewPortfolio: React.FC = () => {
         })
         .catch((e) => {
             // An error occured
+            setError(true);
             setErrorMessage(e === 404 ? "Not found." : "Sorry, an unknown server error occured!");
         })
         .finally(() => {
