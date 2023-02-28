@@ -141,7 +141,7 @@ const ViewPortfolio: React.FC = () => {
                                 <Divider sx={{my: 2}}/>
 
                                 {/* Content */}
-                                <Typography sx={{
+                                <Typography component="div" sx={{
                                     "& img": {
                                         width: "100%",
                                         objectFit: "contain"

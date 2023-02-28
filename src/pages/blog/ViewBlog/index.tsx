@@ -109,7 +109,7 @@ const ViewBlog: React.FC = () => {
                         <Divider sx={{my: 1}}  />
 
                         {/* Content */}
-                        <Typography sx={{
+                        <Typography component="div" sx={{
                             "& img": {
                                 maxHeight: "70vh",
                                 maxWidth: "100%",

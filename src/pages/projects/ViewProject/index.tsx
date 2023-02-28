@@ -131,9 +131,9 @@ const ViewProject: React.FC = () => {
                         <Divider sx={{my: 1}} />
 
                         {/* Content */}
-                        <Box p={1}>
+                        <Typography component="div" p={1}>
                             {parsedContent}
-                        </Box>
+                        </Typography>
 
                         <Divider sx={{my: 1}} />
                         <Box>
