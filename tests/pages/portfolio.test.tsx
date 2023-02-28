@@ -60,4 +60,17 @@ describe("Error Tests", () => {
         
         await waitFor(() => expect(getByText("Error")).toBeTruthy());
     });
+
+    it("View portfolio item", async () => {
+        // Create the router
+        const router = createMemoryRouter(ROUTES, {
+            initialEntries: ["/portfolio/does-not-exist/"],
+            initialIndex: 0
+        });
+
+        // Check if there is an error
+        const { getByText } = render( <RouterProvider router={router} /> );
+        
+        await waitFor(() => expect(getByText("Error")).toBeInTheDocument());
+    })
 });
