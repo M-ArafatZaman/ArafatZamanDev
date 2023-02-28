@@ -2,7 +2,7 @@ import {BASE} from '../../config';
 import { defer, LoaderFunctionArgs } from 'react-router-dom';
 
 // Fetch function to get portfolio items
-const GET_PROJECTS_ITEMS = "/projects/api/get_projects/";
+export const GET_PROJECTS_ITEMS = "projects/api/get_projects/";
 export const GetProjectsLoader = async ({request}: LoaderFunctionArgs) => {
     const response: Promise<Response> = fetch(`${BASE}${GET_PROJECTS_ITEMS}`, {
         method: "GET",
@@ -14,7 +14,7 @@ export const GetProjectsLoader = async ({request}: LoaderFunctionArgs) => {
 };
 
 // Fetch function to view an individual portfolio item
-const VIEW_PROJECT_ITEM = "/projects/api/view_project/";
+export const VIEW_PROJECT_ITEM = "projects/api/view_project/";
 interface LoaderArgsWithSlugParam extends LoaderFunctionArgs {
     params: {
         slug?: string
