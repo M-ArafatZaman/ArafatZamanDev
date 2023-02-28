@@ -46,7 +46,7 @@ const MockPortfolioHandlers = [
                 payload: {
                     name: "Portfolio Item 1",
                     short_description: "Description",
-                    content: "This is a great portfolio",
+                    content: "This is the content of Portfolio Item 1",
                     imageURL: "[LINK]",
                     slug: "portfolio-item-1",
                     tags: ["tag1"]

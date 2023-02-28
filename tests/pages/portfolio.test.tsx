@@ -33,11 +33,10 @@ describe("Success Tests", () => {
             initialEntries: ["/portfolio/portfolio-item-1/"],
             initialIndex: 0
         });
-
-        // Check if all items are rendered properly
-        const { findAllByText } = render( <RouterProvider router={router} /> );
-
-        await waitFor(() => findAllByText("Portfolio Item 1"), {timeout: 1500});
+        // Render the app
+        const { getByText } = render( <RouterProvider router={router} /> );
+        // Checkk if content is rendered properly
+        await waitFor(() => expect(getByText("This is the content of Portfolio Item 1")).toBeInTheDocument());
     })
 });
 
@@ -48,29 +47,24 @@ describe("Error Tests", () => {
     it("List all portfolio items", async () => {
         // @override to add the error handlers
         server.use(...MockPortfolioErrorHandlers);
-
-        // Create the router
+        // Create the router and render the app
         const router = createMemoryRouter(ROUTES, {
             initialEntries: ["/portfolio/"],
             initialIndex: 0
         });
-
-        // Check if there is an error
         const { getByText } = render( <RouterProvider router={router} /> );
-        
-        await waitFor(() => expect(getByText("Error")).toBeTruthy());
+        // Check if an error is in the document
+        await waitFor(() => expect(getByText("Error")).toBeInTheDocument());
     });
 
     it("View portfolio item", async () => {
-        // Create the router
+        // Create the router and render the app
         const router = createMemoryRouter(ROUTES, {
             initialEntries: ["/portfolio/does-not-exist/"],
             initialIndex: 0
         });
-
-        // Check if there is an error
         const { getByText } = render( <RouterProvider router={router} /> );
-        
+        // Check if an error is in the document
         await waitFor(() => expect(getByText("Error")).toBeInTheDocument());
     })
 });
