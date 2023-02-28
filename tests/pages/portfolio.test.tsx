@@ -9,21 +9,18 @@ import {MockPortfolioErrorHandlers} from '../mocks';
 describe("Success Tests", () => {
 
     it("List all portfolio item", async () => {
-        // Create the router
+        // Create the router and render the app
         const router = createMemoryRouter(ROUTES, {
             initialEntries: ["/portfolio/"],
             initialIndex: 0
         });
-
-        // Check if all items are rendered properly
         const { getByText } = render( <RouterProvider router={router} /> );
-        
         // Wait until the lottie is loaded
         await waitFor(() => expect(document.getElementById("lottie")).toBeTruthy());
         // Now wait again until the lottie is removed
         await waitForElementToBeRemoved(document.getElementById("lottie"));
         // NOW we check if portfolio item 1 exists
-        await waitFor(() => getByText("Portfolio Item 1"));
+        await waitFor(() => expect(getByText("Portfolio Item 1")).toBeInTheDocument());
     });
 
 
