@@ -27,13 +27,18 @@ describe("Success Tests", () => {
     });
 
 
-    // it("Views portfolio item", async () => {
-    //     // Check if a portfolio is being viewed correctly
-    //     // Render the app
-    //     const {getByText, getByRole} = render(<App/>);
+    it("Views portfolio item", async () => {
+        // Create the router
+        const router = createMemoryRouter(ROUTES, {
+            initialEntries: ["/portfolio/portfolio-item-1/"],
+            initialIndex: 0
+        });
 
+        // Check if all items are rendered properly
+        const { findAllByText } = render( <RouterProvider router={router} /> );
 
-    // })
+        await waitFor(() => findAllByText("Portfolio Item 1"), {timeout: 1500});
+    })
 });
 
 
@@ -50,7 +55,7 @@ describe("Error Tests", () => {
             initialIndex: 0
         });
 
-        // Check if all items are rendered properly
+        // Check if there is an error
         const { getByText } = render( <RouterProvider router={router} /> );
         
         await waitFor(() => expect(getByText("Error")).toBeTruthy());

@@ -39,8 +39,6 @@ const MockPortfolioHandlers = [
     rest.get(`${VIEW_PORTFOLIO_ENDPOINT}:slug/`, (req: VIEW_PORTFOLIO_REQUEST, res, ctx) => {
         const {slug} = req.params;
 
-        console.log("YOOOO")
-
         if (slug === "portfolio-item-1") {
             // 200 response
             const response: ViewPortfolioItemAPIResponse = {
