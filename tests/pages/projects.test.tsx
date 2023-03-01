@@ -16,7 +16,7 @@ describe("Success Tests", () => {
         });
         const { getByText } = render( <RouterProvider router={router} /> );
         // Wait until the lottie is loaded
-        await waitFor(() => expect(document.getElementById("lottie")).toBeTruthy());
+        await waitFor(() => expect(document.getElementById("lottie")).toBeInTheDocument());
         // Now wait again until the lottie is removed
         await waitForElementToBeRemoved(document.getElementById("lottie"));
         // NOW we check if project item 1 exists
