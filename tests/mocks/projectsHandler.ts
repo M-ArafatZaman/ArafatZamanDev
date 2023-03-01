@@ -38,7 +38,7 @@ const MockProjectsHandlers = [
     rest.get(`${VIEW_PROJECT_ENDPOINT}:slug/`, (req: VIEW_PROJECTS_REQUEST, res, ctx) => {
         const {slug} = req.params;
 
-        if (slug === "portfolio-item-1") {
+        if (slug === "project-item-1") {
             // 200 response
             const response: ViewProjectAPIResponse = {
                 status: "OK",
