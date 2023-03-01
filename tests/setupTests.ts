@@ -6,13 +6,14 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import "jest-canvas-mock";
 import fetchMock from 'jest-fetch-mock';
-import {MockPortfolioHandler, MockProjectsHandlers} from './mocks';
+import {MockPortfolioHandler, MockProjectsHandlers, MockBlogHandlers} from './mocks';
 import {setupServer} from 'msw/node';
 window.scrollTo = jest.fn();
 
 const HANDLERS = [
     ...MockPortfolioHandler,
-    ...MockProjectsHandlers
+    ...MockProjectsHandlers,
+    ...MockBlogHandlers
 ];
 export const server = setupServer(...HANDLERS);
 
@@ -28,7 +29,7 @@ beforeEach(() => {
 
 afterEach(() => {
     server.resetHandlers();
-    server.restoreHandlers();
+    //server.restoreHandlers();
 });
 
 afterAll(() => {

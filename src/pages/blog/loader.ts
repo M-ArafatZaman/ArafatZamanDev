@@ -2,7 +2,7 @@ import {BASE} from '../../config';
 import { defer, LoaderFunctionArgs } from 'react-router-dom';
 
 // Fetch function to get portfolio items
-const GET_BLOGS = "/blogs/api/get_blogs/";
+export const GET_BLOGS = "blogs/api/get_blogs/";
 export const GetBlogsLoader = async ({request}: LoaderFunctionArgs) => {
     const response: Promise<Response> = fetch(`${BASE}${GET_BLOGS}`, {
         method: "GET",
@@ -14,7 +14,7 @@ export const GetBlogsLoader = async ({request}: LoaderFunctionArgs) => {
 };
 
 // Fetch function to view an individual portfolio item
-const READ_BLOG = "/blogs/api/read_blog/";
+export const READ_BLOG = "blogs/api/read_blog/";
 interface LoaderArgsWithSlugParam extends LoaderFunctionArgs {
     params: {
         slug?: string
