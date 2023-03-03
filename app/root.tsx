@@ -70,6 +70,7 @@ export default function App() {
                         <Box display="flex" flexGrow={1} flexDirection="column">
                             <Outlet/>
                         </Box>
+                        <Footer/>
                     </Box>
                 </ThemeProvider>
   
