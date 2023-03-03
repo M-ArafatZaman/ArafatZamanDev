@@ -6,8 +6,8 @@ import MobileNavbar from './MobileNavbar';
 const MOBILE_NAVBAR_WIDTH = 750;
 // The main navbar
 const Navbar: React.FC = () => {
-
-    const [width, setWidth] = useState<number>(window.innerWidth);
+    const [isHydrated, setIsHydrated] = useState<boolean>(false);
+    const [width, setWidth] = useState<number>(0);
 
     // Event listener to update width
     useEffect(() => {
@@ -15,11 +15,17 @@ const Navbar: React.FC = () => {
             setWidth(window.innerWidth);
         };
 
-        window.addEventListener("resize", updateWidth);
+        if (isHydrated) {
+            window.addEventListener("resize", updateWidth);            
+        } else {
+            setIsHydrated(true)
+        }
 
         // Remove event listener on unmount
         return () => {
-            window.removeEventListener("resize", updateWidth);
+            if (isHydrated) {
+                window.removeEventListener("resize", updateWidth);
+            }
         }
     }, []);
     
@@ -28,13 +34,7 @@ const Navbar: React.FC = () => {
         mobile: <MobileNavbar/>
     }
 
-    return (
-        <>
-        {
-            width > MOBILE_NAVBAR_WIDTH ? NAVS["desktop"] : NAVS["mobile"]
-        }
-        </>
-    )
+    return width > MOBILE_NAVBAR_WIDTH ? NAVS["desktop"] : NAVS["mobile"];
 };
 
 export default Navbar;

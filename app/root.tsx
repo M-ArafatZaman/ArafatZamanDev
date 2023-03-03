@@ -66,6 +66,7 @@ export default function App() {
                         display: "flex",
                         flexDirection: "column"
                     }}>
+                        <Header/>
                         <Box display="flex" flexGrow={1} flexDirection="column">
                             <Outlet/>
                         </Box>

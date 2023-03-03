@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["browser-route-module:routes/index.tsx?browser"],
-  "sourcesContent": ["import React from 'react';\n\n\nconst IndexPage: React.FC = () => {\n\n    return (\n        <div>TEST</div>\n    )\n};\n\nexport default IndexPage;"],
-  "mappings": ";;;;;;AAMQ;AAHR,IAAM,YAAsB,MAAM;AAE9B,SACI,mDAAC,SAAI,oBAAL;AAAA;AAAA;AAAA;AAAA,SAAS;AAEjB;AAEA,IAAO,iBAAQ;",
-  "names": []
-}
