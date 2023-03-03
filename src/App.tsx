@@ -5,7 +5,7 @@ import {
 	RouterProvider,
 } from 'react-router-dom';
 // APP THEME
-import {APP_THEME} from './appTheme';
+import {APP_THEME} from '../app/src/appTheme';
 // @MUI
 import {ThemeProvider} from '@mui/material/styles';
 // Import carousel and iPhone carousel

@@ -4,7 +4,7 @@ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 // @ mui components
 // Others
-import {APP_THEME} from '../../../appTheme';
+import {APP_THEME} from '../../../../app/src/appTheme';
 // Utils
 import {isAnyPartOfElementInViewport} from '../../../utils';
 

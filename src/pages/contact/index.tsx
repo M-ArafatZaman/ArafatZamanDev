@@ -14,7 +14,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CloseIcon from '@mui/icons-material/Close';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 // App theme
-import {APP_THEME} from '../../appTheme';
+import {APP_THEME} from '../../../app/src/appTheme';
 // Contact form
 import ContactForm from './ContactForm';
 // Other components
