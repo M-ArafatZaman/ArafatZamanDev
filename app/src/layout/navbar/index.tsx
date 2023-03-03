@@ -8,6 +8,11 @@ const MOBILE_NAVBAR_WIDTH = 750;
 const Navbar: React.FC = () => {
     const [isHydrated, setIsHydrated] = useState<boolean>(false);
     const [width, setWidth] = useState<number>(0);
+    
+    // Hydation check
+    useEffect(() => {
+        setIsHydrated(true);
+    }, [])
 
     // Event listener to update width
     useEffect(() => {
@@ -17,8 +22,7 @@ const Navbar: React.FC = () => {
 
         if (isHydrated) {
             window.addEventListener("resize", updateWidth);            
-        } else {
-            setIsHydrated(true)
+            updateWidth();
         }
 
         // Remove event listener on unmount
@@ -27,7 +31,7 @@ const Navbar: React.FC = () => {
                 window.removeEventListener("resize", updateWidth);
             }
         }
-    }, []);
+    }, [isHydrated]);
     
     const NAVS = {
         desktop: <DesktopNavbar/>,
