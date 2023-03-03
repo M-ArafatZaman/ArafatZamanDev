@@ -70,7 +70,7 @@ const GridLayer1: React.FC = () => {
         <Grid item xs={12} md={6}>
             <Box display="flex" flexDirection="column" sx={{height: "100%", width: "100%"}}>  
                 <Box flexGrow={1}>
-                    <RaspberryPI/>
+                    {/* <RaspberryPI/> */}
                 </Box>
                 
                 {/* Raspberry PI tag */}

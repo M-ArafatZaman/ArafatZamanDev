@@ -1,4 +1,4 @@
-import React, {lazy, Suspense} from 'react';
+import React from 'react';
 // @mui components
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';

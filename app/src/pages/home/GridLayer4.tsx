@@ -13,26 +13,39 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import LaunchIcon from '@mui/icons-material/Launch';
 // Utils and APP_THEME
 import {ElementInViewport, LinkIcon} from '../../utils';
-import {APP_THEME} from '../../../app/src/appTheme';
+import {APP_THEME} from '../../../src/appTheme';
 
 
 const GridLayer4: React.FC = () => {
-    const [width, setWidth] = useState<number>(window.innerWidth);
+    const [isHydrated, setIsHydrated] = useState<boolean>(false);
+    const [width, setWidth] = useState<number>(0);
 
-    // On mount, add event listener
+    // Hydration check for SSR
+    useEffect(() => {
+        if (!isHydrated) {
+            setIsHydrated(true);
+        }
+    }, [])
+
+    // On mount after hydration, add event listener
     // On unmount, remove that event listener to update the state
     useEffect(() => {
         const updateWidth = () => {
             setWidth(window.innerWidth);
         };
-
-        window.addEventListener("resize", updateWidth);
+        
+        if (isHydrated) {
+            window.addEventListener("resize", updateWidth);
+            updateWidth();
+        }
 
         // Destructor
         return () => {
-            window.removeEventListener("resize", updateWidth);
+            if (isHydrated) {
+                window.removeEventListener("resize", updateWidth);
+            }
         }
-    }, []);
+    }, [isHydrated]);
 
     return (
         <>
