@@ -38,10 +38,8 @@ export const links: LinksFunction = () => {
 // All <meta/> tags
 export const meta: MetaFunction = () => ({
     charset: "utf-8",
-    title: "Arafat Zaman",
     viewport: "width=device-width, initial-scale=1",
     "theme-color": "#000000",
-    description: "My portfolio website"
 });
   
 // Client component
