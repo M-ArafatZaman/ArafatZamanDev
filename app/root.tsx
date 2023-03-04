@@ -14,6 +14,7 @@ import indexCSS from "./src/index.css";
 import animateCSS from 'animate.css';
 import utilCSS from './src/utils/index.css';
 import carouselCSS from './src/components/Carousel/index.css';
+import hljsCSS from 'highlight.js/styles/github-dark-dimmed.css';
 // Some layout components like header and footer
 import Header from "./src/layout/header";
 import Footer from "./src/layout/footer";
@@ -33,7 +34,8 @@ export const links: LinksFunction = () => {
         { rel: "stylesheet", href: indexCSS },
         { rel: "stylesheet", href: animateCSS },
         { rel: "stylesheet", href: utilCSS},
-        { rel: "stylesheet", href: carouselCSS}
+        { rel: "stylesheet", href: carouselCSS},
+        { rel: "stylesheet", href: hljsCSS}
     ];
 };
   
