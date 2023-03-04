@@ -7,7 +7,8 @@ import {
     LiveReload,
     Meta,
     Outlet,
-    Scripts
+    Scripts,
+    ScrollRestoration
 } from "@remix-run/react";
 // CSS styles
 import indexCSS from "./src/index.css";
@@ -84,6 +85,8 @@ export default function App() {
                         <Footer/>
                     </Box>
                 </ThemeProvider>
+
+                <ScrollRestoration/>
   
                 {/* Script tags go here */}
                 {/* If you use a nonce-based content security policy for scripts, you must provide the `nonce` prop. Otherwise, omit the nonce prop as shown here. */}

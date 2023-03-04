@@ -38,6 +38,11 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
         height: "100%"
     };
 
+    // Onclick
+    const onClick = () => {
+        navigate(`/portfolio/${slug}`);
+    }
+
     return (
         <Grid item xs={12} md={3}>
             <AppCard sx={onHoverStyle}>
@@ -65,7 +70,7 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
 
                 {/* Button */}
                 <Box sx={{p: 2, backgroundColor: "rgba(0,0,0,.1)"}}>
-                    <Button color="info" onClick={() => {navigate(`/portfolio/${slug}`)}}>View</Button>
+                    <Button color="info" onClick={onClick}>View</Button>
                 </Box>
             </AppCard>
         </Grid>
