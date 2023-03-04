@@ -12,17 +12,22 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // Other components
 import AppCard from '../../home/components/AppCard';
 // App theme
-import {APP_THEME} from '../../../../app/src/appTheme';
+import {APP_THEME} from '../../../appTheme';
 // Context
 import {PortfolioContext} from '../reducer';
 // Header ref
-import {HeaderRef} from '../../../../app/src/layout/header';
+import {HeaderRef} from '../../../layout/header';
+// Types
+import {PortfolioItem} from '../types';
 
-const ViewPortfolioNavbar: React.FC = () => {
+interface ViewPortfolioNavbarProps {
+    other_portfolio_items: PortfolioItem["other_portfolio_items"] 
+}
 
+const ViewPortfolioNavbar: React.FC<ViewPortfolioNavbarProps> = (props: ViewPortfolioNavbarProps) => {
+    const {other_portfolio_items} = props;
     const [collapsed, setCollapsed] = useState<boolean>(false);
     const params = useParams<{slug: string}>();
-    const PContext = useContext(PortfolioContext);
     // Router
     const navigate = useNavigate();
     const location = useLocation();
@@ -102,7 +107,7 @@ const ViewPortfolioNavbar: React.FC = () => {
                         </Box>
 
                         <Typography variant="caption" sx={{color: "rgba(0,0,0,.65)"}}><b>PORTFOLIO ITEMS</b></Typography>
-                        {PContext.items.map((P_ITEMS, i) => (
+                        {other_portfolio_items.map((P_ITEMS, i) => (
                             <Button 
                                 key={i}
                                 fullWidth 

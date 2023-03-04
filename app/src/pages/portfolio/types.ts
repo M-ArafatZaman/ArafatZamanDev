@@ -9,6 +9,10 @@ interface PortfolioItems {
 // A single portfolio item
 interface PortfolioItem extends PortfolioItems {
     content: string;
+    other_portfolio_items: {
+        name: string;
+        slug: string;
+    }[]
 };
 
 /* API response from GET_PORTFOLIO_ITEMS, which returns ALL the portfolio items */
