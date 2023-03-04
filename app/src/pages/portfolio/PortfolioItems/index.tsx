@@ -1,49 +1,44 @@
-import React, {useContext} from 'react';
+import React from 'react';
+import {useLoaderData} from '@remix-run/react';
 // @mui components
 import Grid from '@mui/material/Grid';
-import Skeleton from '@mui/material/Skeleton';
 // Components
 import PortfolioItemGrid from './PortfolioItemGrid';
 import Error from '../../../components/Error';
-// Context
-import {PortfolioContext} from '../reducer';
+// Loader and response types
+import {GetPortfolioItemsLoader} from '../loader';
+import {PortfolioAPIResponse} from '../types';
+// The portfolio wrapper
+import Portfolio from '../index';
 
 const PortfolioItems: React.FC = () => {
-    const context = useContext(PortfolioContext);
+    //const context = useContext(PortfolioContext);
+    const data: PortfolioAPIResponse = useLoaderData<typeof GetPortfolioItemsLoader>();
 
     return (
-        <Grid container justifyContent="center" spacing={2}>
-            {
-            // While it is loading, show a loading
-            context.isLoading ? 
-            [1,2,3,4].map((i) => (
-                <Grid key={i} item xs={12} md={3}>
-                    <Skeleton
-                        variant="rounded"
-                        height={100}
-                    />
+        <Portfolio>
+            <Grid container justifyContent="center" spacing={2}>
+                {
+                // If there is for error
+                data.status !== "OK" ?
+                <Grid item p={2} xs={12}>
+                    <Error message="Sorry, an unknown error occured." />
                 </Grid>
-            ))
-            :
-            // If it is not loading, check for error
-            context.error ?
-            <Grid item p={2} xs={12}>
-                <Error message={context.errorMessage} />
+                :
+                // Else everything else is fine
+                data.items.map((portfolio, i) => (
+                    <PortfolioItemGrid
+                        index={i}
+                        key={i}
+                        name={portfolio.name}
+                        short_description={portfolio.short_description}
+                        image={portfolio.imageURL}
+                        tags={portfolio.tags}
+                        slug={portfolio.slug}
+                    />
+                ))}
             </Grid>
-            :
-            // Else everything else is fine
-            context.items.map((portfolio, i) => (
-                <PortfolioItemGrid
-                    index={i}
-                    key={i}
-                    name={portfolio.name}
-                    short_description={portfolio.short_description}
-                    image={portfolio.imageURL}
-                    tags={portfolio.tags}
-                    slug={portfolio.slug}
-                />
-            ))}
-        </Grid>
+        </Portfolio>
     )
 };
 
