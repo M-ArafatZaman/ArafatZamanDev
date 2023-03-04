@@ -1,43 +1,40 @@
-import React, {useContext} from 'react';
+import React from 'react';
+import {useLoaderData} from '@remix-run/react';
 // @mui components
 import Grid from '@mui/material/Grid';
-import Skeleton from '@mui/material/Skeleton';
 // Components
 import ProjectItemGrid from './ProjectItemGrid';
 import Error from '../../../components/Error';
-// Context
-import {ProjectsContext} from '../reducer';
+// Loader and types
+import {GetProjectsLoader} from '../loader';
+import {GetProjectsAPIResponse} from '../types';
+// Projects wrapper
+import Projects from '../index';
 
 const ProjectItems: React.FC = () => {
-    const context = useContext(ProjectsContext);
+    const data: GetProjectsAPIResponse = useLoaderData<typeof GetProjectsLoader>();
 
     return (
-        <Grid container justifyContent="center" spacing={2}>
-            {
-            // Content is still loading
-            context.isLoading ? 
-            [1,2,3,4].map((i) => (
-                <Grid key={i} item xs={12} md={3}>
-                    <Skeleton variant="rounded" height={100} />
+        <Projects>
+            <Grid container justifyContent="center" spacing={2}>
+                {
+                // An error occured
+                data.status !== "OK" ?
+                <Grid item xs={12}>
+                    <Error message="Sorry, an unknown error occured." />
                 </Grid>
-            ))
-            :
-            // An error occured
-            context.error ?
-            <Grid item xs={12}>
-                <Error message={context.errorMessage} />
+                :
+                data.items.map((projects, i) => (
+                    <ProjectItemGrid
+                        key={i}
+                        name={projects.name}
+                        short_description={projects.short_description}
+                        imageURL={projects.imageURL}
+                        slug={projects.slug}
+                    />
+                ))}
             </Grid>
-            :
-            context.items.map((projects, i) => (
-                <ProjectItemGrid
-                    key={i}
-                    name={projects.name}
-                    short_description={projects.short_description}
-                    imageURL={projects.imageURL}
-                    slug={projects.slug}
-                />
-            ))}
-        </Grid>
+        </Projects>
     )
 };
 

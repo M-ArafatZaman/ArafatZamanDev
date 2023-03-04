@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from '@remix-run/react';
 // @mui components
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
