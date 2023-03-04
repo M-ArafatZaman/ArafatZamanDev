@@ -1,5 +1,4 @@
 import {BASE} from '../../config';
-import { defer, LoaderFunctionArgs} from 'react-router-dom';
 import {LoaderFunction, LoaderArgs} from '@remix-run/node';
 import { PortfolioAPIResponse, ViewPortfolioItemAPIResponse } from './types';
 
@@ -19,17 +18,7 @@ export const GetPortfolioItemsLoader: LoaderFunction = async () => {
         }
     }) as Promise<PortfolioAPIResponse>;
     return resp;
-}
-
-// export const GetPortfolioItemsLoader = async ({request}: LoaderFunctionArgs) => {
-//     const response: Promise<Response> = fetch(`${BASE}${GET_PORTFOLIO_ITEMS}`, {
-//         method: "GET",
-//         mode: "cors",
-//         signal: request.signal
-//     });
-
-//     return defer({response});
-// };
+};
 
 // Fetch function to view an individual portfolio item
 export const VIEW_PORTFOLIO_ITEMS = "projects/api/view_portfolio_item/";
@@ -52,13 +41,4 @@ export const ViewPortfolioItemLoader: LoaderFunction = async ({params}: LoaderAr
         }
     }) as Promise<ViewPortfolioItemAPIResponse>;
     return resp;
-}
-// export const ViewPortfolioItemLoader = async ({request, params}: LoaderArgsWithSlugParam) => {
-//     const response: Promise<Response> = fetch(`${BASE}${VIEW_PORTFOLIO_ITEMS}${params.slug}/`, {
-//         method: "GET",
-//         mode: "cors",
-//         signal: request.signal
-//     });
-
-//     return defer({response});
-// }
+};
