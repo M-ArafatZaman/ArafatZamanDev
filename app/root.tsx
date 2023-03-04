@@ -9,7 +9,10 @@ import {
     Outlet,
     Scripts
 } from "@remix-run/react";
+// CSS styles
 import indexCSS from "./src/index.css";
+import animateCSS from 'animate.css';
+import utilCSS from './src/utils/index.css';
 // Some layout components like header and footer
 import Header from "./src/layout/header";
 import Footer from "./src/layout/footer";
@@ -26,7 +29,9 @@ import {FadeInWrapper} from './src/utils';
 // All <link/> tags
 export const links: LinksFunction = () => {
     return [
-        { rel: "stylesheet", href: indexCSS }
+        { rel: "stylesheet", href: indexCSS },
+        { rel: "stylesheet", href: animateCSS },
+        { rel: "stylesheet", href: utilCSS}
     ];
 };
   

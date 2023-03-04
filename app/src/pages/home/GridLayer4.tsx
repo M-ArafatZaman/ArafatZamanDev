@@ -48,7 +48,7 @@ const GridLayer4: React.FC = () => {
         <>
         <Grid container direction={width <= APP_THEME.breakpoints.values.md ? "column-reverse" : "row"} spacing={2} paddingBottom={1}>
             <Grid item xs={12} md={8}>
-                <ElementInViewport>
+                <ElementInViewport animation="fadeInLeft">
                     <AppCard>
                         <Box p={2}>
                             {/* The lyrics finder */}
@@ -74,7 +74,7 @@ const GridLayer4: React.FC = () => {
             </Grid>
 
             <Grid item xs={12} md={4}>
-                <ElementInViewport>
+                <ElementInViewport animation="fadeInRight">
                     <Box display="flex" justifyContent="center" alignItems="center" p={3} height="100%">
                         <img src={MobileDeviceGIF} style={{objectFit: "contain", height: "250px"}}/>
                     </Box>

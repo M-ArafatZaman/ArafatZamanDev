@@ -1,16 +1,18 @@
-import React, {createRef, useEffect} from 'react';
+import React, {createRef, useEffect, useState} from 'react';
 // @mui element
 import Box from '@mui/material/Box';
 import {SxProps} from '@mui/material/styles';
 // Utils
-import {isAnyPartOfElementInViewport} from './viewport';
+import {isAnyPartOfElementInViewport} from '../viewport';
 
 interface ElementInViewportProps {
     children: React.ReactNode;
     animation?: string;
     delay?: number;
     sx?: SxProps;
-}
+};
+
+const HIDE_CLASSNAME = "ElementInViewport-pre";
 
 /**
  * An element which triggers an animation once it is in viewport
@@ -19,6 +21,12 @@ interface ElementInViewportProps {
  */
 const ElementInViewport: React.FC<ElementInViewportProps> = (props: ElementInViewportProps) => {
     const {children, animation="fadeIn", delay=0, sx} = props;
+    const [isHydrated, setIsHydrated] = useState<boolean>(false);
+
+    // Hydration update
+    useEffect(() => {
+        setIsHydrated(true);
+    }, []);
 
     const Style: SxProps = {
         animationDelay: `${delay}ms`,
@@ -34,11 +42,17 @@ const ElementInViewport: React.FC<ElementInViewportProps> = (props: ElementInVie
 
     // On load, scroll, and resize
     const onChange = () => {
-        if (ContainerElementRef.current instanceof HTMLElement && typeof ContainerElementRef.current != "undefined" && !ContainerElementRef.current.classList.contains("animate__animated")) {
+        if (
+            ContainerElementRef.current instanceof HTMLElement && 
+            typeof ContainerElementRef.current != "undefined" && 
+            !ContainerElementRef.current.classList.contains("animate__animated"))
+        {
             if (isAnyPartOfElementInViewport(ContainerElementRef.current)) {
                 // The element is in view now
+                // Remove the display none class and then add animation classes
                 // Add the animation and remove the event listeners
-                ContainerElementRef.current.classList.add("animate__animated", `animate__${animation}`);
+                ContainerElementRef.current.classList.remove(HIDE_CLASSNAME);
+                ContainerElementRef.current!.classList.add("animate__animated", `animate__${animation}`);
                 WINDOW_EVENTS.forEach((elem) => {
                     window.removeEventListener(elem, onChange);
                 })
@@ -48,22 +62,24 @@ const ElementInViewport: React.FC<ElementInViewportProps> = (props: ElementInVie
 
     // On component mount, add event listeners
     useEffect(() => {
-        WINDOW_EVENTS.forEach((event) => {
-            window.addEventListener(event, onChange);
-        });
-        // Call on change when the component is mounted
-        onChange();
-
-        // On componentUnMount / Destructor
-        return () => {
+        if (isHydrated) {
             WINDOW_EVENTS.forEach((event) => {
-                window.removeEventListener(event, onChange);
-            })
-        };
-    }, [ContainerElementRef]);
+                window.addEventListener(event, onChange);
+            });
+            // Call on change when the component is mounted
+            onChange();
+    
+            // On componentUnMount / Destructor
+            return () => {
+                WINDOW_EVENTS.forEach((event) => {
+                    window.removeEventListener(event, onChange);
+                })
+            };
+        }
+    }, [ContainerElementRef, isHydrated]);
 
     return (
-        <Box sx={Style} ref={ContainerElementRef}>
+        <Box sx={Style} ref={ContainerElementRef} className={HIDE_CLASSNAME}>
             {children}
         </Box>
     ) 
