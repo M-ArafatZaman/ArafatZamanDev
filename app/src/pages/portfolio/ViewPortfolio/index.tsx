@@ -15,9 +15,9 @@ import htmlReactParser from 'html-react-parser';
 import AppCard from '../../home/components/AppCard';
 import Error from '../../../components/Error';
 // Types
-import {ViewPortfolioItemAPIResponse, PortfolioItem} from '../types';
+import {ViewPortfolioItemAPIResponse} from '../types';
 // Loader
-import {GetPortfolioItemsLoader} from '../loader';
+import {ViewPortfolioItemLoader} from '../loader';
 // Carousel component
 import {replaceContentWithCarousel, replaceContentWithIphone} from '../../../components/Carousel';
 // Navbar
@@ -39,7 +39,7 @@ const ViewPortfolio: React.FC = () => {
     }, []);
     
     // The data fetched from API
-    const $data: ViewPortfolioItemAPIResponse = useLoaderData<typeof GetPortfolioItemsLoader>();
+    const $data: ViewPortfolioItemAPIResponse = useLoaderData<typeof ViewPortfolioItemLoader>();
     // The content parsed and the javascript to execute
     const [content, setContent] = useState<ReturnType<typeof htmlReactParser>>();
     const [JS, setJS] = useState<string[]>([]);
