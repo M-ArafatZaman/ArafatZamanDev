@@ -20,6 +20,8 @@ import {ThemeProvider} from "@mui/material/styles";
 import { APP_THEME } from "./src/appTheme";
 // Some icons
 import Logo192 from './static/logo192.png';
+// A fadein Wrapper
+import {FadeInWrapper} from './src/utils';
 
 // All <link/> tags
 export const links: LinksFunction = () => {
@@ -68,7 +70,9 @@ export default function App() {
                     }}>
                         <Header/>
                         <Box display="flex" flexGrow={1} flexDirection="column">
-                            <Outlet/>
+                            <FadeInWrapper>
+                                <Outlet/>
+                            </FadeInWrapper>
                         </Box>
                         <Footer/>
                     </Box>

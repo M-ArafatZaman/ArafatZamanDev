@@ -30,19 +30,16 @@ const GridLayer4: React.FC = () => {
     // On mount after hydration, add event listener
     // On unmount, remove that event listener to update the state
     useEffect(() => {
-        const updateWidth = () => {
-            setWidth(window.innerWidth);
-        };
-        
         if (isHydrated) {
+            const updateWidth = () => {
+                setWidth(window.innerWidth);
+            };
             window.addEventListener("resize", updateWidth);
             updateWidth();
-        }
-
-        // Destructor
-        return () => {
-            if (isHydrated) {
+            // Destructor
+            return () => {
                 window.removeEventListener("resize", updateWidth);
+                
             }
         }
     }, [isHydrated]);

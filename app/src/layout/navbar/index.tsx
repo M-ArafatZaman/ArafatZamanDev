@@ -16,18 +16,16 @@ const Navbar: React.FC = () => {
 
     // Event listener to update width
     useEffect(() => {
-        const updateWidth = () => {
-            setWidth(window.innerWidth);
-        };
-
         if (isHydrated) {
+            const updateWidth = () => {
+                setWidth(window.innerWidth);
+            };
+            
             window.addEventListener("resize", updateWidth);            
             updateWidth();
-        }
-
-        // Remove event listener on unmount
-        return () => {
-            if (isHydrated) {
+    
+            // Remove event listener on unmount
+            return () => {
                 window.removeEventListener("resize", updateWidth);
             }
         }
