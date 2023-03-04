@@ -46,7 +46,7 @@ const ViewPortfolio: React.FC = () => {
 
     // Highlight all after hydration
     useEffect(() => {
-        if (isHydrated) {
+        if (isHydrated && $data.status === "OK") {
             const contentMD: string = marked.parse($data.payload.content);
             // Replace to parse normal carousel and then parse iphone carousel
             const replacedWithCarousel = replaceContentWithCarousel(contentMD);
@@ -57,7 +57,7 @@ const ViewPortfolio: React.FC = () => {
             setContent(contentMDParsed);
             setJS([...replacedWithCarousel.js, ...replacedFinal.js]);
         }
-    }, [isHydrated]);
+    }, [isHydrated, $data]);
     
     // After the content is rendered
     useEffect(() => {
@@ -70,7 +70,9 @@ const ViewPortfolio: React.FC = () => {
         // Execute the javascript after 1000ms
         console.log("We executing with", JS);
         JS.forEach((str) => {
-            eval(str);
+            setTimeout(() => {
+                eval(str);
+            }, 250);
         })
     }, [JS]);
 
