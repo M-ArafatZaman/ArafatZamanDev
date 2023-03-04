@@ -13,8 +13,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AppCard from '../../home/components/AppCard';
 // App theme
 import {APP_THEME} from '../../../appTheme';
-// Context
-import {PortfolioContext} from '../reducer';
 // Header ref
 import {HeaderRef} from '../../../layout/header';
 // Types
