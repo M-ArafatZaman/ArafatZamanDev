@@ -6,11 +6,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
 // @mui icons
 import Icon from '@mui/material/Icon';
 import SendIcon from '@mui/icons-material/Send';
-import CloseIcon from '@mui/icons-material/Close';
 // Endpoints
 import {BASE, SEND_MESSAGE} from './ENDPOINT';
 
