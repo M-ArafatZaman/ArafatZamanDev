@@ -12,6 +12,7 @@ export interface BlogItems {
 export interface GetBlogsAPIResponse {
     status: string;
     response: BlogItems[];
+    imageURL: string;
 }
 
 // Individual blog items
