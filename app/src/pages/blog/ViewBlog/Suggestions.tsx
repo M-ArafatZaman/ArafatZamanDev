@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import React from 'react';
+import {useNavigate} from '@remix-run/react';
 // @mui components
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -12,7 +12,6 @@ import ClockIcon from '@mui/icons-material/WatchLater';
 // Other components
 import AppCard from '../../home/components/AppCard';
 // Context and types
-import {BlogsContext} from '../reducer';
 import {BlogItems} from '../types';
 
 
@@ -65,13 +64,15 @@ const SuggestionItem: React.FC<SuggestionItemProps> = (props: SuggestionItemProp
     )
 }
 
+interface SuggestionProps {
+    suggestions: SuggestionItemProps[];
+}
+
 // Suggestions main component
-const Suggestions: React.FC = () => {
+const Suggestions: React.FC<SuggestionProps> = (props: SuggestionProps) => {
 
-    const BContext = useContext(BlogsContext);
-    const {slug} = useParams<{slug: string}>(); 
+    const {suggestions} = props;
 
-    let items = 0;
     return (
         <AppCard sx={{mt: 1}}>
             <Box sx={{p: 3}}>
@@ -80,18 +81,15 @@ const Suggestions: React.FC = () => {
 
                 <Grid container spacing={2}>
                     {
-                        BContext.items.map((elem, i) => {
-                            if (items < 3 && elem.slug !== slug) {
-                                items++;
-                                return <SuggestionItem
-                                    key={i}
-                                    name={elem.name}
-                                    slug={elem.slug}
-                                    date_created={elem.date_created}
-                                    read_time={elem.read_time}
-                                />
-                            }
-                        })
+                        suggestions.map((elem, i) => (
+                            <SuggestionItem
+                                key={i}
+                                name={elem.name}
+                                slug={elem.slug}
+                                date_created={elem.date_created}
+                                read_time={elem.read_time}
+                            />
+                        ))
                     }
                 </Grid>
             </Box>

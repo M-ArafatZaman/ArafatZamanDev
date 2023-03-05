@@ -17,6 +17,8 @@ export interface GetBlogsAPIResponse {
 // Individual blog items
 export interface BlogItem extends BlogItems {
     content: string;
+    short_description: string;
+    suggestions: Omit<BlogItems, "tags">[];
 }
 
 // /read-blog/:slug response
