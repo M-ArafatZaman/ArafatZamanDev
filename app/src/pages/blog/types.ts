@@ -12,7 +12,6 @@ export interface BlogItems {
 export interface GetBlogsAPIResponse {
     status: string;
     response: BlogItems[];
-    imageURL: string;
 }
 
 // Individual blog items
@@ -20,6 +19,7 @@ export interface BlogItem extends BlogItems {
     content: string;
     short_description: string;
     suggestions: Omit<BlogItems, "tags">[];
+    imageURL: string;
 }
 
 // /read-blog/:slug response
