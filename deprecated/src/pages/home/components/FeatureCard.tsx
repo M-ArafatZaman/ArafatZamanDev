@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 // Extras
 import AppCard from './AppCard';
-import {APP_THEME} from '../../../../app/src/appTheme';
+import {APP_THEME} from '../../../../../app/src/appTheme';
 
 interface FeatureCardProps {
     image: string;

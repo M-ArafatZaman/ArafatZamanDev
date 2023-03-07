@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 // Lottie player and the loading animation
 import {Player} from '@lottiefiles/react-lottie-player';
-import LoadingAnimationJSON from '../../../src/media/lottie/loadingAnimation.json';
+import LoadingAnimationJSON from '../media/lottie/loadingAnimation.json';
 
 const Loader: React.FC = () => {
 

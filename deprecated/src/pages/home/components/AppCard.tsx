@@ -2,7 +2,7 @@ import React from 'react';
 // @mui Components
 import Box from '@mui/material/Box';
 import {SxProps} from '@mui/material/styles';
-import {APP_THEME} from '../../../../app/src/appTheme';
+import {APP_THEME} from '../../../../../app/src/appTheme';
 
 interface AppCardProps {
     children: JSX.Element | JSX.Element[];

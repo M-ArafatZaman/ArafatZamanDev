@@ -12,11 +12,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // Other components
 import AppCard from '../../home/components/AppCard';
 // App theme
-import {APP_THEME} from '../../../../app/src/appTheme';
+import {APP_THEME} from '../../../../../app/src/appTheme';
 // Context
 import {PortfolioContext} from '../reducer';
 // Header ref
-import {HeaderRef} from '../../../../app/src/layout/header';
+import {HeaderRef} from '../../../../../app/src/layout/header';
 
 const ViewPortfolioNavbar: React.FC = () => {
 

@@ -2,8 +2,8 @@ import React, {Suspense} from 'react';
 import {createBrowserRouter, RouteObject} from 'react-router-dom';
 import {LazyImport, FadeInWrapper} from './utils';
 // Main index, loader, and error page;
-import Root from '../app/src/layout';
-import Loader from '../app/src/layout/loader';
+import Root from '../../app/src/layout';
+import Loader from '../../app/src/layout/loader';
 import P404 from './pages/P404';
 // Page components
 // Loaders

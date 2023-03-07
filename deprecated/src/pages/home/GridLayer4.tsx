@@ -13,7 +13,7 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import LaunchIcon from '@mui/icons-material/Launch';
 // Utils and APP_THEME
 import {ElementInViewport, LinkIcon} from '../../utils';
-import {APP_THEME} from '../../../app/src/appTheme';
+import {APP_THEME} from '../../../../app/src/appTheme';
 
 
 const GridLayer4: React.FC = () => {
