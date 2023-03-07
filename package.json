@@ -25,13 +25,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject",
-    "remix-build": "remix build",
-    "remix-dev": "remix dev",
-    "remix-start": "remix-serve build"
+    "build": "remix build",
+    "dev": "remix dev",
+    "start": "remix-serve build"
   },
   "eslintConfig": {
     "extends": [
