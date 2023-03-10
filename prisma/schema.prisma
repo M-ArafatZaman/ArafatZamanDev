@@ -18,7 +18,7 @@ model Projects {
     detail_description      String
     image_url               String   @default("https://i.imgur.com/UzjI8sf.png")
     date_created            DateTime @default(now())
-    slug                    String
+    slug                    String?
 }
 
 
