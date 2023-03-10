@@ -10,6 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// The Portfolio model
+model Portfolio {
+    id                      Int         @id @default(autoincrement())
+    name                    String      @unique
+    short_description       String?
+    content                 String
+    tags                    String?
+    image                   String      @default("https://i.imgur.com/sRi3pGm.png")
+    date_created            DateTime    @default(now())
+    slug                    String?
+}
+
+
 // The Projects model
 model Projects {
     id                      Int      @id @default(autoincrement())
@@ -20,7 +33,6 @@ model Projects {
     date_created            DateTime @default(now())
     slug                    String?
 }
-
 
 // The Blogs model
 model Blogs {
