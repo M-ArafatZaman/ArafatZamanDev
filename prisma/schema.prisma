@@ -10,6 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// The Projects model
+model Projects {
+    id                      Int      @id @default(autoincrement())
+    name                    String   @unique
+    short_description       String?
+    detail_description      String
+    image_url               String   @default("https://i.imgur.com/UzjI8sf.png")
+    date_created            DateTime @default(now())
+    slug                    String
+}
+
+
 // The Blogs model
 model Blogs {
     id              Int         @id @default(autoincrement())
