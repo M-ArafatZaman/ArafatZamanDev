@@ -1,22 +1,34 @@
 import {BASE} from '../../config';
 import {LoaderFunction, LoaderArgs} from '@remix-run/node';
 import {GetProjectsAPIResponse, ViewProjectAPIResponse} from './types';
+import {prisma} from '../../dbconfig.server';
+import {json} from 'react-router-dom';
 
 // Fetch function to get portfolio items
-export const GET_PROJECTS_ITEMS = "projects/api/get_projects/";
 export const GetProjectsLoader: LoaderFunction = async () => {
-    const ENDPOINT = `${BASE}${GET_PROJECTS_ITEMS}`;
-    const resp = await fetch(ENDPOINT, {
-        method: "GET",
-        mode: "cors"
-    })
-    .then((response) => response.json())
-    .catch(() => {
-        return {
-            status: "Error"
+    const data = await prisma.projects.findMany({
+        select: {
+            name: true,
+            short_description: true,
+            image_url: true,
+            slug: true,
+        },
+        orderBy: {
+            date_created: "desc"
         }
-    }) as Promise<GetProjectsAPIResponse>;
-    return resp;
+    });
+
+    const response: GetProjectsAPIResponse = {
+        status: "OK",
+        items: data.map((elem) => ({
+            name: elem.name as string,
+            short_description: elem.short_description as string,
+            imageURL: elem.image_url as string,
+            slug: elem.slug as string
+        })) 
+    };
+
+    return json(response);
 };
 
 // Fetch function to view an individual portfolio item
