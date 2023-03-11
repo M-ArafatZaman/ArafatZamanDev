@@ -39,16 +39,29 @@ interface LoaderArgsWithSlugParam extends LoaderArgs {
     }
 };
 export const ViewProjectLoader = async ({params}: LoaderArgsWithSlugParam) => {
-    const ENDPOINT = `${BASE}${VIEW_PROJECT_ITEM}${params.slug}/`;
-    const resp = await fetch(ENDPOINT, {
-        method: "GET",
-        mode: "cors"
-    })
-    .then((response) => response.json())
-    .catch(() => {
-        return {
-            status: "Error"
+    const data = await prisma.projects.findFirst({
+        where: {
+            slug: params.slug
+        },
+        select: {
+            name: true,
+            short_description: true,
+            detail_description: true,
+            image_url: true,
+            slug: true,
         }
-    }) as Promise<ViewProjectAPIResponse>;
-    return resp;
+    });
+
+    const response: ViewProjectAPIResponse = {
+        status: "OK",
+        item: {
+            name: data?.name as string,
+            short_description: data?.short_description as string,
+            content: data?.detail_description as string,
+            imageURL: data?.image_url as string,
+            slug: data?.slug as string
+        }
+    };
+
+    return json(response);
 };
