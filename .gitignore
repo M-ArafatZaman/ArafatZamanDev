@@ -26,6 +26,7 @@ yarn-error.log*
 .cache/
 public/build/
 .vscode/
+dump/
 
 # ENV ignore
 .env

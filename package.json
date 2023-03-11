@@ -30,7 +30,8 @@
     "test": "jest",
     "build": "remix build",
     "dev": "remix dev",
-    "start": "remix-serve build"
+    "start": "remix-serve build",
+    "seedDB": "python3 ./prisma/seed.py"
   },
   "eslintConfig": {
     "extends": [
