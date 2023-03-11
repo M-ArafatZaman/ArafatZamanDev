@@ -87,7 +87,7 @@ def main():
 
         for row in parsedModel:
             # Create SQL statement
-            values = tuple((f'"{row[col]}"' for col in fields))
+            values = tuple((row[col] for col in fields))
             data_values.append(values)
         
         statement = f"INSERT INTO {model} ({', '.join(fields)}) VALUES ({', '.join(['?' for _ in fields])});"
