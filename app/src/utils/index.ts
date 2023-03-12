@@ -7,8 +7,8 @@ import LinkIcon from './LinkIcon';
 import generateString from './generateString';
 import MetaTags from './MetaTags';
 import getReadTime from './getReadTime';
-import formateDate from './formateDate';
-import generateShortDescription from './generateSuggestion';
+import formatDate from './formatDate';
+import generateShortDescription from './generateShortDescription';
 
 export {
     toHex,
@@ -21,6 +21,6 @@ export {
     generateString,
     MetaTags,
     getReadTime,
-    formateDate,
+    formatDate,
     generateShortDescription
 };

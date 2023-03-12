@@ -3,7 +3,7 @@ import { LoaderFunction, LoaderArgs } from '@remix-run/node';
 // @types
 import {GetBlogsAPIResponse, ReadBlogsAPIResponse} from './types';
 import {prisma} from '../../dbconfig.server';
-import { getReadTime, formateDate, generateShortDescription } from '../../utils';
+import { getReadTime, formatDate, generateShortDescription } from '../../utils';
 import { json } from 'react-router-dom';
 
 // Fetch function to get portfolio items
@@ -25,7 +25,7 @@ export const GetBlogsLoader: LoaderFunction = async () => {
         status: "OK", 
         response: data.map((elem) => ({
             name: elem.name as string,
-            date_created: formateDate(elem.date_created) as string,
+            date_created: formatDate(elem.date_created) as string,
             tags: elem.tags?.split(" ") as string[],
             slug: elem.slug as string,
             read_time: getReadTime(elem.content) as number
@@ -90,16 +90,16 @@ export const ReadBlogLoader: LoaderFunction = async ({params}: LoaderArgsWithSlu
         status: "OK",
         payload: {
             name: data?.name as string,
-            date_created: formateDate(data?.date_created as Date) as string,
+            date_created: formatDate(data?.date_created as Date) as string,
             tags: data?.tags?.split(" ") as string[],
             slug: data?.slug as string,
             read_time: getReadTime(data?.content as string) as number,
             content: data?.content as string,
-            short_description: "",
+            short_description: generateShortDescription(data?.content as string),
             imageURL: data?.image as string,
             suggestions: suggestions.map((elem) => ({
                 name: elem.name as string,
-                date_created: formateDate(elem.date_created),
+                date_created: formatDate(elem.date_created),
                 slug: elem.slug as string,
                 read_time: getReadTime(elem.content)
             }))
