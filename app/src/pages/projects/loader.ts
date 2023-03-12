@@ -1,4 +1,3 @@
-import {BASE} from '../../config';
 import {LoaderFunction, LoaderArgs} from '@remix-run/node';
 import {GetProjectsAPIResponse, ViewProjectAPIResponse} from './types';
 import {prisma} from '../../dbconfig.server';
