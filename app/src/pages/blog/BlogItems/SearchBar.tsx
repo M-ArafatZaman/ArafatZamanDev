@@ -2,6 +2,9 @@ import React from 'react';
 // @mui components
 import InputBase from '@mui/material/InputBase';
 import Box from '@mui/material/Box';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import WarningIcon from '@mui/icons-material/Warning';
 import {styled, useTheme} from "@mui/material/styles";
 // @mui icons
 import SearchIcon from '@mui/icons-material/Search';
@@ -43,10 +46,19 @@ const SearchBar: React.FC = () => {
                 borderRadius: 1,
             }}
         >
-            <CustomSearchBar 
-                placeholder='Search'
-                endAdornment={<SearchIcon htmlColor='#EAEAEA' />}
-            />
+            <Tooltip title={
+                <>  
+                    <Box display="flex" justifyContent="center" alignItems="center">
+                        <WarningIcon/>  
+                        <Typography variant="body2" ml={1}>This feature is under development.</Typography>
+                    </Box>
+                </>
+            }>
+                <CustomSearchBar 
+                    placeholder='Search'
+                    endAdornment={<SearchIcon htmlColor='#EAEAEA' />}
+                />
+            </Tooltip>
         </Box>
         </>
     )
