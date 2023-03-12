@@ -1,11 +1,12 @@
 import React, {useState, createRef, useEffect} from 'react';
 import {useNavigate, useParams, useLocation} from '@remix-run/react';
 // @mui components
-import Box from '@mui/material/Box';
+import Box, {BoxProps} from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
+import {styled} from '@mui/material/styles';
 // @mui icons
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -22,6 +23,18 @@ interface ViewPortfolioNavbarProps {
     other_portfolio_items: PortfolioItem["other_portfolio_items"] 
 }
 
+// A custom component
+const AbsoluteBox = styled(Box)<BoxProps>(({theme}) => ({
+    [theme.breakpoints.up("md")]: {
+        position: "absolute",
+        top: "16px"
+    },
+    [theme.breakpoints.down("md")]: {
+        position: "static"
+    }
+}));
+
+// The navbar component
 const ViewPortfolioNavbar: React.FC<ViewPortfolioNavbarProps> = (props: ViewPortfolioNavbarProps) => {
     const {other_portfolio_items} = props;
     const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -44,7 +57,8 @@ const ViewPortfolioNavbar: React.FC<ViewPortfolioNavbarProps> = (props: ViewPort
 
     }, [location.pathname]);
 
-    const onResize = () => {
+    // Make the navbar sticky on scroll
+    const onScroll = () => {
         if (NavRef.current !== null && HeaderRef.current !== null && NavBackdropRef.current !== null) {
             // If the navbar backdrop (the element that acts a navbar) is outside the screen
             // Bring it down using top property
@@ -60,12 +74,12 @@ const ViewPortfolioNavbar: React.FC<ViewPortfolioNavbarProps> = (props: ViewPort
     // Constructor to watch for changes to Navbar and header elements and update the event listener
     useEffect(() => {
 
-        window.addEventListener("scroll", onResize);
+        window.addEventListener("scroll", onScroll);
 
         // Destructor
         return () => {
             // Remove the event listener
-            window.removeEventListener("scroll", onResize);
+            window.removeEventListener("scroll", onScroll);
         }
     }, [NavRef, NavBackdropRef, HeaderRef]);
 
@@ -73,7 +87,7 @@ const ViewPortfolioNavbar: React.FC<ViewPortfolioNavbarProps> = (props: ViewPort
     useEffect(() => {
         // Destructor
         return () => {
-            window.removeEventListener("scroll", onResize);
+            window.removeEventListener("scroll", onScroll);
         }
     }, [])
 
@@ -83,7 +97,7 @@ const ViewPortfolioNavbar: React.FC<ViewPortfolioNavbarProps> = (props: ViewPort
         <Box ref={NavBackdropRef}></Box>
 
         {/* The navbar */}
-        <Box ref={NavRef} sx={{position: "absolute", top: "16px"}}>
+        <AbsoluteBox ref={NavRef}>
             <AppCard sx={{backgroundColor: APP_THEME.palette.primary.main}}>
                 <Box p={2} display="flex" alignItems="center">
                     <IconButton onClick={toggleButton}><MenuIcon/></IconButton>
@@ -118,7 +132,7 @@ const ViewPortfolioNavbar: React.FC<ViewPortfolioNavbarProps> = (props: ViewPort
                     </Box>
                 </Collapse>
             </AppCard>
-        </Box>     
+        </AbsoluteBox>
         </>
     )
 };

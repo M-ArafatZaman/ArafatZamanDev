@@ -9,6 +9,7 @@ import MetaTags from './MetaTags';
 import getReadTime from './getReadTime';
 import formatDate from './formatDate';
 import generateShortDescription from './generateShortDescription';
+import useWidth from './useWidth';
 
 export {
     toHex,
@@ -22,5 +23,6 @@ export {
     MetaTags,
     getReadTime,
     formatDate,
-    generateShortDescription
+    generateShortDescription,
+    useWidth
 };

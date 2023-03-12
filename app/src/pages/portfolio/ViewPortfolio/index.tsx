@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Skeleton from '@mui/material/Skeleton';
+import { useTheme } from '@mui/material/styles';
 // Marked, highlight js, and html react parser
 import {marked} from 'marked';
 import hljs from "highlight.js";
@@ -23,6 +24,8 @@ import {replaceContentWithCarousel, replaceContentWithIphone} from '../../../com
 // Navbar
 import ViewPortfolioNavbar from './ViewPortfolioNavbar';
 import Portfolio from '../index';
+// Util functions
+import {useWidth} from '../../../utils';
 
 
 /* 
@@ -32,6 +35,8 @@ It is a page component. It receives the slug parameter from the browserrouter AP
 */
 const ViewPortfolio: React.FC = () => {
     const [isHydrated, setIsHydrated] = useState<boolean>(false);
+    const width = useWidth();
+    const APP_THEME = useTheme();
     
     // Check for hydration
     useEffect(() => {
@@ -105,14 +110,14 @@ const ViewPortfolio: React.FC = () => {
                     // Else found a portfolio item
                     <>
                         {/* Portfolio Navbar */}
-                        <Grid item xs={12} md={4} sx={{overflow: "hidden", position: "relative"}}>
+                        <Grid item xs={12} md={4} sx={{position: "relative"}}>
                             <ViewPortfolioNavbar other_portfolio_items={$data.payload.other_portfolio_items} />
                         </Grid>
 
                         {/* Portfolio content */}
                         <Grid item xs={12} md={8}>
                             <AppCard>
-                                <Box sx={{p: 3}}>
+                                <Box py={3} px={width >= APP_THEME.breakpoints.values["md"] ? 3 : 2}>
                                     {/* Header and tags */}
                                     <Typography variant="h4" sx={{textDecoration: "underline", mb: 1}}>{$data.payload.name}</Typography>
                                     {$data.payload.tags.map((str, i) => <Chip label={str} size="small" color="info" sx={{mr: 1}} key={i}/>) }
