@@ -7,6 +7,7 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
+import {useTheme} from '@mui/material/styles';
 // @mui icons
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -22,6 +23,7 @@ import HTMLReactParser from 'html-react-parser';
 import hljs from 'highlight.js';
 // Projects wrapper
 import Projects from '../index';
+import {useWidth} from '../../../utils';
 
 
 const ViewProject: React.FC = () => {
@@ -32,27 +34,10 @@ const ViewProject: React.FC = () => {
     }, []);
 
     const [parsedContent, setParsedContent] = useState<ReturnType<typeof HTMLReactParser>>();
-    const [width, setWidth] = useState<number>(0);
+    const width = useWidth();
+    const APP_THEME = useTheme();
     // Data api from the loader
     const $data: ViewProjectAPIResponse = useLoaderData<typeof ViewProjectLoader>();
-
-    // When the component is mounted
-    // Attach an eventlistener to update the width whenever the width of the window changes
-    // removeEventlistener on component unmount
-    useEffect(() => {
-        if (isHydrated) {
-            const updateWidth = () => {
-                setWidth(window.innerWidth);
-            };
-            window.addEventListener("resize", updateWidth);
-            updateWidth();
-    
-            // Destructor
-            return () => {
-                window.removeEventListener("resize", updateWidth);
-            }
-        }
-    }, [isHydrated]);
 
     // Router dom
     const navigate = useNavigate();
@@ -76,7 +61,7 @@ const ViewProject: React.FC = () => {
 
     return (
         <Projects>
-            <Grid container spacing={2} direction={width <= 900 ? "column-reverse" : "row"}>
+            <Grid container spacing={2}>
                 {
                     !isHydrated ? 
                     <>
@@ -98,47 +83,57 @@ const ViewProject: React.FC = () => {
                     :
                     // Data is found
                     <>
-                    {/* Main content */}
-                    <Grid item xs={12} md={9}>
-                        <AppCard sx={{p: 2}}>
-                            {/* Title */}
-                            <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center">
-                                <AccountTreeIcon/>
-                                <Typography variant="h4" sx={{ml: 1}}>{$data.item.name}</Typography>
-                            </Box>
-                            <Divider sx={{my: 1}} />
-
-                            {/* Content */}
-                            <Typography component="div" p={1}>
-                                {parsedContent}
-                            </Typography>
-
-                            <Divider sx={{my: 1}} />
-                            <Box>
-                                <Button
-                                    startIcon={<ArrowBackIcon/>}
-                                    variant="contained"
-                                    color="error"
-                                    onClick={goBack}
-                                >Go back</Button>
-                            </Box>
-                        </AppCard>
-                    </Grid>
-
                     {/* Extra content */}
                     <Grid item xs={12} md={3}>
                         <Box sx={{
                             width: "100%",
-                            p: 2,
                             justifyContent: "center",
                             alignItems: "center",
                             display: "flex",
-                            flexDirection: "column"
+                            flexDirection: "column",
+                            "& > img": {
+                                objectFit: "contain",
+                                maxWidth: "100%",
+                                maxHeight: "300px",
+                                borderRadius: "8px"
+                            }
                         }}>
-                            <img src={$data.item.imageURL} style={{objectFit: "contain", width: "100%", maxHeight: "300px", borderRadius: "8px"}} />
-                            <Typography sx={{mt: 1, fontSize: 12}} variant="body2" color="GrayText">{$data.item.short_description}</Typography>
+                            <img src={$data.item.imageURL} />
+                            <Typography sx={{mt: 1, fontSize: 12}} variant="body2" color="GrayText">
+                                {$data.item.short_description}
+                            </Typography>
                         </Box>
                     </Grid>
+
+                    {/* Main content */}
+                    <Grid item xs={12} md={9}>
+                        <AppCard>
+                            <Box py={3} px={width >= APP_THEME.breakpoints.values["md"] ? 2 : 1}>
+                                {/* Title */}
+                                <Box display="flex" flexDirection="row" alignItems="center" justifyContent="center">
+                                    <AccountTreeIcon/>
+                                    <Typography variant="h4" sx={{ml: 1}}>{$data.item.name}</Typography>
+                                </Box>
+                                <Divider sx={{my: 1}} />
+
+                                {/* Content */}
+                                <Typography component="div" p={1}>
+                                    {parsedContent}
+                                </Typography>
+
+                                <Divider sx={{my: 1}} />
+                                <Box>
+                                    <Button
+                                        startIcon={<ArrowBackIcon/>}
+                                        variant="contained"
+                                        color="error"
+                                        onClick={goBack}
+                                    >Go back</Button>
+                                </Box>
+                            </Box>
+                        </AppCard>
+                    </Grid>
+
                     </>
                 }
             </Grid>
