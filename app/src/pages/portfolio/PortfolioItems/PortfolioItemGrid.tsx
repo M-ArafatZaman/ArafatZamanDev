@@ -40,7 +40,7 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
 
     // Onclick
     const onClick = () => {
-        navigate(`/portfolio/${slug}`);
+        navigate(`/portfolio/${slug}/`);
     }
 
     return (

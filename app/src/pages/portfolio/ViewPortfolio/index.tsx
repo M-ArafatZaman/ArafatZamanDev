@@ -120,7 +120,7 @@ const ViewPortfolio: React.FC = () => {
                                 <Box py={3} px={width >= APP_THEME.breakpoints.values["md"] ? 3 : 2}>
                                     {/* Header and tags */}
                                     <Typography variant="h4" sx={{textDecoration: "underline", mb: 1}}>{$data.payload.name}</Typography>
-                                    {$data.payload.tags.map((str, i) => <Chip label={str} size="small" color="info" sx={{mr: 1}} key={i}/>) }
+                                    {$data.payload.tags.map((str, i) => <Chip label={str} size="small" color="info" sx={{m: .5, ml: 0}} key={i}/>) }
                                     
                                     <Divider sx={{my: 2}}/>
 
