@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from "@mui/material/Grid";
-import {SxProps} from '@mui/material/styles';
+import {SxProps, useTheme} from '@mui/material/styles';
 // @mui icons
 import CalendarIcon from '@mui/icons-material/CalendarMonth';
 import ClockIcon from '@mui/icons-material/WatchLater';
@@ -13,6 +13,7 @@ import ClockIcon from '@mui/icons-material/WatchLater';
 import AppCard from '../../home/components/AppCard';
 // Context and types
 import {BlogItems} from '../types';
+import { useWidth } from '~/src/utils';
 
 
 // Individual suggestion item
@@ -72,10 +73,12 @@ interface SuggestionProps {
 const Suggestions: React.FC<SuggestionProps> = (props: SuggestionProps) => {
 
     const {suggestions} = props;
+    const width = useWidth();
+    const theme = useTheme();
 
     return (
         <AppCard sx={{mt: 1}}>
-            <Box sx={{p: 3}}>
+            <Box py={3} px={width >= theme.breakpoints.values["sm"] ? 3 : 2}>
                 <Typography variant="h6">Suggested</Typography>
                 <Divider sx={{my: 1}}/>
 
