@@ -21,6 +21,13 @@ export const GetBlogsLoader: LoaderFunction = async () => {
         }
     });
 
+    // If nothing is found, an error occured
+    if (!data) {
+        return json({
+            status: "Error"
+        })
+    }
+
     const response: GetBlogsAPIResponse = {
         status: "OK", 
         response: data.map((elem) => ({
@@ -35,24 +42,12 @@ export const GetBlogsLoader: LoaderFunction = async () => {
 };
 
 // Fetch function to view an individual portfolio item
-export const READ_BLOG = "blogs/api/read_blog/";
 interface LoaderArgsWithSlugParam extends LoaderArgs {
     params: {
         slug?: string
     }
 };
 export const ReadBlogLoader: LoaderFunction = async ({params}: LoaderArgsWithSlugParam) => {
-    const ENDPOINT = `${BASE}${READ_BLOG}${params.slug}/`;
-    const resp = await fetch(ENDPOINT, {
-        method: "GET",
-        mode: "cors"
-    })
-    .then((response) => response.json())
-    .catch(() => {
-        return {
-            status: "Error"
-        }
-    }) as Promise<ReadBlogsAPIResponse>;
 
     const data = await prisma.blogs.findFirst({
         where: {
@@ -67,6 +62,13 @@ export const ReadBlogLoader: LoaderFunction = async ({params}: LoaderArgsWithSlu
             image: true
         }
     });
+
+    // If nothing is found
+    if (!data) {
+        return json({
+            status: "Not Found."
+        })
+    }
 
     const suggestions = await prisma.blogs.findMany({
         orderBy: {

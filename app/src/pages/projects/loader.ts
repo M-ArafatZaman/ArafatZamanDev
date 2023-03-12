@@ -17,6 +17,13 @@ export const GetProjectsLoader: LoaderFunction = async () => {
         }
     });
 
+    // If nothing is found, an error must have occured
+    if (!data) {
+        return json({
+            status: "Not Found."
+        })
+    }
+
     const response: GetProjectsAPIResponse = {
         status: "OK",
         items: data.map((elem) => ({
@@ -50,6 +57,13 @@ export const ViewProjectLoader = async ({params}: LoaderArgsWithSlugParam) => {
             slug: true,
         }
     });
+
+    // If not found
+    if (!data) {
+        return json({
+            status: "Not Found."
+        })
+    }
 
     const response: ViewProjectAPIResponse = {
         status: "OK",

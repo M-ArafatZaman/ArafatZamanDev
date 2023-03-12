@@ -18,6 +18,13 @@ export const GetPortfolioItemsLoader: LoaderFunction = async () => {
         }
     });
 
+    // If nothing is found, an error must have occured
+    if (!data) {
+        return json({
+            status: "Not Found."
+        })
+    }
+
     const response: PortfolioAPIResponse = {
         status: "OK",
         items: data.map((elem) => ({
@@ -54,6 +61,13 @@ export const ViewPortfolioItemLoader: LoaderFunction = async ({params}: LoaderAr
             slug: true,
         }
     });
+
+    // If nothing is found
+    if (!data) {
+        return json({
+            status: "Not Found."
+        })
+    }
 
     const otherItems = await prisma.portfolio.findMany({
         select: {
