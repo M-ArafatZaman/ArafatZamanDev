@@ -6,6 +6,8 @@ import {isElementInViewport, isAnyPartOfElementInViewport} from './viewport';
 import LinkIcon from './LinkIcon';
 import generateString from './generateString';
 import MetaTags from './MetaTags';
+import getReadTime from './getReadTime';
+import formateDate from './formateDate';
 
 export {
     toHex,
@@ -16,5 +18,7 @@ export {
     isAnyPartOfElementInViewport,
     LinkIcon,
     generateString,
-    MetaTags
+    MetaTags,
+    getReadTime,
+    formateDate
 };
