@@ -68,11 +68,10 @@ const ViewPortfolio: React.FC = () => {
     // Execute javascript of all the carousel after the content is rendered
     useEffect(() => {
         // Execute the javascript after 1000ms
-        console.log("We executing with", JS);
         JS.forEach((str) => {
             setTimeout(() => {
                 eval(str);
-            }, 250);
+            }, 1000);
         })
     }, [JS]);
 
