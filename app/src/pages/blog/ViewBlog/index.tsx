@@ -48,7 +48,7 @@ const ViewBlog: React.FC = () => {
         if (isHydrated && $data.status === "OK" && typeof $data.payload !== "undefined") {
             setParsedContent(HTMLReactParser(marked.parse($data.payload.content)));
         }
-    }, [isHydrated]);
+    }, [isHydrated, $data]);
 
     // Highlight once parsed content is loading
     useEffect(() => {
