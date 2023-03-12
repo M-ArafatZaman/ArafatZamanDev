@@ -3,7 +3,7 @@ import { LoaderFunction, LoaderArgs } from '@remix-run/node';
 // @types
 import {GetBlogsAPIResponse, ReadBlogsAPIResponse} from './types';
 import {prisma} from '../../dbconfig.server';
-import { getReadTime, formateDate } from '../../utils';
+import { getReadTime, formateDate, generateShortDescription } from '../../utils';
 import { json } from 'react-router-dom';
 
 // Fetch function to get portfolio items
@@ -53,5 +53,58 @@ export const ReadBlogLoader: LoaderFunction = async ({params}: LoaderArgsWithSlu
             status: "Error"
         }
     }) as Promise<ReadBlogsAPIResponse>;
-    return resp;
+
+    const data = await prisma.blogs.findFirst({
+        where: {
+            slug: params.slug
+        },
+        select: {
+            name: true,
+            date_created: true,
+            content: true,
+            tags: true,
+            slug: true,
+            image: true
+        }
+    });
+
+    const suggestions = await prisma.blogs.findMany({
+        orderBy: {
+            date_created: "desc"
+        },
+        where: {
+            NOT: {
+                slug: params.slug
+            }
+        },
+        take: 3,
+        select: {
+            name: true,
+            date_created: true,
+            content: true,
+            slug: true
+        }
+    });
+
+    const response: ReadBlogsAPIResponse = {
+        status: "OK",
+        payload: {
+            name: data?.name as string,
+            date_created: formateDate(data?.date_created as Date) as string,
+            tags: data?.tags?.split(" ") as string[],
+            slug: data?.slug as string,
+            read_time: getReadTime(data?.content as string) as number,
+            content: data?.content as string,
+            short_description: "",
+            imageURL: data?.image as string,
+            suggestions: suggestions.map((elem) => ({
+                name: elem.name as string,
+                date_created: formateDate(elem.date_created),
+                slug: elem.slug as string,
+                read_time: getReadTime(elem.content)
+            }))
+        }
+    }
+
+    return json(response);
 }

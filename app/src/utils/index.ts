@@ -8,6 +8,7 @@ import generateString from './generateString';
 import MetaTags from './MetaTags';
 import getReadTime from './getReadTime';
 import formateDate from './formateDate';
+import generateShortDescription from './generateSuggestion';
 
 export {
     toHex,
@@ -20,5 +21,6 @@ export {
     generateString,
     MetaTags,
     getReadTime,
-    formateDate
+    formateDate,
+    generateShortDescription
 };
