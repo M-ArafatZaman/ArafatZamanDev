@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Grid from "@mui/material/Grid";
+import ButtonBase from '@mui/material/ButtonBase';
 import {SxProps, useTheme} from '@mui/material/styles';
 // @mui icons
 import CalendarIcon from '@mui/icons-material/CalendarMonth';
@@ -25,6 +26,7 @@ const SuggestionItem: React.FC<SuggestionItemProps> = (props: SuggestionItemProp
     // Some styles to make it hoverable and clickable
     const CardStyles: SxProps = {
         height: "100%",
+        width: "100%",
         display: "flex",
         flexDirection: "column",
         cursor: "pointer",
@@ -38,12 +40,16 @@ const SuggestionItem: React.FC<SuggestionItemProps> = (props: SuggestionItemProp
     };
 
     // On click to go to the blog
+    const href = `/blog/${slug}/`;
     const navigate = useNavigate();
-    const onClick = () => { navigate(`/blog/${slug}/`) };
+    const onClick = (e: React.MouseEvent<HTMLElement>) => { 
+        e.preventDefault();
+        navigate(href) 
+    };
 
     return (
         <Grid item xs={12} sm={4}>
-            <Box sx={{height: "100%", width: "100%", flexAlign: "start"}} onClick={onClick}>
+            <ButtonBase sx={{height: "100%", width: "100%", flexAlign: "start", textAlign: "left", borderRadius: "12px"}} onClick={onClick} href={href}>
                 <AppCard sx={CardStyles}>
                     {/* Title */}
                     <Box flexGrow={1} px={2} pt={1} pb={0}>
@@ -60,7 +66,7 @@ const SuggestionItem: React.FC<SuggestionItemProps> = (props: SuggestionItemProp
                         </Typography>
                     </Box>
                 </AppCard>
-            </Box>
+            </ButtonBase>
         </Grid>
     )
 }

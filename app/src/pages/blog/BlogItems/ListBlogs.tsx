@@ -22,12 +22,14 @@ const ListBlogs: React.FC<ListBlogsProps> = (props: ListBlogsProps) => {
     const navigate = useNavigate();
 
     // Go to the blog page
-    const onClick = () => {
+    const href = `/blog/${slug}/`;
+    const onClick = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
         navigate(`/blog/${slug}/`);
     }
 
     return (
-        <ListItemButton divider={!isLast} onClick={onClick}>
+        <ListItemButton divider={!isLast} onClick={onClick} href={href}>
             <ListItemText>
                 {/* Name */}
                 <Typography variant="h6">
