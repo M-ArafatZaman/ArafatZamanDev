@@ -20,6 +20,7 @@ export interface BlogItem extends BlogItems {
     short_description: string;
     suggestions: Omit<BlogItems, "tags">[];
     imageURL: string;
+    md: string;
 }
 
 // /read-blog/:slug response

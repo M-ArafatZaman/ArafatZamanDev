@@ -16,7 +16,6 @@ import AppCard from '../../home/components/AppCard';
 import ArafatTag from '../components/ArafatTag';
 import Suggestions from './Suggestions';
 import Error from '../../../components/Error';
-import SkeletonLoader from './SkeletonLoader';
 // Types and laoders
 import {ReadBlogLoader} from '../loader';
 import {ReadBlogsAPIResponse} from '../types';
@@ -34,40 +33,37 @@ marked.use(ImageExtension);
 
 const ViewBlog: React.FC = () => {
     const [isHydrated, setIsHydrated] = useState<boolean>(false);
-    // Hydration check
+    useEffect(() => setIsHydrated(true), []);
+    // Location
+    const [pageHref, setPageHref] = useState<string>();
     useEffect(() => {
-        setIsHydrated(true);
-    }, []);
-
+        if (isHydrated) {setPageHref(window.location.href)}
+    }, [isHydrated]);
+    
     const width = useWidth();
     const theme = useTheme();
-    const [parsedContent, setParsedContent] = useState<JSX.Element | JSX.Element[] | string>();
     // DataAPI from the loader
     const $data: ReadBlogsAPIResponse = useLoaderData<typeof ReadBlogLoader>();
     // Navigator
     const navigate = useNavigate();
 
-    // After hydration
-    useEffect(() => {
-        if (isHydrated && $data.status === "OK" && typeof $data.payload !== "undefined") {
-            setParsedContent(HTMLReactParser(marked.parse($data.payload.content)));
-        }
-    }, [isHydrated, $data]);
+    const href = "/blog/"
+    const goBack = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        navigate(href);
+    }
 
     // Highlight once parsed content is loading
     useEffect(() => {
         hljs.highlightAll();
-    }, [parsedContent])
+    }, [$data])
 
     return (
         <Blog>
             <Box>
                 <AppCard>
                     <Box py={3} px={width > theme.breakpoints.values["sm"] ? 3 : 2}>    
-                        {
-                            // If it is still loading
-                            !isHydrated ? <SkeletonLoader/> :
-                            
+                        {   
                             // Else check for erros
                             $data.status === "Error" ?
                             <Error message="Sorry, an unknown server error occured!" />
@@ -102,7 +98,7 @@ const ViewBlog: React.FC = () => {
                                         objectFit: "contain"
                                     }
                                 }}>
-                                    {parsedContent}
+                                    {HTMLReactParser($data.payload?.md as string)}
                                 </Typography>
 
                                 {/* Tag */}
@@ -112,13 +108,16 @@ const ViewBlog: React.FC = () => {
 
                                 {/* Facebook plugins */}
                                 <Box>
-
-                                    <div className="fb-like" data-href={window.location.href} data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
-                                    <div className="fb-comments" data-href={window.location.href} data-width="100%" data-numposts="5"></div>
+                                    {pageHref && (
+                                        <>
+                                        <div className="fb-like" data-href={pageHref} data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+                                        <div className="fb-comments" data-href={pageHref} data-width="100%" data-numposts="5"></div>
+                                        </>
+                                    )}
                                 </Box>
 
                                 <Divider sx={{my: 1}} />
-                                <Button variant="contained" startIcon={<ArrowBackIcon/>} color="error" onClick={() => {navigate("/blog/")}}>Go back</Button>
+                                <Button variant="contained" startIcon={<ArrowBackIcon/>} color="error" onClick={goBack} href={href}>Go back</Button>
                             </>
                         }
                     </Box>

@@ -5,6 +5,7 @@ import {GetBlogsAPIResponse, ReadBlogsAPIResponse} from './types';
 import {prisma} from '../../dbconfig.server';
 import { getReadTime, formatDate, generateShortDescription } from '../../utils';
 import { json } from 'react-router-dom';
+import {marked} from 'marked';
 
 // Fetch function to get portfolio items
 export const GetBlogsLoader: LoaderFunction = async () => {
@@ -104,7 +105,8 @@ export const ReadBlogLoader: LoaderFunction = async ({params}: LoaderArgsWithSlu
                 date_created: formatDate(elem.date_created),
                 slug: elem.slug as string,
                 read_time: getReadTime(elem.content)
-            }))
+            })),
+            md: marked.parse(data.content as string)
         }
     }
 
