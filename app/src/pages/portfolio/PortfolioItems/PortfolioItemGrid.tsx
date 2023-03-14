@@ -25,6 +25,7 @@ const ANIMATION_CLASSES = ["fadeInLeft", "fadeInUp", "fadeInDown", "fadeInRight"
 const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioItemGridProps) => {
     const {name, short_description, image, slug, index} = props;
     const navigate = useNavigate();
+    const href = `/portfolio/${slug}/`;
 
     // On hover style
     const onHoverStyle: SxProps = {
@@ -39,8 +40,9 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
     };
 
     // Onclick
-    const onClick = () => {
-        navigate(`/portfolio/${slug}/`);
+    const onClick = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        navigate(href);
     }
 
     return (
@@ -70,7 +72,7 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
 
                 {/* Button */}
                 <Box sx={{p: 2, backgroundColor: "rgba(0,0,0,.1)"}}>
-                    <Button color="info" onClick={onClick}>View</Button>
+                    <Button color="info" onClick={onClick} href={href}>View</Button>
                 </Box>
             </AppCard>
         </Grid>

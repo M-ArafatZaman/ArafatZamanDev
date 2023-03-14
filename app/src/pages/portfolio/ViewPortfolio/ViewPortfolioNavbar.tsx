@@ -125,8 +125,12 @@ const ViewPortfolioNavbar: React.FC<ViewPortfolioNavbarProps> = (props: ViewPort
                                 fullWidth 
                                 variant="contained" 
                                 sx={{backgroundColor: "rgba(255,255,255,0.4)", my: 0.5}}
-                                onClick={() => {navigate(`/portfolio/${P_ITEMS.slug}`)}}
+                                onClick={(e: React.MouseEvent<HTMLElement>) => {
+                                    e.preventDefault();
+                                    navigate(`/portfolio/${P_ITEMS.slug}`)
+                                }}
                                 disabled={params.slug == P_ITEMS.slug}
+                                href={`/portfolio/${P_ITEMS.slug}/`}
                             >{P_ITEMS.name}</Button>
                         ))}
                     </Box>
