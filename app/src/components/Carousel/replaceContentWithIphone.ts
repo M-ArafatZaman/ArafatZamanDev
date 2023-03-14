@@ -10,6 +10,8 @@ const END_CAROUSEL = "<p>[END-IPHONE-CAROUSEL]</p>";
 const MATCH_CAROUSEL = new RegExp("(<p>\\[IPHONE-CAROUSEL\\]<\\/p>)[\\s\\S]+?(<p>\\[END-IPHONE-CAROUSEL\\]<\\/p>)");
 const PARAGRAPH_BEGIN = "<p>";
 const PARAGRAPH_END = "</p>";
+// Image tags
+const IMAGE_TAGS = new RegExp(/<img(.)+?\/>/g);
 
 interface replaceContentWithIphoneType {
     html: string;
@@ -25,10 +27,17 @@ function replaceContentWithIphone(html: string): replaceContentWithIphoneType {
         // Get the matched content and filter appropriately
         let matchContent = match[0];
         matchContent = matchContent.substring(BEGIN_CAROUSEL.length, matchContent.length - END_CAROUSEL.length);
-        // Remove null strings and the <p></p> tags
-        let imageTags = matchContent.split("\n").filter((str) => str !== "").map((str) => str.substring(PARAGRAPH_BEGIN.length, str.length - PARAGRAPH_END.length));
+        // Extract all image tags
+        let imageTags: string[] = [];
+        let match_img_tags = IMAGE_TAGS.exec(matchContent);
+        while (match_img_tags !== null) {
+            imageTags[imageTags.length] = match_img_tags[0];
+            match_img_tags = IMAGE_TAGS.exec(matchContent);
+        };
         
+        // Generate HTML
         let id = generateString(10);
+        let carouselScript = getCarouselJS(id);
         let carousel = `
         <div class="iphone-container">
             <div class="iphone">
@@ -58,7 +67,6 @@ function replaceContentWithIphone(html: string): replaceContentWithIphoneType {
             </div>
         </div>
         `;
-        let carouselScript = getCarouselJS(id);
 
         html = html.replace(match[0], carousel);
         JAVASCRIPT[JAVASCRIPT.length] = carouselScript;
