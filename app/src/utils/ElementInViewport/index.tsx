@@ -63,6 +63,10 @@ const ElementInViewport: React.FC<ElementInViewportProps> = (props: ElementInVie
     // On component mount, add event listeners
     useEffect(() => {
         if (isHydrated) {
+            // Remove the classes that are inplace when javascript is not added
+            ContainerElementRef.current?.classList.remove("animate__animated", `animate__${animation}`, "animate__delay-1s");
+            ContainerElementRef.current?.classList.add(HIDE_CLASSNAME);
+
             WINDOW_EVENTS.forEach((event) => {
                 window.addEventListener(event, onChange);
             });
@@ -79,7 +83,7 @@ const ElementInViewport: React.FC<ElementInViewportProps> = (props: ElementInVie
     }, [ContainerElementRef, isHydrated]);
 
     return (
-        <Box sx={Style} ref={ContainerElementRef} className={HIDE_CLASSNAME}>
+        <Box sx={Style} ref={ContainerElementRef} className={["animate__animated", `animate__${animation}`, "animate__delay-1s"].join(" ")}>
             {children}
         </Box>
     ) 
