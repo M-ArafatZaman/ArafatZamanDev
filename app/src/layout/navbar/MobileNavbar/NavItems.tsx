@@ -33,12 +33,13 @@ const NavItem: React.FC<NavItemProps> = (props: NavItemProps) => {
     }, [location.pathname]);
 
     // On Click
-    const onClick = () => {
+    const onClick = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
         navigate(href);
     }
 
     return (
-        <ListItemButton disabled={active} onClick={onClick}>
+        <ListItemButton disabled={active} href={href} onClick={onClick}>
             {/* Icon */}
             <ListItemIcon>
                 {icon}

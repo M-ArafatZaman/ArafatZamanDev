@@ -67,7 +67,7 @@ const NavLink: React.FC<NavLinkProps> = (props: NavLinkProps) => {
             paddingX: 2,
             cursor: active ? "default" : "pointer"
         }}>
-            <Link sx={LinkStyles} onClick={onClick}>{label}</Link>
+            <Link sx={LinkStyles} onClick={onClick} href={href}>{label}</Link>
         </Box>
     )
 }
