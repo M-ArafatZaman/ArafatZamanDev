@@ -6,6 +6,7 @@ import {GLTFLoader, OrbitControls} from '../../../components/ThreeJSComponents';
 import {APP_THEME} from '../../../../src/appTheme';
 // Utils
 import {isAnyPartOfElementInViewport} from '../../../utils';
+import {isWebGLAvailable} from './isWebGLAvailable';
 
 const RASPBERRY_PI_MODEL: string = "./models/raspberry_pi/scene.gltf";
 
@@ -33,7 +34,7 @@ const RaspberryPI: React.FC = () => {
 
     // Only after the component is hydrated
     useEffect(() => {
-        if (isHydrated) {
+        if (isHydrated && isWebGLAvailable()) {
             const WIDTH: number = ContainerRef.current?.clientWidth as number;
             const HEIGHT: number = ContainerRef.current?.clientHeight as number;
             // Create scene, renderer, and camera
