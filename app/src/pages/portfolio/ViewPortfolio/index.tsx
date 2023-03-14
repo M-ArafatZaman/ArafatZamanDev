@@ -6,10 +6,8 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
-import Skeleton from '@mui/material/Skeleton';
 import { useTheme } from '@mui/material/styles';
 // Marked, highlight js, and html react parser
-import {marked} from 'marked';
 import hljs from "highlight.js";
 import htmlReactParser from 'html-react-parser';
 // Other components
@@ -19,8 +17,6 @@ import Error from '../../../components/Error';
 import {ViewPortfolioItemAPIResponse} from '../types';
 // Loader
 import {ViewPortfolioItemLoader} from '../loader';
-// Carousel component
-import {replaceContentWithCarousel, replaceContentWithIphone} from '../../../components/Carousel';
 // Navbar
 import ViewPortfolioNavbar from './ViewPortfolioNavbar';
 import Portfolio from '../index';
@@ -34,67 +30,27 @@ from the server and renders it.
 It is a page component. It receives the slug parameter from the browserrouter API.
 */
 const ViewPortfolio: React.FC = () => {
-    const [isHydrated, setIsHydrated] = useState<boolean>(false);
     const width = useWidth();
     const APP_THEME = useTheme();
     
-    // Check for hydration
-    useEffect(() => {
-        setIsHydrated(true);
-    }, []);
-    
     // The data fetched from API
     const $data: ViewPortfolioItemAPIResponse = useLoaderData<typeof ViewPortfolioItemLoader>();
-    // The content parsed and the javascript to execute
-    const [content, setContent] = useState<ReturnType<typeof htmlReactParser>>();
-    const [JS, setJS] = useState<string[]>([]);
 
-    // Highlight all after hydration
-    useEffect(() => {
-        if (isHydrated && $data.status === "OK") {
-            const contentMD: string = marked.parse($data.payload.content);
-            // Replace to parse normal carousel and then parse iphone carousel
-            const replacedWithCarousel = replaceContentWithCarousel(contentMD);
-            const replacedFinal = replaceContentWithIphone(replacedWithCarousel.html);
-            // Parse from html string to React jsx
-            const contentMDParsed: JSX.Element | JSX.Element[] | string = htmlReactParser(replacedFinal.html);
-            // Update states
-            setContent(contentMDParsed);
-            setJS([...replacedWithCarousel.js, ...replacedFinal.js]);
-        }
-    }, [isHydrated, $data]);
-    
     // After the content is rendered
     useEffect(() => {
         // This is executed when the content is parsed
         hljs.highlightAll();
-    }, [content]);
-
-    // Execute javascript of all the carousel after the content is rendered
-    useEffect(() => {
-        // Execute the javascript after 1000ms
-        JS.forEach((str) => {
-            setTimeout(() => {
-                eval(str);
-            }, 1000);
-        })
-    }, [JS]);
+        if ($data.status === "OK") {
+            $data.payload.js.forEach((scripts) => {
+                setTimeout(() => eval(scripts), 100);
+            });
+        }
+    }, [$data]);
 
     return (
         <Portfolio>
             <Grid container spacing={2}>
                 {
-                    !isHydrated ?
-                    // A skeleton loader
-                    <>
-                        <Grid item xs={12} md={4}>
-                            <Skeleton variant="rounded" height={500}/>
-                        </Grid>
-                        <Grid item xs={12} md={8}>
-                            <Skeleton variant="rounded" height={800}/>
-                        </Grid>
-                    </>    
-                    :
 
                     // If there is an from the loader, then there has been some sort of error occured
                     $data.status === "Error" ? 
@@ -131,12 +87,11 @@ const ViewPortfolio: React.FC = () => {
                                             objectFit: "contain"
                                         }
                                     }}>
-                                        {content}
+                                        {htmlReactParser($data.payload.md)}
                                     </Typography>
                                 </Box>
                             </AppCard>
                         </Grid>
-
                     </>
 
                 }

@@ -2,6 +2,9 @@ import {LoaderFunction, LoaderArgs} from '@remix-run/node';
 import { PortfolioAPIResponse, ViewPortfolioItemAPIResponse } from './types';
 import {prisma} from '../../dbconfig.server';
 import {json} from 'react-router-dom';
+// Parsers
+import {marked} from 'marked';
+import {replaceContentWithCarousel, replaceContentWithIphone} from '../../components/Carousel/';
 
 // Fetch function to get portfolio items
 export const GetPortfolioItemsLoader: LoaderFunction = async () => {
@@ -48,6 +51,7 @@ interface LoaderArgsWithSlugParam extends LoaderArgs {
 
 export const ViewPortfolioItemLoader: LoaderFunction = async ({params}: LoaderArgsWithSlugParam) => {
 
+    // Get the main portfolio data that is important
     const data = await prisma.portfolio.findFirst({
         where: {
             slug: params.slug
@@ -69,6 +73,7 @@ export const ViewPortfolioItemLoader: LoaderFunction = async ({params}: LoaderAr
         })
     }
 
+    // Get other navbar items
     const otherItems = await prisma.portfolio.findMany({
         select: {
             name: true,
@@ -78,6 +83,12 @@ export const ViewPortfolioItemLoader: LoaderFunction = async ({params}: LoaderAr
             date_created: "desc"
         }
     });
+
+    // Parse content
+    const contentMD: string = marked.parse(data.content);
+    // Replace to parse normal carousel and then parse iphone carousel
+    const replacedWithCarousel = replaceContentWithCarousel(contentMD);
+    const replacedFinal = replaceContentWithIphone(replacedWithCarousel.html);
 
     const response: ViewPortfolioItemAPIResponse = {
         status: "OK",
@@ -91,7 +102,10 @@ export const ViewPortfolioItemLoader: LoaderFunction = async ({params}: LoaderAr
             other_portfolio_items: otherItems.map((elem) => ({
                 name: elem.name as string,
                 slug: elem.slug as string
-            }))
+            })),
+            // Add marked content
+            md: replacedFinal.html,
+            js: [...replacedWithCarousel.js, ...replacedFinal.js]
         }
     }
 

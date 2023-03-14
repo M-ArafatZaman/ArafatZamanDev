@@ -9,6 +9,10 @@ interface PortfolioItems {
 // A single portfolio item
 interface PortfolioItem extends PortfolioItems {
     content: string;
+    // These are all marked content from the server
+    md: string;
+    js: string[];
+    // end marked
     other_portfolio_items: {
         name: string;
         slug: string;
