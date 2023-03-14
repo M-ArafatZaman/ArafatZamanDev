@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useNavigate, useLocation} from 'react-router-dom';
+import {useNavigate, useLocation} from '@remix-run/react';
 // @mui components
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
