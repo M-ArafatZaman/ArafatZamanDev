@@ -2,6 +2,7 @@ import {LoaderFunction, LoaderArgs} from '@remix-run/node';
 import {GetProjectsAPIResponse, ViewProjectAPIResponse} from './types';
 import {prisma} from '../../dbconfig.server';
 import {json} from 'react-router-dom';
+import {marked} from 'marked';
 
 // Fetch function to get portfolio items
 export const GetProjectsLoader: LoaderFunction = async () => {
@@ -65,6 +66,9 @@ export const ViewProjectLoader = async ({params}: LoaderArgsWithSlugParam) => {
         })
     }
 
+    // Parse data
+    const contentMD: string = marked.parse(data.detail_description);
+
     const response: ViewProjectAPIResponse = {
         status: "OK",
         item: {
@@ -72,7 +76,8 @@ export const ViewProjectLoader = async ({params}: LoaderArgsWithSlugParam) => {
             short_description: data?.short_description as string,
             content: data?.detail_description as string,
             imageURL: data?.image_url as string,
-            slug: data?.slug as string
+            slug: data?.slug as string,
+            md: contentMD as string
         }
     };
 

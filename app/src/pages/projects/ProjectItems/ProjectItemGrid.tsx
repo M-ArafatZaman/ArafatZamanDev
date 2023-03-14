@@ -4,6 +4,7 @@ import {useNavigate} from '@remix-run/react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import ButtonBase from '@mui/material/ButtonBase';
 import {SxProps} from '@mui/material/styles';
 // @mui icons
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
@@ -37,13 +38,15 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
     };
 
     // On click
-    const onClick = () => {
-        navigate(`/projects/${slug}/`);
+    const href = `/projects/${slug}`;
+    const onClick = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        navigate(href);
     }
 
     return (
         <Grid item xs={12} md={3}>
-            <Box sx={{height: "100%"}} onClick={onClick}>
+            <ButtonBase sx={{height: "100%", textAlign: "left"}} onClick={onClick} href={href}>
                 <AppCard sx={onHoverStyle}>
                     {/* Title */}
                     <Box sx={{p:2, pb: 1}} display="flex" flexDirection="row" alignItems="start">
@@ -57,7 +60,7 @@ const PortfolioItemGrid: React.FC<PortfolioItemGridProps> = (props: PortfolioIte
                     </Box>
                 </AppCard>
 
-            </Box>
+            </ButtonBase>
         </Grid>
     )
 };

@@ -13,6 +13,7 @@ export interface GetProjectsAPIResponse {
 
 export interface ProjectItem extends ProjectItems {
     content: string;
+    md: string;
 }
 
 // API response from /view_project/
