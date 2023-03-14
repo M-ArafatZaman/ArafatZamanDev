@@ -14,4 +14,4 @@ const isWebGLAvailable: () => boolean = () => {
     };
 }
 
-export {isWebGLAvailable};
+export default isWebGLAvailable;

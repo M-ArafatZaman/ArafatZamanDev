@@ -6,7 +6,7 @@ import {GLTFLoader, OrbitControls} from '../../../components/ThreeJSComponents';
 import {APP_THEME} from '../../../../src/appTheme';
 // Utils
 import {isAnyPartOfElementInViewport} from '../../../utils';
-import {isWebGLAvailable} from './isWebGLAvailable';
+import isWebGLAvailable from './isWebGLAvailable';
 
 const RASPBERRY_PI_MODEL: string = "./models/raspberry_pi/scene.gltf";
 
