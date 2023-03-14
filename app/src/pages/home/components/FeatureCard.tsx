@@ -20,7 +20,8 @@ const FeatureCard: React.FC<FeatureCardProps> = (props: FeatureCardProps) => {
     const navigate = useNavigate();
 
     // OnClick go to the href
-    const onClick = () => {
+    const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
         navigate(href);
     };
 
@@ -44,7 +45,7 @@ const FeatureCard: React.FC<FeatureCardProps> = (props: FeatureCardProps) => {
             </Box>
             <Divider/>
             <Box px={3} py={2} sx={{backgroundColor: APP_THEME.palette.background.paper}}>
-                <Button variant='contained' onClick={onClick}>Visit</Button>
+                <Button variant='contained' onClick={onClick} href={href}>Visit</Button>
             </Box>
         </AppCard>
     )
