@@ -80,7 +80,7 @@ const Header: React.FC = () => {
             </Box>
             
             {/* A header backdrop */}
-            <div ref={HeaderBackdropRef} style={{width: "100%"}}></div>
+            <div ref={HeaderBackdropRef} style={{width: "100%", height: "80px"}}></div>
         </Box>
     );
 };
