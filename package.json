@@ -4,7 +4,9 @@
   "private": true,
   "package": "module",
   "dependencies": {
+    "@emotion/css": "^11.10.6",
     "@emotion/react": "^11.10.5",
+    "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.5",
     "@lottiefiles/react-lottie-player": "^3.5.0",
     "@mui/icons-material": "^5.11.0",
