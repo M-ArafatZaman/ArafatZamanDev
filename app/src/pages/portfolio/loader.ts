@@ -5,6 +5,10 @@ import {json} from 'react-router-dom';
 // Parsers
 import {marked} from 'marked';
 import {replaceContentWithCarousel, replaceContentWithIphone} from '../../components/Carousel/';
+// Endpoints
+import {BASE} from '../../config';
+
+export const GET_PORTFOLIO_ITEMS = "projects/api/get_portfolio_items/";
 
 // Fetch function to get portfolio items
 export const GetPortfolioItemsLoader: LoaderFunction = async () => {
@@ -26,7 +30,15 @@ export const GetPortfolioItemsLoader: LoaderFunction = async () => {
         return json({
             status: "Not Found."
         })
-    }
+    };
+
+    // Revert back to getting data from portfolio website
+    const d = await fetch(`${BASE}${GET_PORTFOLIO_ITEMS}`, {
+        method: "GET",
+        mode: "cors"
+    });
+
+    console.log(d)
 
     const response: PortfolioAPIResponse = {
         status: "OK",
