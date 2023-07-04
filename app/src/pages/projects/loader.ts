@@ -37,38 +37,30 @@ interface LoaderArgsWithSlugParam extends LoaderArgs {
     }
 };
 export const ViewProjectLoader = async ({params}: LoaderArgsWithSlugParam) => {
-    const data = await prisma.projects.findFirst({
-        where: {
-            slug: params.slug
-        },
-        select: {
-            name: true,
-            short_description: true,
-            detail_description: true,
-            image_url: true,
-            slug: true,
-        }
+    const d = await fetch(`${BASE}${VIEW_PROJECT_ITEM}${params.slug}`, {
+        method: "get",
+        mode: "cors"
     });
 
-    // If not found
-    if (!data) {
-        return json({
-            status: "Not Found."
+    // Read data from data stream
+    const data: ViewProjectAPIResponse = await d.json();
+    
+    // Check for error
+    if (data["status"] != "OK") {
+        json({
+            status: data["status"]
         })
-    }
+    };
 
-    // Parse data
-    const contentMD: string = marked.parse(data.detail_description);
+    // Parse content as md
+    const contentMD: string = marked.parse(data["item"]["content"]);
 
+    // Prepare response
     const response: ViewProjectAPIResponse = {
-        status: "OK",
+        status: data["status"],
         item: {
-            name: data?.name as string,
-            short_description: data?.short_description as string,
-            content: data?.detail_description as string,
-            imageURL: data?.image_url as string,
-            slug: data?.slug as string,
-            md: contentMD as string
+            ...data["item"],
+            md: contentMD
         }
     };
 
