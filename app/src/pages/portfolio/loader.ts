@@ -34,28 +34,6 @@ export const VIEW_PORTFOLIO_ITEMS = "projects/api/view_portfolio_item/";
 
 export const ViewPortfolioItemLoader: LoaderFunction = async ({params}: LoaderArgsWithSlugParam) => {
 
-    // Get the main portfolio data that is important
-    // const data = await prisma.portfolio.findFirst({
-    //     where: {
-    //         slug: params.slug
-    //     },
-    //     select: {
-    //         name: true,
-    //         short_description: true,
-    //         content: true,
-    //         image: true,
-    //         tags: true,
-    //         slug: true,
-    //     }
-    // });
-
-    // // If nothing is found
-    // if (!data) {
-    //     return json({
-    //         status: "Not Found."
-    //     })
-    // }
-
     const d = await fetch(`${BASE}${VIEW_PORTFOLIO_ITEMS}${params.slug}`, {
         method: "GET",
         mode: "cors"
@@ -78,37 +56,6 @@ export const ViewPortfolioItemLoader: LoaderFunction = async ({params}: LoaderAr
     let response: ViewPortfolioItemAPIResponse = data;
     response["payload"]["md"] = replacedFinal.html
     response["payload"]["js"] = [...replacedWithCarousel.js, ...replacedFinal.js];
-
-    // Get other navbar items
-    // const otherItems = await prisma.portfolio.findMany({
-    //     select: {
-    //         name: true,
-    //         slug: true
-    //     },
-    //     orderBy: {
-    //         date_created: "desc"
-    //     }
-    // });
-
-
-    // const response: ViewPortfolioItemAPIResponse = {
-    //     status: "OK",
-    //     payload: {
-    //         name: data?.name as string,
-    //         short_description: data?.short_description as string,
-    //         content: data?.content as string,
-    //         tags: data?.tags?.split(",") as string[],
-    //         imageURL: data?.image as string,
-    //         slug: data?.slug as string,
-    //         other_portfolio_items: otherItems.map((elem) => ({
-    //             name: elem.name as string,
-    //             slug: elem.slug as string
-    //         })),
-    //         // Add marked content
-    //         md: replacedFinal.html,
-    //         js: [...replacedWithCarousel.js, ...replacedFinal.js]
-    //     }
-    // }
 
     return json(response);
 };
