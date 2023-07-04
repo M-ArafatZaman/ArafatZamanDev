@@ -20,6 +20,13 @@ export const GetPortfolioItemsLoader: LoaderFunction = async () => {
 
     const response: PortfolioAPIResponse = await d.json();
 
+    // Check for error response
+    if (response["status"] != "OK") {
+        return json({
+            status: response["status"]
+        })
+    }
+
     return json(response);
 };
 
