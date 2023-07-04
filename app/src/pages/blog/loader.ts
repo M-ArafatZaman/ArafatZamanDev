@@ -7,39 +7,25 @@ import { getReadTime, formatDate, generateShortDescription } from '../../utils';
 import { json } from 'react-router-dom';
 import {marked} from 'marked';
 
+export const GET_BLOGS = "blogs/api/get_blogs/";
 // Fetch function to get portfolio items
 export const GetBlogsLoader: LoaderFunction = async () => {
-    const data = await prisma.blogs.findMany({
-        select: {
-            name: true,
-            date_created: true,
-            content: true,
-            tags: true,
-            slug: true
-        },
-        orderBy: {
-            date_created: "desc"
-        }
+    const d = await fetch(`${BASE}${GET_BLOGS}`, {
+        method: "get",
+        mode: "cors"
     });
 
-    // If nothing is found, an error occured
-    if (!data) {
+    // Read data stream 
+    const data: GetBlogsAPIResponse = await d.json();
+
+    // Check for error
+    if (data["status"] != "OK") {
         return json({
-            status: "Error"
+            status: data["status"]
         })
     }
 
-    const response: GetBlogsAPIResponse = {
-        status: "OK", 
-        response: data.map((elem) => ({
-            name: elem.name as string,
-            date_created: formatDate(elem.date_created) as string,
-            tags: elem.tags?.split(" ") as string[],
-            slug: elem.slug as string,
-            read_time: getReadTime(elem.content) as number
-        }))
-    }
-    return json(response);
+    return json(data);
 };
 
 // Fetch function to view an individual portfolio item
@@ -48,6 +34,8 @@ interface LoaderArgsWithSlugParam extends LoaderArgs {
         slug?: string
     }
 };
+export const READ_BLOG = "blogs/api/read_blog/";
+
 export const ReadBlogLoader: LoaderFunction = async ({params}: LoaderArgsWithSlugParam) => {
 
     const data = await prisma.blogs.findFirst({
