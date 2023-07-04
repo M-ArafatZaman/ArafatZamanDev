@@ -3,39 +3,30 @@ import {GetProjectsAPIResponse, ViewProjectAPIResponse} from './types';
 import {prisma} from '../../dbconfig.server';
 import {json} from 'react-router-dom';
 import {marked} from 'marked';
+// Endpoints
+import {BASE} from '../../config';
+
+
+const GET_PROJECTS_ITEMS = "projects/api/get_projects/";
 
 // Fetch function to get portfolio items
 export const GetProjectsLoader: LoaderFunction = async () => {
-    const data = await prisma.projects.findMany({
-        select: {
-            name: true,
-            short_description: true,
-            image_url: true,
-            slug: true,
-        },
-        orderBy: {
-            date_created: "desc"
-        }
-    });
+    const d = await fetch(`${BASE}${GET_PROJECTS_ITEMS}`, {
+        method: "get",
+        mode: "cors"
+    })
 
-    // If nothing is found, an error must have occured
-    if (!data) {
+    // Read data from data stream
+    const data: GetProjectsAPIResponse = await d.json();
+
+    // Add error checking
+    if (data["status"] != "OK") {
         return json({
-            status: "Not Found."
+            status: data["status"]
         })
     }
 
-    const response: GetProjectsAPIResponse = {
-        status: "OK",
-        items: data.map((elem) => ({
-            name: elem.name as string,
-            short_description: elem.short_description as string,
-            imageURL: elem.image_url as string,
-            slug: elem.slug as string
-        })) 
-    };
-
-    return json(response);
+    return json(data);
 };
 
 // Fetch function to view an individual portfolio item
