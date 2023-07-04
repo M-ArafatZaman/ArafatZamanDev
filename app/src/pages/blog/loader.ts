@@ -38,65 +38,34 @@ export const READ_BLOG = "blogs/api/read_blog/";
 
 export const ReadBlogLoader: LoaderFunction = async ({params}: LoaderArgsWithSlugParam) => {
 
-    const data = await prisma.blogs.findFirst({
-        where: {
-            slug: params.slug
-        },
-        select: {
-            name: true,
-            date_created: true,
-            content: true,
-            tags: true,
-            slug: true,
-            image: true
-        }
+    const d = await fetch(`${BASE}${READ_BLOG}${params.slug}`, {
+        method: "get",
+        mode: "cors"
     });
 
-    // If nothing is found
-    if (!data) {
-        return json({
-            status: "Not Found."
-        })
-    }
+    // Read data from data stream
+    const data: ReadBlogsAPIResponse = await d.json();
 
-    const suggestions = await prisma.blogs.findMany({
-        orderBy: {
-            date_created: "desc"
-        },
-        where: {
-            NOT: {
-                slug: params.slug
+    // Check for error
+    if (data["status"] != "OK") {
+        return json({status: data["status"]})
+    };
+
+    // Parse content 
+    const contentMD: string = marked.parse(data["payload"] ? data["payload"]["content"] : "");
+
+    if (typeof data.payload != "undefined") {
+        const response: ReadBlogsAPIResponse = {
+            status: "OK",
+            payload: {
+                ...data.payload,
+                md: contentMD
             }
-        },
-        take: 3,
-        select: {
-            name: true,
-            date_created: true,
-            content: true,
-            slug: true
         }
-    });
 
-    const response: ReadBlogsAPIResponse = {
-        status: "OK",
-        payload: {
-            name: data?.name as string,
-            date_created: formatDate(data?.date_created as Date) as string,
-            tags: data?.tags?.split(" ") as string[],
-            slug: data?.slug as string,
-            read_time: getReadTime(data?.content as string) as number,
-            content: data?.content as string,
-            short_description: generateShortDescription(data?.content as string),
-            imageURL: data?.image as string,
-            suggestions: suggestions.map((elem) => ({
-                name: elem.name as string,
-                date_created: formatDate(elem.date_created),
-                slug: elem.slug as string,
-                read_time: getReadTime(elem.content)
-            })),
-            md: marked.parse(data.content as string)
-        }
+        return json(response);
+    } else {
+        return json({status: "Fetch Error Occured."})
     }
 
-    return json(response);
 }
