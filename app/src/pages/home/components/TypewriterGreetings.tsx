@@ -8,7 +8,7 @@ import {SxProps, keyframes} from '@mui/material/styles';
 
 const TypewriterGreetings: React.FC = () => {
 
-    const Content: string[] = ["software developer", "freelancer", "motivated learner", "risk taker", "change maker"];
+    const Content: string[] = ["undergrad student", "software developer", "minecrafter"];
     const [currContent, setContent] = useState<number>(0);
 
     // Update content - Cycle back to first if current content is the last
@@ -36,10 +36,10 @@ const TypewriterGreetings: React.FC = () => {
         width: 0%;
     }
     20% {
-        width: 95%;
+        width: 97%;
     }
     80% {
-        width: 95%;
+        width: 97%;
     }
     100% {
         width: 0%;
